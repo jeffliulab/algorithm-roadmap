@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>Enhanced Algorithm Roadmap</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+    <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0; padding: 0; background-color: #1a1a1a; color: #f0f0f0;
+        }
+        #cy { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 1; }
+        #modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); z-index: 99;
+        }
+        #modal {
+            position: fixed; z-index: 100; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 90%; max-width: 600px; background-color: #2c2c2c; border: 1px solid #444;
+            border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); padding: 25px 30px;
+        }
+        #modal-content h2 {
+            margin-top: 0; font-size: 24px; border-bottom: 1px solid #444;
+            padding-bottom: 15px; margin-bottom: 15px;
+        }
+        #modal-content p {
+            line-height: 1.6; margin-bottom: 20px; color: #ccc;
+        }
+        #modal-content h3 {
+            font-size: 18px; margin-top: 25px; margin-bottom: 10px; color: #eee;
+            border-bottom: 1px solid #444; padding-bottom: 8px;
+        }
+        #modal-content ul { list-style: none; padding: 0; max-height: 280px; overflow-y: auto; }
+        #modal-content li { padding: 12px 0; border-bottom: 1px solid #444; }
+        #modal-content li:last-child { border-bottom: none; }
+        #modal-content li a { text-decoration: none; color: #58a6ff; font-weight: bold; transition: color 0.2s; }
+        #modal-content li a:hover { color: #80bfff; }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div id="modal-overlay">
+        <div id="modal">
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const roadmapConfig = {
+        nodes: [
+            // ====================================================================
+            // ====================================================================
+            // 基础
+            { id: 'list', label: 'Arrays & Dynamic Arrays', type: 'basic', details: {
+                description: 'Array is the most basic data structure, in Python we use list to present array and dynamic array.',
+                exercises: [
+                    { title: 'LeetCode 1: Two Sum', url: 'https://leetcode.com/problems/two-sum/description/' },
+                    { title: 'LeetCode 15: 3Sum', url: 'https://leetcode.com/problems/3sum/description/' },
+                ]
+            }},
+            { id: 'hashmap', label: 'HashSet & HashMap', type: 'basic', details: {
+                description: 'HashSet (set) and HashMap (dict) can store unique keys. HashMap can store unique key-value pairs. Keys must use immutable elements.',
+                exercises: [
+                    { title: 'LeetCode 347. Top K Frequent Elements', url: 'https://leetcode.com/problems/top-k-frequent-elements/description/' },
+                    { title: 'LeetCode 128. Longest Consecutive Sequence', url: 'https://leetcode.com/problems/longest-consecutive-sequence/description/' },
+                ]
+            }},
+            { id: 'string', label: 'String', type: 'basic', details: {
+             description: 'A string is a sequence of characters. Common operations include searching, replacing, and splitting.',
+             exercises: [
+                 { title: 'LeetCode 3: Longest Substring Without Repeating Characters', url: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/description/' },
+                 { title: 'LeetCode 125: Valid Palindrome', url: 'https://leetcode.com/problems/valid-palindrome/description/' },
+                 { title: 'LeetCode 242: Valid Anagram', url: 'https://leetcode.com/problems/valid-anagram/description/' },
+             ]
+            }},
+            { id: 'two_pointers', label: 'Two Pointers', type: 'basic', details: {
+             description: 'Two pointers is a common technique that uses two pointers to solve problems in an array or linked list, often used to optimize time and space complexity.',
+             exercises: [
+                 { title: 'LeetCode 167: Two Sum II - Input Array Is Sorted', url: 'https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/' },
+                 { title: 'LeetCode 11: Container With Most Water', url: 'https://leetcode.com/problems/container-with-most-water/description/' },
+                 { title: 'LeetCode 283: Move Zeroes', url: 'https://leetcode.com/problems/move-zeroes/description/' },
+             ]
+            }},
+            { id: 'stack', label: 'Stack', type: 'basic', details: {
+                description: 'A stack is a Last-In-First-Out (LIFO) data structure. It is often used to implement function calls, expression evaluation, etc.',
+                exercises: [
+                    { title: 'LeetCode 20: Valid Parentheses', url: 'https://leetcode.com/problems/valid-parentheses/description/' },
+                    { title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' },
+                    { title: 'LeetCode 150: Evaluate Reverse Polish Notation', url: 'https://leetcode.com/problems/evaluate-reverse-polish-notation/description/' },
+                ]
+            }},
+            // stack引申出来的括号问题和Basic Calculator Problem
+            { id: 'stack_basic_calculator', label: 'Basic Calculator Problem', type: 'intermediate', details: {
+            description: 'These problems involve parsing and evaluating mathematical expressions with addition, subtraction, and parentheses. The stack is a key data structure to handle operator precedence and nested parentheses.',
+            exercises: [
+                { title: 'LeetCode 20: Valid Parentheses', url: 'https://leetcode.com/problems/valid-parentheses/description/' },
+                { title: 'LeetCode 224: Basic Calculator', url: 'https://leetcode.com/problems/basic-calculator/description/' },
+                { title: 'LeetCode 227: Basic Calculator II', url: 'https://leetcode.com/problems/basic-calculator-ii/description/' },
+            ]
+            }},
+            // 调度场问题
+            { id: 'shunting_yard', label: 'Shunting Yard Algorithm', type: 'advanced', details: {
+                description: 'Advanced versions of calculator problems that may involve more complex parsing rules, variables, or require implementing a full parser. These problems often go beyond simple operator precedence and require more general parsing strategies.',
+                exercises: [
+                    { title: 'LeetCode 772: Basic Calculator III', url: 'https://leetcode.com/problems/basic-calculator-iii/description/' },
+                    { title: 'LeetCode 770: Basic Calculator IV', url: 'https://leetcode.com/problems/basic-calculator-iv/description/' },
+                    { title: 'LeetCode 736: Parse Lisp Expression', url: 'https://leetcode.com/problems/parse-lisp-expression/description/' },
+                ]
+            }},
+            { id: 'linked_list', label: 'Linked List', type: 'basic', details: {
+            description: 'A linked list is a linear data structure where elements are not stored at contiguous memory locations. Each element (node) contains data and a pointer to the next node.',
+            exercises: [
+                { title: 'LeetCode 206: Reverse Linked List', url: 'https://leetcode.com/problems/reverse-linked-list/description/' },
+                { title: 'LeetCode 21: Merge Two Sorted Lists', url: 'https://leetcode.com/problems/merge-two-sorted-lists/description/' },
+                { title: 'LeetCode 141: Linked List Cycle', url: 'https://leetcode.com/problems/linked-list-cycle/description/' },
+            ]
+            }},
+            { id: 'queue', label: 'Queue', type: 'basic', details: {
+                description: 'A queue is a First-In-First-Out (FIFO) data structure. It is often used for task scheduling, Breadth-First Search (BFS), etc.',
+                exercises: [
+                    { title: 'LeetCode 232: Implement Queue using Stacks', url: 'https://leetcode.com/problems/implement-queue-using-stacks/description/' },
+                    { title: 'LeetCode 622: Design Circular Queue', url: 'https://leetcode.com/problems/design-circular-queue/description/' },
+                    { title: 'LeetCode 102: Binary Tree Level Order Traversal', url: 'https://leetcode.com/problems/binary-tree-level-order-traversal/description/' },
+                ]
+            }},
+            { id: 'sorting', label: 'Sorting', type: 'basic', details: {
+                description: 'Sorting is the process of arranging a set of elements in a specific order. Common sorting algorithms include bubble sort, selection sort, insertion sort, merge sort, quick sort, etc.',
+                exercises: [
+                    { title: 'LeetCode 912: Sort an Array', url: 'https://leetcode.com/problems/sort-an-array/description/' },
+                    { title: 'LeetCode 75: Sort Colors', url: 'https://leetcode.com/problems/sort-colors/description/' },
+                    { title: 'LeetCode 56: Merge Intervals', url: 'https://leetcode.com/problems/merge-intervals/description/' },
+                ]
+            }},
+            { id: 'searching', label: 'Searching', type: 'basic', details: {
+                description: 'Binary search is an efficient search algorithm that works on a sorted data set. It repeatedly divides the search interval in half to quickly find the target element.',
+                exercises: [
+                    { title: 'LeetCode 704: Binary Search', url: 'https://leetcode.com/problems/binary-search/description/' },
+                    { title: 'LeetCode 33: Search in Rotated Sorted Array', url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/description/' },
+                    { title: 'LeetCode 875: Koko Eating Bananas', url: 'https://leetcode.com/problems/koko-eating-bananas/description/' },
+                ]
+            }},
+            { id: 'binary_search', label: 'Binary Search', type: 'basic', details: {
+                description: 'Binary search is an efficient search algorithm that works on a sorted data set. It repeatedly divides the search interval in half to quickly find the target element.',
+                exercises: [
+                    { title: 'LeetCode 704: Binary Search', url: 'https://leetcode.com/problems/binary-search/description/' },
+                    { title: 'LeetCode 33: Search in Rotated Sorted Array', url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/description/' },
+                    { title: 'LeetCode 875: Koko Eating Bananas', url: 'https://leetcode.com/problems/koko-eating-bananas/description/' },
+                ]
+            }},
+            { id: 'tree', label: 'Tree', type: 'basic', details: {
+                description: 'A tree is a hierarchical data structure composed of nodes and edges that connect them. Common types include binary trees, balanced trees, search trees, etc.',
+                exercises: [
+                    { title: 'LeetCode 104: Maximum Depth of Binary Tree', url: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/description/' },
+                    { title: 'LeetCode 98: Validate Binary Search Tree', url: 'https://leetcode.com/problems/validate-binary-search-tree/description/' },
+                    { title: 'LeetCode 226: Invert Binary Tree', url: 'https://leetcode.com/problems/invert-binary-tree/description/' },
+                ]
+            }},
+            { id: 'backtracking', label: 'Backtracking', type: 'basic', details: {
+                description: 'Backtracking is an algorithmic paradigm that finds solutions to a problem by trying all possible solutions and undoing choices that are not suitable.',
+                exercises: [
+                    { title: 'LeetCode 78: Subsets', url: 'https://leetcode.com/problems/subsets/description/' },
+                    { title: 'LeetCode 46: Permutations', url: 'https://leetcode.com/problems/permutations/description/' },
+                    { title: 'LeetCode 39: Combination Sum', url: 'https://leetcode.com/problems/combination-sum/description/' },
+                ]
+            }},
+            // 排列组合问题
+            {
+                "id": "permutations_combinations",
+                "label": "Permutations and Combinations",
+                "type": "basic",
+                "details": {
+                    "description": "Problems involving permutations and combinations require finding all possible arrangements or selections of elements from a set. The primary method for solving these is backtracking, a recursive approach that systematically explores all solutions. Key variations include whether order matters (permutations vs. combinations), if elements can be reused, and how to handle duplicates in the input to avoid redundant results.",
+                    "exercises": [
+                        { "title": "LeetCode 46: Permutations", "url": "https://leetcode.com/problems/permutations/description/" },
+                        { "title": "LeetCode 47: Permutations II", "url": "https://leetcode.com/problems/permutations-ii/description/" },
+                        { "title": "LeetCode 78: Subsets", "url": "https://leetcode.com/problems/subsets/description/" },
+                        { "title": "LeetCode 90: Subsets II", "url": "https://leetcode.com/problems/subsets-ii/description/" },
+                        { "title": "LeetCode 39: Combination Sum", "url": "https://leetcode.com/problems/combination-sum/description/" },
+                        { "title": "LeetCode 40: Combination Sum II", "url": "https://leetcode.com/problems/combination-sum-ii/description/" }
+                    ]
+                }
+            },
+            { id: 'heap', label: 'Heap / Priority Queue', type: 'basic', details: {
+            description: 'A heap is a special tree-based data structure. A priority queue is an abstract data type, often implemented using a heap, which provides the ability to access the element with the highest (or lowest) priority.',
+            exercises: [
+                { title: 'LeetCode 215: Kth Largest Element in an Array', url: 'https://leetcode.com/problems/kth-largest-element-in-an-array/description/' },
+                { title: 'LeetCode 295: Find Median from Data Stream', url: 'https://leetcode.com/problems/find-median-from-data-stream/description/' },
+                { title: 'LeetCode 23: Merge k Sorted Lists', url: 'https://leetcode.com/problems/merge-k-sorted-lists/description/' },
+            ]
+            }},
+            { id: 'trie', label: 'Trie (Prefix Tree)', type: 'basic', details: {
+                description: 'A Trie, also known as a prefix tree or digital tree, is a tree-like data structure used to efficiently store and retrieve keys in a dataset of strings. It is often used for scenarios like autocomplete and spell checking.',
+                exercises: [
+                    { title: 'LeetCode 208: Implement Trie (Prefix Tree)', url: 'https://leetcode.com/problems/implement-trie-prefix-tree/description/' },
+                    { title: 'LeetCode 211: Design Add and Search Words Data Structure', url: 'https://leetcode.com/problems/design-add-and-search-words-data-structure/description/' },
+                    { title: 'LeetCode 212: Word Search II', url: 'https://leetcode.com/problems/word-search-ii/description/' },
+                ]
+            }},
+            { id: 'graph', label: 'Graph', type: 'basic', details: {
+                description: 'A graph is a data structure consisting of nodes (vertices) and edges connecting these nodes, used to represent relationships between objects.',
+                exercises: [
+                    { title: 'LeetCode 200: Number of Islands', url: 'https://leetcode.com/problems/number-of-islands/description/' },
+                    { title: 'LeetCode 133: Clone Graph', url: 'https://leetcode.com/problems/clone-graph/description/' },
+                    { title: 'LeetCode 207: Course Schedule', url: 'https://leetcode.com/problems/course-schedule/description/' },
+                ]
+            }},
+            {
+                "id": "dfs_bfs",
+                "label": "DFS & BFS",
+                "type": "intermediate",
+                "details": {
+                    "description": "Depth-First Search (DFS) and Breadth-First Search (BFS) are fundamental algorithms for traversing or searching tree and graph data structures. DFS explores as far as possible along each branch before backtracking (using recursion or a stack), while BFS explores level by level (using a queue). BFS is ideal for finding the shortest path in unweighted graphs.",
+                    "exercises": [
+                        { "title": "LeetCode 200: Number of Islands", "url": "https://leetcode.com/problems/number-of-islands/description/" },
+                        { "title": "LeetCode 102: Binary Tree Level Order Traversal", "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/description/" },
+                        { "title": "LeetCode 994: Rotting Oranges", "url": "https://leetcode.com/problems/rotting-oranges/description/" },
+                        { "title": "LeetCode 133: Clone Graph", "url": "https://leetcode.com/problems/clone-graph/description/" }
+                    ]
+                }
+            },
+            // Dynamic Programming (1D)
+            { id: 'dp_1d', label: '1D Dynamic Programming', type: 'intermediate', details: {
+                description: 'One-dimensional dynamic programming is a technique for optimizing complex problems by breaking them down into smaller overlapping subproblems and storing the solutions to these subproblems.',
+                exercises: [
+                    { title: 'LeetCode 70: Climbing Stairs', url: 'https://leetcode.com/problems/climbing-stairs/description/' },
+                    { title: 'LeetCode 198: House Robber', url: 'https://leetcode.com/problems/house-robber/description/' },
+                    { title: 'LeetCode 322: Coin Change', url: 'https://leetcode.com/problems/coin-change/description/' },
+                ]
+            }},
+
+            // 2D DP
+            { id: 'dp_2d', label: '2D Dynamic Programming', type: 'advanced', details: {
+                description: 'Two-dimensional dynamic programming is an extension of dynamic programming used to solve problems involving two-dimensional structures, such as grids.',
+                exercises: [
+                    { title: 'LeetCode 62: Unique Paths', url: 'https://leetcode.com/problems/unique-paths/description/' },
+                    { title: 'LeetCode 1143: Longest Common Subsequence', url: 'https://leetcode.com/problems/longest-common-subsequence/description/' },
+                    { title: 'LeetCode 72: Edit Distance', url: 'https://leetcode.com/problems/edit-distance/description/' },
+                ]
+            }},
+
+            // Intervals
+            {
+                "id": "intervals",
+                "label": "Intervals",
+                "type": "basic",
+                "details": {
+                    "description": "Interval problems involve dealing with ranges or segments of data. Common tasks include merging overlapping intervals, inserting new intervals, and finding intersections. Sorting the intervals by their start or end points is often the first step to solving these problems efficiently.",
+                    "exercises": [
+                        { "title": "LeetCode 56: Merge Intervals", "url": "https://leetcode.com/problems/merge-intervals/description/" },
+                        { "title": "LeetCode 57: Insert Interval", "url": "https://leetcode.com/problems/insert-interval/description/" },
+                        { "title": "LeetCode 435: Non-overlapping Intervals", "url": "https://leetcode.com/problems/non-overlapping-intervals/description/" },
+                        { "title": "LeetCode 253: Meeting Rooms II", "url": "https://leetcode.com/problems/meeting-rooms-ii/description/" }
+                    ]
+                }
+            },
+            // Greedy 
+            {
+                "id": "greedy",
+                "label": "Greedy",
+                "type": "basic",
+                "details": {
+                    "description": "Greedy algorithms build up a solution piece by piece, always choosing the next piece that offers the most obvious and immediate benefit. The key is to determine the correct greedy choice that will lead to a globally optimal solution.",
+                    "exercises": [
+                        { "title": "LeetCode 55: Jump Game", "url": "https://leetcode.com/problems/jump-game/description/" },
+                        { "title": "LeetCode 45: Jump Game II", "url": "https://leetcode.com/problems/jump-game-ii/description/" },
+                        { "title": "LeetCode 881: Boats to Save People", "url": "https://leetcode.com/problems/boats-to-save-people/description/" },
+                        { "title": "LeetCode 134: Gas Station", "url": "https://leetcode.com/problems/gas-station/description/" }
+                    ]
+                }
+            },
+            {
+                "id": "advanced_graphs",
+                "label": "Advanced Graphs",
+                "type": "intermediate",
+                "details": {
+                    "description": "These problems go beyond basic graph traversal, often requiring more complex algorithms like Dijkstra's for shortest paths in weighted graphs, topological sorting for dependency resolution, or algorithms for finding minimum spanning trees and network flow.",
+                    "exercises": [
+                        { "title": "LeetCode 207: Course Schedule", "url": "https://leetcode.com/problems/course-schedule/description/" },
+                        { "title": "LeetCode 743: Network Delay Time", "url": "https://leetcode.com/problems/network-delay-time/description/" },
+                        { "title": "LeetCode 1584: Min Cost to Connect All Points", "url": "https://leetcode.com/problems/min-cost-to-connect-all-points/description/" },
+                        { "title": "LeetCode 787: Cheapest Flights Within K Stops", "url": "https://leetcode.com/problems/cheapest-flights-within-k-stops/description/" }
+                    ]
+                }
+            },
+            {
+                "id": "bit_manipulation",
+                "label": "Bit Manipulation",
+                "type": "basic",
+                "details": {
+                    "description": "Bit manipulation involves performing operations on data at the bit level using operators like AND, OR, XOR, NOT, and bit shifts. It can lead to highly efficient solutions for a specific class of problems.",
+                    "exercises": [
+                        { "title": "LeetCode 191: Number of 1 Bits", "url": "https://leetcode.com/problems/number-of-1-bits/description/" },
+                        { "title": "LeetCode 268: Missing Number", "url": "https://leetcode.com/problems/missing-number/description/" },
+                        { "title": "LeetCode 136: Single Number", "url": "https://leetcode.com/problems/single-number/description/" },
+                        { "title": "LeetCode 338: Counting Bits", "url": "https://leetcode.com/problems/counting-bits/description/" }
+                    ]
+                }
+            },
+            {
+                "id": "math_geometry",
+                "label": "Math & Geometry",
+                "type": "basic",
+                "details": {
+                    "description": "These problems require knowledge of mathematical concepts, number theory, or geometric principles. They often involve detecting patterns, working with prime numbers, or calculating distances and areas in a coordinate plane.",
+                    "exercises": [
+                        { "title": "LeetCode 204: Count Primes", "url": "https://leetcode.com/problems/count-primes/description/" },
+                        { "title": "LeetCode 50: Pow(x, n)", "url": "https://leetcode.com/problems/powx-n/description/" },
+                        { "title": "LeetCode 48: Rotate Image", "url": "https://leetcode.com/problems/rotate-image/description/" },
+                        { "title": "LeetCode 54: Spiral Matrix", "url": "https://leetcode.com/problems/spiral-matrix/description/" }
+                    ]
+                }
+            },
+
+
+        ],
+        // ====================================================================
+        // ====================================================================
+        edges: [
+            { from: 'list', to: 'string' }, 
+            { from: 'list', to: 'hashmap' }, 
+            { from: 'list', to: 'two_pointers' }, 
+            { from: 'list', to: 'stack' },
+            { from: 'list', to: 'sorting' }, 
+            { from: 'list', to: 'linked_list' }, 
+            { from: 'list', to: 'queue' },
+            { from: 'list', to: 'backtracking' },
+
+            { from: 'sorting', to: 'searching' },
+            { from: 'searching', to: 'binary_search' },
+            { from: 'stack', to: 'stack_basic_calculator' },
+            { from: 'stack_basic_calculator', to: 'shunting_yard' },
+            { from: 'linked_list', to: 'tree' }, 
+            { from: 'binary_search', to: 'tree' },
+            { from: 'tree', to: 'graph' }, 
+            { from: 'tree', to: 'heap' }, 
+            { from: 'tree', to: 'trie' },
+
+            // 回溯 > 排列组合 > DFS/BFS
+            { from: 'backtracking', to: 'permutations_combinations' }, 
+            { from: 'backtracking', to: 'dp_1d' },
+            
+            { from: 'backtracking', to: 'dfs_bfs' },
+
+            // Graph延伸出来的
+            { from: 'graph', to: 'math_geometry' }, 
+            { from: 'graph', to: 'dfs_bfs' }, 
+  
+            // 偏后期的几个内容
+            { from: 'heap', to: 'intervals' }, 
+            { from: 'heap', to: 'greedy' }, 
+            { from: 'heap', to: 'advanced_graphs' }, 
+            { from: 'dp_1d', to: 'bit_manipulation' },  
+            
+            // Dynamic Programming
+            { from: 'graph', to: 'dp_2d' },
+            { from: 'dp_1d', to: 'dp_2d' },
+        ],
+        colorPalette: {
+            basic:        { main: '#0d6efd', border: '#58a6ff' },
+            intermediate: { main: '#fd7e14', border: '#ffa94d' },
+            advanced:     { main: '#DC3545', border: '#E57373' },
+            reserved1:    { main: '#FFC107', border: '#FFD54F' },
+            reserved2:    { main: '#198754', border: '#4CAF50' }
+        }
+    };
+
+    function initializeRoadmap(config) {
+        const elements = [
+            ...config.nodes.map(node => ({ data: node })),
+            ...config.edges.map(edge => ({ data: { source: edge.from, target: edge.to } }))
+        ];
+
+        const styles = [
+            { selector: 'node', style: {
+                'label': 'data(label)', 'color': '#ffffff', 'text-valign': 'center',
+                'text-halign': 'center', 'font-size': '16px', 'font-weight': 'bold',
+                'shape': 'round-rectangle', 'width': 'label', 'padding': '16px 20px',
+                'height': '48px', 'border-width': 2.5,
+            }},
+            { selector: 'edge', style: {
+                'width': 2.5, 'line-color': '#6c757d', 'curve-style': 'bezier',
+                'target-arrow-shape': 'triangle', 'target-arrow-color': '#6c757d',
+                'arrow-scale': 1.2
+            }}
+        ];
+
+        for (const [type, colors] of Object.entries(config.colorPalette)) {
+            styles.push({
+                selector: `node[type='${type}']`,
+                style: {
+                    'background-color': colors.main,
+                    'border-color': colors.border
+                }
+            });
+        }
+
+        const cy = cytoscape({
+            container: document.getElementById('cy'),
+            elements: elements,
+            style: styles,
+            layout: {
+                name: 'dagre', rankDir: 'TB', spacingFactor: 1.2,
+                nodeSep: 60, rankSep: 70,
+            }
+        });
+        
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalContent = document.getElementById('modal-content');
+
+        cy.on('tap', 'node', function(evt){
+            const node = evt.target;
+            const details = node.data('details');
+            if (!details) return;
+
+            const nodeType = node.data('type');
+            const titleColor = config.colorPalette[nodeType]?.border || '#ffffff';
+
+            let contentHtml = `<h2 style="color:${titleColor}">${node.data('label')}</h2>`;
+            if (details.description) {
+                contentHtml += `<p>${details.description}</p>`;
+            }
+            if (details.exercises && details.exercises.length > 0) {
+                contentHtml += '<h3>Practices on Leetcode</h3><ul>';
+                details.exercises.forEach(exercise => {
+                    contentHtml += `<li><a href="${exercise.url}" target="_blank">${exercise.title}</a></li>`;
+                });
+                contentHtml += '</ul>';
+            }
+
+            modalContent.innerHTML = contentHtml;
+            modalOverlay.style.display = 'block';
+        });
+
+        modalOverlay.addEventListener('click', function(event) {
+            if (event.target === modalOverlay) {
+                modalOverlay.style.display = 'none';
+            }
+        });
+    }
+
+    initializeRoadmap(roadmapConfig);
+});
+</script>
+
+</body>
+</html>
