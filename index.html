@@ -318,8 +318,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         ],
-        // ====================================================================
-        // ====================================================================
+        // =======================================================================
+        // =======================================================================
+        // 节点关系图   节点关系图   节点关系图   节点关系图   节点关系图   节点关系图
         edges: [
             { from: 'list', to: 'string' }, 
             { from: 'list', to: 'hashmap' }, 
@@ -329,33 +330,29 @@ document.addEventListener('DOMContentLoaded', function() {
             { from: 'list', to: 'linked_list' }, 
             { from: 'list', to: 'queue' },
             { from: 'list', to: 'backtracking' },
-
+            // Sorting, Searching, Binary Search
             { from: 'sorting', to: 'searching' },
             { from: 'searching', to: 'binary_search' },
             { from: 'stack', to: 'stack_basic_calculator' },
             { from: 'stack_basic_calculator', to: 'shunting_yard' },
             { from: 'linked_list', to: 'tree' }, 
             { from: 'binary_search', to: 'tree' },
+            // TREE相关的
             { from: 'tree', to: 'graph' }, 
             { from: 'tree', to: 'heap' }, 
             { from: 'tree', to: 'trie' },
-
             // 回溯 > 排列组合 > DFS/BFS
             { from: 'backtracking', to: 'permutations_combinations' }, 
             { from: 'backtracking', to: 'dp_1d' },
-            
             { from: 'backtracking', to: 'dfs_bfs' },
-
             // Graph延伸出来的
             { from: 'graph', to: 'math_geometry' }, 
             { from: 'graph', to: 'dfs_bfs' }, 
-  
+            { from: 'graph', to: 'advanced_graphs' }, 
             // 偏后期的几个内容
             { from: 'heap', to: 'intervals' }, 
             { from: 'heap', to: 'greedy' }, 
-            { from: 'heap', to: 'advanced_graphs' }, 
-            { from: 'dp_1d', to: 'bit_manipulation' },  
-            
+            { from: 'math_geometry', to: 'bit_manipulation' },  
             // Dynamic Programming
             { from: 'graph', to: 'dp_2d' },
             { from: 'dp_1d', to: 'dp_2d' },
