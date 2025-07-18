@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // ====================================================================
             // ====================================================================
             // 基础
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'list', label: 'Arrays & Dynamic Arrays', type: 'basic', details: {
                 description: 'Array is the most basic data structure, in Python we use list to present array and dynamic array.',
                 exercises: [
@@ -63,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 15: 3Sum', url: 'https://leetcode.com/problems/3sum/description/' },
                 ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'hashmap', label: 'HashSet & HashMap', type: 'basic', details: {
                 description: 'HashSet (set) and HashMap (dict) can store unique keys. HashMap can store unique key-value pairs. Keys must use immutable elements.',
                 exercises: [
@@ -70,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 128. Longest Consecutive Sequence', url: 'https://leetcode.com/problems/longest-consecutive-sequence/description/' },
                 ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'string', label: 'String', type: 'basic', details: {
              description: 'A string is a sequence of characters. Common operations include searching, replacing, and splitting.',
              exercises: [
@@ -78,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                  { title: 'LeetCode 242: Valid Anagram', url: 'https://leetcode.com/problems/valid-anagram/description/' },
              ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'two_pointers', label: 'Two Pointers', type: 'basic', details: {
              description: 'Two pointers is a common technique that uses two pointers to solve problems in an array or linked list, often used to optimize time and space complexity.',
              exercises: [
@@ -86,32 +90,64 @@ document.addEventListener('DOMContentLoaded', function() {
                  { title: 'LeetCode 283: Move Zeroes', url: 'https://leetcode.com/problems/move-zeroes/description/' },
              ]
             }},
+            // stack 
             { id: 'stack', label: 'Stack', type: 'basic', details: {
                 description: 'A stack is a Last-In-First-Out (LIFO) data structure. It is often used to implement function calls, expression evaluation, etc.',
                 exercises: [
                     { title: 'LeetCode 20: Valid Parentheses', url: 'https://leetcode.com/problems/valid-parentheses/description/' },
-                    { title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' },
                     { title: 'LeetCode 150: Evaluate Reverse Polish Notation', url: 'https://leetcode.com/problems/evaluate-reverse-polish-notation/description/' },
                 ]
             }},
-            // stack引申出来的括号问题和Basic Calculator Problem
+            // stack >> stack_basic_calculator （stack引申出来的括号问题和Basic Calculator Problem）
             { id: 'stack_basic_calculator', label: 'Basic Calculator Problem', type: 'intermediate', details: {
-            description: 'These problems involve parsing and evaluating mathematical expressions with addition, subtraction, and parentheses. The stack is a key data structure to handle operator precedence and nested parentheses.',
+            description: 'These problems involve parsing and evaluating mathematical expressions with addition, subtraction, and parentheses. The stack is a key data structure to handle operator precedence and nested parentheses. Basic Calculator III is Shunting Yard Algorithm, very classic',
             exercises: [
-                { title: 'LeetCode 20: Valid Parentheses', url: 'https://leetcode.com/problems/valid-parentheses/description/' },
                 { title: 'LeetCode 224: Basic Calculator', url: 'https://leetcode.com/problems/basic-calculator/description/' },
                 { title: 'LeetCode 227: Basic Calculator II', url: 'https://leetcode.com/problems/basic-calculator-ii/description/' },
+                { title: 'LeetCode 772: Basic Calculator III', url: 'https://leetcode.com/problems/basic-calculator-iii/description/' },
+
+
             ]
             }},
-            // 调度场问题
-            { id: 'shunting_yard', label: 'Shunting Yard Algorithm', type: 'advanced', details: {
-                description: 'Advanced versions of calculator problems that may involve more complex parsing rules, variables, or require implementing a full parser. These problems often go beyond simple operator precedence and require more general parsing strategies.',
+            // stack_basic_calculator >> symbolic_computation
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
+            { id: 'symbolic_computation', label: 'Symbolic Computation', type: 'advanced', details: {
+                description: 'Symbolic Computation is the area of computer science and mathematics that deals with the manipulation of mathematical expressions in symbolic form rather than numeric approximation.',
                 exercises: [
-                    { title: 'LeetCode 772: Basic Calculator III', url: 'https://leetcode.com/problems/basic-calculator-iii/description/' },
-                    { title: 'LeetCode 770: Basic Calculator IV', url: 'https://leetcode.com/problems/basic-calculator-iv/description/' },
-                    { title: 'LeetCode 736: Parse Lisp Expression', url: 'https://leetcode.com/problems/parse-lisp-expression/description/' },
+                    
+                { title: 'LeetCode 736: Parse Lisp Expression', url: 'https://leetcode.com/problems/parse-lisp-expression/description/' },
+                { title: 'LeetCode 770: Basic Calculator IV', url: 'https://leetcode.com/problems/basic-calculator-iv/description/' },
+
                 ]
             }},
+            // stack >> stack_enhanced_stack
+            // 【Enhanced Stack】stack引申出来的辅助stack(auxiliary stack)/强化节点思想(augmented stack node)
+            { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: {
+            description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.',
+            exercises: [
+                { title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' },
+
+            ]
+            }},
+            // stack_enhanced_stack >> stack_monotonic_stack
+            // 单调栈 Monotonic Stack 
+            // 单调递增栈，单调递减栈
+            { id: 'stack_monotonic_stack', label: 'Monotonic Stack', type: 'basic', details: {
+            description: 'Maintaining monotonically increasing or decreasing values is used to efficiently solve the "next bigger/next smaller" problem. During pop and push, the monotonic stack always keeps the values of the elements in the stack in a monotonic order.',
+            exercises: [
+                { title: 'LeetCode 739: Daily Temperatures', url: 'https://leetcode.com/problems/daily-temperatures/description/' },
+                { title: 'LeetCode 853: Car Fleet', url: 'https://leetcode.com/problems/car-fleet/description/' },
+            ]
+            }},
+            // 一个比较难的单调递增栈问题：Largest Rectangle In Histogram
+            { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'intermediate', details: {
+            description: 'This is a very classic monotonically increasing stack problem.',
+            exercises: [
+                { title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' },
+            ]
+            }},
+            
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'linked_list', label: 'Linked List', type: 'basic', details: {
             description: 'A linked list is a linear data structure where elements are not stored at contiguous memory locations. Each element (node) contains data and a pointer to the next node.',
             exercises: [
@@ -120,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { title: 'LeetCode 141: Linked List Cycle', url: 'https://leetcode.com/problems/linked-list-cycle/description/' },
             ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'queue', label: 'Queue', type: 'basic', details: {
                 description: 'A queue is a First-In-First-Out (FIFO) data structure. It is often used for task scheduling, Breadth-First Search (BFS), etc.',
                 exercises: [
@@ -128,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 102: Binary Tree Level Order Traversal', url: 'https://leetcode.com/problems/binary-tree-level-order-traversal/description/' },
                 ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'sorting', label: 'Sorting', type: 'basic', details: {
                 description: 'Sorting is the process of arranging a set of elements in a specific order. Common sorting algorithms include bubble sort, selection sort, insertion sort, merge sort, quick sort, etc.',
                 exercises: [
@@ -136,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 56: Merge Intervals', url: 'https://leetcode.com/problems/merge-intervals/description/' },
                 ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'searching', label: 'Searching', type: 'basic', details: {
                 description: 'Binary search is an efficient search algorithm that works on a sorted data set. It repeatedly divides the search interval in half to quickly find the target element.',
                 exercises: [
@@ -144,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 875: Koko Eating Bananas', url: 'https://leetcode.com/problems/koko-eating-bananas/description/' },
                 ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'binary_search', label: 'Binary Search', type: 'basic', details: {
                 description: 'Binary search is an efficient search algorithm that works on a sorted data set. It repeatedly divides the search interval in half to quickly find the target element.',
                 exercises: [
@@ -152,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 875: Koko Eating Bananas', url: 'https://leetcode.com/problems/koko-eating-bananas/description/' },
                 ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'tree', label: 'Tree', type: 'basic', details: {
                 description: 'A tree is a hierarchical data structure composed of nodes and edges that connect them. Common types include binary trees, balanced trees, search trees, etc.',
                 exercises: [
@@ -160,6 +201,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 226: Invert Binary Tree', url: 'https://leetcode.com/problems/invert-binary-tree/description/' },
                 ]
             }},
+            // Backtracking
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'backtracking', label: 'Backtracking', type: 'basic', details: {
                 description: 'Backtracking is an algorithmic paradigm that finds solutions to a problem by trying all possible solutions and undoing choices that are not suitable.',
                 exercises: [
@@ -168,10 +211,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 39: Combination Sum', url: 'https://leetcode.com/problems/combination-sum/description/' },
                 ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
+            {
+                "id": "branch_and_bound",
+                "label": "Branch and Bound",
+                "type": "advanced",
+                "details": {
+                    "description": "The branch and bound method is an algorithm design paradigm for solving combinatorial optimization problems. It searches the solution space tree systematically to find the optimal solution, and uses bounds to prune those subtrees that cannot contain the optimal solution, thereby significantly reducing the amount of computation. The core of the algorithm lies in branching (i.e. building a state tree) and bounding (i.e. calculating the cost boundary of each node), and is a powerful upgraded version of the backtracking algorithm for optimization problems.",
+                    "exercises": [
+                        { "title": "LeetCode 1066: Campus Bikes II", "url": "https://leetcode.com/problems/campus-bikes-ii/description/" },
+                        { "title": "LeetCode 1723: Find Minimum Time to Finish All Jobs", "url": "https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/description/" },
+                        { "title": "LeetCode 473: Matchsticks to Square", "url": "https://leetcode.com/problems/matchsticks-to-square/description/" },
+                        { "title": "The Traveling Salesperson Problem (Classic Example)", "url": "https://en.wikipedia.org/wiki/Travelling_salesman_problem" }
+                    ]
+                }
+            },
             // 排列组合问题
             {
                 "id": "permutations_combinations",
-                "label": "Permutations and Combinations",
+                "label": "Permutations & Combinations",
                 "type": "basic",
                 "details": {
                     "description": "Problems involving permutations and combinations require finding all possible arrangements or selections of elements from a set. The primary method for solving these is backtracking, a recursive approach that systematically explores all solutions. Key variations include whether order matters (permutations vs. combinations), if elements can be reused, and how to handle duplicates in the input to avoid redundant results.",
@@ -185,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ]
                 }
             },
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'heap', label: 'Heap / Priority Queue', type: 'basic', details: {
             description: 'A heap is a special tree-based data structure. A priority queue is an abstract data type, often implemented using a heap, which provides the ability to access the element with the highest (or lowest) priority.',
             exercises: [
@@ -193,6 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { title: 'LeetCode 23: Merge k Sorted Lists', url: 'https://leetcode.com/problems/merge-k-sorted-lists/description/' },
             ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'trie', label: 'Trie (Prefix Tree)', type: 'basic', details: {
                 description: 'A Trie, also known as a prefix tree or digital tree, is a tree-like data structure used to efficiently store and retrieve keys in a dataset of strings. It is often used for scenarios like autocomplete and spell checking.',
                 exercises: [
@@ -209,9 +269,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 207: Course Schedule', url: 'https://leetcode.com/problems/course-schedule/description/' },
                 ]
             }},
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
+            // DFS
             {
-                "id": "dfs_bfs",
-                "label": "DFS & BFS",
+                "id": "dfs",
+                "label": "DFS",
+                "type": "basic",
+                "details": {
+                    "description": "Depth-First Search (DFS) and Breadth-First Search (BFS) are fundamental algorithms for traversing or searching tree and graph data structures. DFS explores as far as possible along each branch before backtracking (using recursion or a stack), while BFS explores level by level (using a queue). BFS is ideal for finding the shortest path in unweighted graphs.",
+                    "exercises": [
+                        { "title": "LeetCode 200: Number of Islands", "url": "https://leetcode.com/problems/number-of-islands/description/" },
+                        { "title": "LeetCode 102: Binary Tree Level Order Traversal", "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/description/" },
+                        { "title": "LeetCode 994: Rotting Oranges", "url": "https://leetcode.com/problems/rotting-oranges/description/" },
+                        { "title": "LeetCode 133: Clone Graph", "url": "https://leetcode.com/problems/clone-graph/description/" }
+                    ]
+                }
+            },
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
+            {
+                "id": "bfs",
+                "label": "BFS",
+                "type": "basic",
+                "details": {
+                    "description": "Depth-First Search (DFS) and Breadth-First Search (BFS) are fundamental algorithms for traversing or searching tree and graph data structures. DFS explores as far as possible along each branch before backtracking (using recursion or a stack), while BFS explores level by level (using a queue). BFS is ideal for finding the shortest path in unweighted graphs.",
+                    "exercises": [
+                        { "title": "LeetCode 200: Number of Islands", "url": "https://leetcode.com/problems/number-of-islands/description/" },
+                        { "title": "LeetCode 102: Binary Tree Level Order Traversal", "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/description/" },
+                        { "title": "LeetCode 994: Rotting Oranges", "url": "https://leetcode.com/problems/rotting-oranges/description/" },
+                        { "title": "LeetCode 133: Clone Graph", "url": "https://leetcode.com/problems/clone-graph/description/" }
+                    ]
+                }
+            },
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
+            // Dijkstra
+            {
+                "id": "dijkstra",
+                "label": "Dijkstra",
                 "type": "intermediate",
                 "details": {
                     "description": "Depth-First Search (DFS) and Breadth-First Search (BFS) are fundamental algorithms for traversing or searching tree and graph data structures. DFS explores as far as possible along each branch before backtracking (using recursion or a stack), while BFS explores level by level (using a queue). BFS is ideal for finding the shortest path in unweighted graphs.",
@@ -223,6 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ]
                 }
             },
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             // Dynamic Programming (1D)
             { id: 'dp_1d', label: '1D Dynamic Programming', type: 'intermediate', details: {
                 description: 'One-dimensional dynamic programming is a technique for optimizing complex problems by breaking them down into smaller overlapping subproblems and storing the solutions to these subproblems.',
@@ -232,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 322: Coin Change', url: 'https://leetcode.com/problems/coin-change/description/' },
                 ]
             }},
-
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             // 2D DP
             { id: 'dp_2d', label: '2D Dynamic Programming', type: 'advanced', details: {
                 description: 'Two-dimensional dynamic programming is an extension of dynamic programming used to solve problems involving two-dimensional structures, such as grids.',
@@ -242,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { title: 'LeetCode 72: Edit Distance', url: 'https://leetcode.com/problems/edit-distance/description/' },
                 ]
             }},
-
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             // Intervals
             {
                 "id": "intervals",
@@ -259,6 +353,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             },
             // Greedy 
+            // list >> sorting >> greedy
+            // 可以增加一个Candy
             {
                 "id": "greedy",
                 "label": "Greedy",
@@ -268,11 +364,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     "exercises": [
                         { "title": "LeetCode 55: Jump Game", "url": "https://leetcode.com/problems/jump-game/description/" },
                         { "title": "LeetCode 45: Jump Game II", "url": "https://leetcode.com/problems/jump-game-ii/description/" },
-                        { "title": "LeetCode 881: Boats to Save People", "url": "https://leetcode.com/problems/boats-to-save-people/description/" },
                         { "title": "LeetCode 134: Gas Station", "url": "https://leetcode.com/problems/gas-station/description/" }
                     ]
                 }
             },
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
+            // Graph
             {
                 "id": "advanced_graphs",
                 "label": "Advanced Graphs",
@@ -287,6 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ]
                 }
             },
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             {
                 "id": "bit_manipulation",
                 "label": "Bit Manipulation",
@@ -301,6 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ]
                 }
             },
+            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             {
                 "id": "math_geometry",
                 "label": "Math & Geometry",
@@ -310,8 +409,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     "exercises": [
                         { "title": "LeetCode 204: Count Primes", "url": "https://leetcode.com/problems/count-primes/description/" },
                         { "title": "LeetCode 50: Pow(x, n)", "url": "https://leetcode.com/problems/powx-n/description/" },
-                        { "title": "LeetCode 48: Rotate Image", "url": "https://leetcode.com/problems/rotate-image/description/" },
-                        { "title": "LeetCode 54: Spiral Matrix", "url": "https://leetcode.com/problems/spiral-matrix/description/" }
+                    ]
+                }
+            },
+            // Matrix
+            {
+                "id": "matrix",
+                "label": "Matrix",
+                "type": "basic",
+                "details": {
+                    "description": "Matrix (or 2D array) problems often involve traversing the grid in various patterns (e.g., spiral, diagonal) and performing in-place modifications like rotation or setting values based on specific conditions. These problems test your ability to handle 2D indices and manage state carefully.",
+                    "exercises": [
+                        { "title": "LeetCode 36: Valid Sudoku", "url": "https://leetcode.com/problems/valid-sudoku/" },
+                        { "title": "LeetCode 54: Spiral Matrix", "url": "https://leetcode.com/problems/spiral-matrix/" },
+                        { "title": "LeetCode 48: Rotate Image", "url": "https://leetcode.com/problems/rotate-image/" },
+                        { "title": "LeetCode 73: Set Matrix Zeroes", "url": "https://leetcode.com/problems/set-matrix-zeroes/" },
+                        { "title": "LeetCode 289: Game of Life", "url": "https://leetcode.com/problems/game-of-life/" }
+                    ]
+                }
+            },
+            // Recursion
+            {
+                "id": "recursion",
+                "label": "Recursion",
+                "type": "basic",
+                "details": {
+                    "description": "Recursion is actually a stack.",
+                    "exercises": [
+                        { "title": "The concept of recursion:", "url": "https://example.com" },
                     ]
                 }
             },
@@ -322,40 +447,64 @@ document.addEventListener('DOMContentLoaded', function() {
         // =======================================================================
         // 节点关系图   节点关系图   节点关系图   节点关系图   节点关系图   节点关系图
         edges: [
-            { from: 'list', to: 'string' }, 
+            // 优化学习顺序
             { from: 'list', to: 'hashmap' }, 
-            { from: 'list', to: 'two_pointers' }, 
-            { from: 'list', to: 'stack' },
-            { from: 'list', to: 'sorting' }, 
+            { from: 'hashmap', to: 'string' }, 
+            { from: 'string', to: 'two_pointers' }, 
+            { from: 'two_pointers', to: 'sorting' }, 
+            { from: 'graph', to: 'matrix' }, 
+
+
+            { from: 'two_pointers', to: 'stack' },
             { from: 'list', to: 'linked_list' }, 
             { from: 'list', to: 'queue' },
-            { from: 'list', to: 'backtracking' },
             // Sorting, Searching, Binary Search
             { from: 'sorting', to: 'searching' },
             { from: 'searching', to: 'binary_search' },
-            { from: 'stack', to: 'stack_basic_calculator' },
-            { from: 'stack_basic_calculator', to: 'shunting_yard' },
-            { from: 'linked_list', to: 'tree' }, 
-            { from: 'binary_search', to: 'tree' },
-            // TREE相关的
+
+            // Stack Related
+            
+            { from: 'stack', to: 'stack_enhanced_stack' },
+            { from: 'stack_enhanced_stack', to: 'stack_monotonic_stack' },
+            { from: 'stack_monotonic_stack', to: 'stack_problem_largest_rectangle' },
+
+            // Recursion >> Tree >> Graph
+            { from: 'stack', to: 'recursion' },
+            { from: 'recursion', to: 'tree' },
+            { from: 'recursion', to: 'backtracking' },
+
             { from: 'tree', to: 'graph' }, 
             { from: 'tree', to: 'heap' }, 
+            { from: 'heap', to: 'intervals' },
             { from: 'tree', to: 'trie' },
+
+
+
             // 回溯 > 排列组合 > DFS/BFS
             { from: 'backtracking', to: 'permutations_combinations' }, 
-            { from: 'backtracking', to: 'dp_1d' },
-            { from: 'backtracking', to: 'dfs_bfs' },
+            { from: 'backtracking', to: 'branch_and_bound' },
             // Graph延伸出来的
-            { from: 'graph', to: 'math_geometry' }, 
-            { from: 'graph', to: 'dfs_bfs' }, 
             { from: 'graph', to: 'advanced_graphs' }, 
-            // 偏后期的几个内容
-            { from: 'heap', to: 'intervals' }, 
-            { from: 'heap', to: 'greedy' }, 
+            { from: 'graph', to: 'dfs' }, 
+            { from: 'dfs', to: 'bfs' }, 
+            { from: 'bfs', to: 'dijkstra' },
+            
+            // Greedy 
+            // list >> sorting >> greedy
+            { from: 'sorting', to: 'greedy' }, 
+            { from: 'matrix', to: 'math_geometry' },  
+            { from: 'math_geometry', to: 'stack_basic_calculator' },
+            { from: 'stack_basic_calculator', to: 'symbolic_computation' },
             { from: 'math_geometry', to: 'bit_manipulation' },  
+            { from: 'greedy', to: 'dp_1d' },
+
+            
             // Dynamic Programming
-            { from: 'graph', to: 'dp_2d' },
+            //{ from: 'graph', to: 'dp_2d' },
             { from: 'dp_1d', to: 'dp_2d' },
+
+            // 特殊序列：数学相关
+            
         ],
         colorPalette: {
             basic:        { main: '#0d6efd', border: '#58a6ff' },
