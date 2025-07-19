@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
             }},
             // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
-            { id: 'queue', label: 'Queue', type: 'basic', details: {
+            { id: 'queue', label: 'Queue and Deque', type: 'basic', details: {
                 description: 'A queue is a First-In-First-Out (FIFO) data structure. It is often used for task scheduling, Breadth-First Search (BFS), etc.',
                 exercises: [
                     { title: 'LeetCode 232: Implement Queue using Stacks', url: 'https://leetcode.com/problems/implement-queue-using-stacks/description/' },
@@ -194,13 +194,45 @@ document.addEventListener('DOMContentLoaded', function() {
             }},
             // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'tree', label: 'Tree', type: 'basic', details: {
-                description: 'A tree is a hierarchical data structure composed of nodes and edges that connect them. Common types include binary trees, balanced trees, search trees, etc.',
+                description: 'To be continued.',
                 exercises: [
-                    { title: 'LeetCode 104: Maximum Depth of Binary Tree', url: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/description/' },
-                    { title: 'LeetCode 98: Validate Binary Search Tree', url: 'https://leetcode.com/problems/validate-binary-search-tree/description/' },
-                    { title: 'LeetCode 226: Invert Binary Tree', url: 'https://leetcode.com/problems/invert-binary-tree/description/' },
+                    { title: 'LeetCode ?', url: 'https://example.com' },
                 ]
             }},
+            //-----------------------------
+            // tree >> tree_binary_tree >> tree_binary_tree_bfs >> tree_binary_search_tree
+            { id: 'tree_binary_tree', label: 'Binary Tree', type: 'basic', details: {
+                description: 'To be continued.',
+                exercises: [
+                    { title: 'LeetCode ?', url: 'https://example.com' },
+                ]
+            }},
+            { id: 'tree_binary_tree_bfs', label: 'Binary Tree BFS', type: 'basic', details: {
+                description: 'To be continued.',
+                exercises: [
+                    { title: 'LeetCode ?', url: 'https://example.com' },
+                ]
+            }},
+            { id: 'tree_binary_search_tree', label: 'Binary Search Tree (BST)', type: 'basic', details: {
+                description: 'To be continued.',
+                exercises: [
+                    { title: 'LeetCode ?', url: 'https://example.com' },
+                ]
+            }},
+            // tree_binary_tree >> tree_complete_binary_tree >> heap 
+            { id: 'tree_complete_binary_tree', label: 'Complete Binary Tree', type: 'basic', details: {
+                description: 'To be continued.',
+                exercises: [
+                    { title: 'LeetCode ?', url: 'https://example.com' },
+                ]
+            }},
+            { id: 'heap', label: 'Heap / Priority Queue', type: 'basic', details: {
+            description: 'To be continued.',
+                exercises: [
+                    { title: 'LeetCode ?', url: 'https://example.com' },
+                ]
+            }},
+            //-----------------------------
             // Backtracking
             // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'backtracking', label: 'Backtracking', type: 'basic', details: {
@@ -243,15 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ]
                 }
             },
-            // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
-            { id: 'heap', label: 'Heap / Priority Queue', type: 'basic', details: {
-            description: 'A heap is a special tree-based data structure. A priority queue is an abstract data type, often implemented using a heap, which provides the ability to access the element with the highest (or lowest) priority.',
-            exercises: [
-                { title: 'LeetCode 215: Kth Largest Element in an Array', url: 'https://leetcode.com/problems/kth-largest-element-in-an-array/description/' },
-                { title: 'LeetCode 295: Find Median from Data Stream', url: 'https://leetcode.com/problems/find-median-from-data-stream/description/' },
-                { title: 'LeetCode 23: Merge k Sorted Lists', url: 'https://leetcode.com/problems/merge-k-sorted-lists/description/' },
-            ]
-            }},
+            
             // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             { id: 'trie', label: 'Trie (Prefix Tree)', type: 'basic', details: {
                 description: 'A Trie, also known as a prefix tree or digital tree, is a tree-like data structure used to efficiently store and retrieve keys in a dataset of strings. It is often used for scenarios like autocomplete and spell checking.',
@@ -273,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // DFS
             {
                 "id": "dfs",
-                "label": "DFS",
+                "label": "Depth-First Search (DFS)",
                 "type": "basic",
                 "details": {
                     "description": "Depth-First Search (DFS) and Breadth-First Search (BFS) are fundamental algorithms for traversing or searching tree and graph data structures. DFS explores as far as possible along each branch before backtracking (using recursion or a stack), while BFS explores level by level (using a queue). BFS is ideal for finding the shortest path in unweighted graphs.",
@@ -288,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 下面这个node中有初始化算法天梯时预添加的内容，修改为自己的理解后可以删除本行
             {
                 "id": "bfs",
-                "label": "BFS",
+                "label": "Breadth-First Search (BFS)",
                 "type": "basic",
                 "details": {
                     "description": "Depth-First Search (DFS) and Breadth-First Search (BFS) are fundamental algorithms for traversing or searching tree and graph data structures. DFS explores as far as possible along each branch before backtracking (using recursion or a stack), while BFS explores level by level (using a queue). BFS is ideal for finding the shortest path in unweighted graphs.",
@@ -449,15 +473,15 @@ document.addEventListener('DOMContentLoaded', function() {
         edges: [
             // 优化学习顺序
             { from: 'list', to: 'hashmap' }, 
-            { from: 'hashmap', to: 'string' }, 
-            { from: 'string', to: 'two_pointers' }, 
-            { from: 'two_pointers', to: 'sorting' }, 
-            { from: 'graph', to: 'matrix' }, 
+            { from: 'list', to: 'string' }, 
 
-
-            { from: 'two_pointers', to: 'stack' },
             { from: 'list', to: 'linked_list' }, 
             { from: 'list', to: 'queue' },
+
+            { from: 'linked_list', to: 'two_pointers' }, 
+            { from: 'string', to: 'two_pointers' }, 
+            { from: 'two_pointers', to: 'sorting' }, 
+
             // Sorting, Searching, Binary Search
             { from: 'sorting', to: 'searching' },
             { from: 'searching', to: 'binary_search' },
@@ -468,30 +492,39 @@ document.addEventListener('DOMContentLoaded', function() {
             { from: 'stack_enhanced_stack', to: 'stack_monotonic_stack' },
             { from: 'stack_monotonic_stack', to: 'stack_problem_largest_rectangle' },
 
-            // Recursion >> Tree >> Graph
+            // Recursion >> backtracking
             { from: 'stack', to: 'recursion' },
-            { from: 'recursion', to: 'tree' },
+           
             { from: 'recursion', to: 'backtracking' },
 
-            { from: 'tree', to: 'graph' }, 
-            { from: 'tree', to: 'heap' }, 
+            
             { from: 'heap', to: 'intervals' },
             { from: 'tree', to: 'trie' },
+
+            { from: 'tree', to: 'tree_binary_tree' }, 
+            { from: 'tree_binary_tree', to: 'tree_binary_tree_bfs' }, 
+            { from: 'tree_binary_tree_bfs', to: 'tree_binary_search_tree' }, 
+            { from: 'tree_binary_tree', to: 'tree_complete_binary_tree' }, 
+            { from: 'tree_complete_binary_tree', to: 'heap' }, 
 
 
 
             // 回溯 > 排列组合 > DFS/BFS
             { from: 'backtracking', to: 'permutations_combinations' }, 
             { from: 'backtracking', to: 'branch_and_bound' },
+
             // Graph延伸出来的
             { from: 'graph', to: 'advanced_graphs' }, 
             { from: 'graph', to: 'dfs' }, 
             { from: 'dfs', to: 'bfs' }, 
             { from: 'bfs', to: 'dijkstra' },
+            { from: 'bfs', to: 'tree_binary_tree_bfs' },
+
+            // Tree是特殊的graph
+            { from: 'graph', to: 'tree' },
             
             // Greedy 
             // list >> sorting >> greedy
-            { from: 'sorting', to: 'greedy' }, 
             { from: 'matrix', to: 'math_geometry' },  
             { from: 'math_geometry', to: 'stack_basic_calculator' },
             { from: 'stack_basic_calculator', to: 'symbolic_computation' },
@@ -503,7 +536,6 @@ document.addEventListener('DOMContentLoaded', function() {
             //{ from: 'graph', to: 'dp_2d' },
             { from: 'dp_1d', to: 'dp_2d' },
 
-            // 特殊序列：数学相关
             
         ],
         colorPalette: {
