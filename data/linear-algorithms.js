@@ -1,7 +1,7 @@
 // 初始化全局数据容器（如果不存在）
 if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
-ROADMAP_DATA.list = {
+ROADMAP_DATA.linear_algorithms = {
     nodes: [
         { id: 'list', label: 'Arrays & Dynamic Arrays', type: 'basic', details: { description: 'Array is the most basic data structure, in Python we use list to present array and dynamic array.', exercises: [{ title: 'LeetCode 1: Two Sum', url: 'https://leetcode.com/problems/two-sum/description/' }, { title: 'LeetCode 15: 3Sum', url: 'https://leetcode.com/problems/3sum/description/' }]}},
         { id: 'hashmap', label: 'HashSet & HashMap', type: 'basic', details: { description: 'HashSet (set) and HashMap (dict) can store unique keys. HashMap can store unique key-value pairs. Keys must use immutable elements.', exercises: [{ title: 'LeetCode 347. Top K Frequent Elements', url: 'https://leetcode.com/problems/top-k-frequent-elements/description/' }, { title: 'LeetCode 128. Longest Consecutive Sequence', url: 'https://leetcode.com/problems/longest-consecutive-sequence/description/' }]}},
@@ -13,6 +13,15 @@ ROADMAP_DATA.list = {
         { id: 'binary_search', label: 'Binary Search', type: 'basic', details: { description: 'Binary search repeatedly divides the search interval in half to quickly find the target element.', exercises: [{ title: 'LeetCode 875: Koko Eating Bananas', url: 'https://leetcode.com/problems/koko-eating-bananas/description/' }]}},
         { id: 'intervals', label: 'Intervals', type: 'basic', details: { description: "Interval problems involve dealing with ranges or segments of data. Sorting is often the first step.", exercises: [{ title: "LeetCode 56: Merge Intervals", url: "https://leetcode.com/problems/merge-intervals/description/" }, { title: "LeetCode 57: Insert Interval", url: "https://leetcode.com/problems/insert-interval/description/" }, { title: "LeetCode 253: Meeting Rooms II", url: "https://leetcode.com/problems/meeting-rooms-ii/description/" }]}},
         { id: 'matrix', label: 'Matrix', type: 'basic', details: { description: "Matrix problems involve traversing or modifying a 2D grid.", exercises: [{ title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" }, { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" }, { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" }]}},
+        { id: 'stack', label: 'Stack', type: 'basic', details: { description: 'A stack is a Last-In-First-Out (LIFO) data structure.', exercises: [{ title: 'LeetCode 20: Valid Parentheses', url: 'https://leetcode.com/problems/valid-parentheses/description/' }, { title: 'LeetCode 150: Evaluate Reverse Polish Notation', url: 'https://leetcode.com/problems/evaluate-reverse-polish-notation/description/' }]}},
+        { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: { description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.', exercises: [{ title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' }]}},
+        { id: 'stack_monotonic_stack', label: 'Monotonic Stack', type: 'basic', details: { description: 'A stack that maintains a monotonic order of elements.', exercises: [{ title: 'LeetCode 739: Daily Temperatures', url: 'https://leetcode.com/problems/daily-temperatures/description/' }, { title: 'LeetCode 853: Car Fleet', url: 'https://leetcode.com/problems/car-fleet/description/' }]}},
+        { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'intermediate', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
+        { id: 'stack_basic_calculator', label: 'Basic Calculator Problem', type: 'intermediate', details: { description: 'Use stacks to parse and evaluate mathematical expressions.', exercises: [{ title: 'LeetCode 224: Basic Calculator', url: 'https://leetcode.com/problems/basic-calculator/description/' }, { title: 'LeetCode 227: Basic Calculator II', url: 'https://leetcode.com/problems/basic-calculator-ii/description/' }]}},
+        { id: 'recursion', label: 'Recursion', type: 'basic', details: { description: "Recursion is a function that calls itself. Its execution is managed by the call stack.", exercises: [{ title: "The concept of recursion:", url: "https://example.com" }]}},
+        { id: 'backtracking', label: 'Backtracking', type: 'basic', details: { description: 'Backtracking is an algorithmic paradigm for solving problems recursively by trying to build a solution incrementally.', exercises: [{ title: 'LeetCode 78: Subsets', url: 'https://leetcode.com/problems/subsets/description/' }, { title: 'LeetCode 46: Permutations', url: 'https://leetcode.com/problems/permutations/description/' }]}},
+        { id: 'permutations_combinations', label: 'Permutations & Combinations', type: 'basic', details: { description: "Classic problems solved with backtracking.", exercises: [{ title: "LeetCode 47: Permutations II", url: "https://leetcode.com/problems/permutations-ii/description/" }, { title: "LeetCode 90: Subsets II", url: "https://leetcode.com/problems/subsets-ii/description/" }, { title: "LeetCode 39: Combination Sum", url: "https://leetcode.com/problems/combination-sum/description/" }]}},
+    
     ],
     edges: [
         { from: 'list', to: 'hashmap' }, { from: 'list', to: 'string' }, { from: 'list', to: 'matrix' },
@@ -20,5 +29,13 @@ ROADMAP_DATA.list = {
         { from: 'string', to: 'two_pointers' }, { from: 'two_pointers', to: 'sorting' },
         { from: 'sorting', to: 'searching' }, { from: 'searching', to: 'binary_search' },
         { from: 'sorting', to: 'intervals' },
+        { from: 'list', to: 'stack' },
+        { from: 'stack', to: 'stack_enhanced_stack' },
+        { from: 'stack_enhanced_stack', to: 'stack_monotonic_stack' },
+        { from: 'stack_monotonic_stack', to: 'stack_problem_largest_rectangle' },
+        { from: 'stack', to: 'stack_basic_calculator' },
+        { from: 'stack', to: 'recursion' },
+        { from: 'recursion', to: 'backtracking' },
+        { from: 'backtracking', to: 'permutations_combinations' },
     ]
 };
