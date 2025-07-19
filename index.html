@@ -43,7 +43,6 @@
             gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             user-select: none;
-            /* ✨ 新增：限制面板最大高度，以便在小窗口下可以垂直滚动 */
             max-height: calc(100vh - 40px);
             overflow-y: auto;
         }
@@ -64,7 +63,7 @@
             font-weight: bold;
             text-align: left;
             transition: all 0.2s ease;
-            flex-shrink: 0; /* 防止按钮在flex布局中被压缩 */
+            flex-shrink: 0;
         }
         .topic-btn:hover {
             background-color: #4f4f4f;
@@ -80,19 +79,97 @@
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.6); z-index: 99;
         }
+
+        /* --- MODIFIED: 修改了弹窗样式以支持内容滚动 --- */
         #modal {
             position: fixed; z-index: 100; left: 50%; top: 50%; transform: translate(-50%, -50%);
             width: 90%; max-width: 600px; background-color: #2c2c2c; border: 1px solid #444;
-            border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); padding: 25px 30px;
+            border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); 
+            /* 修改: 移除内边距 padding, 改为 flex 布局 */
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 40px);
         }
+        #modal-content {
+            /* 修改: 在这里添加内边距和滚动条 */
+            padding: 25px 30px;
+            overflow-y: auto;
+        }
+        /* --- END OF MODIFICATION --- */
+        
         #modal-content h2 { margin-top: 0; font-size: 24px; border-bottom: 1px solid #444; padding-bottom: 15px; margin-bottom: 15px; }
         #modal-content p { line-height: 1.6; margin-bottom: 20px; color: #ccc; }
         #modal-content h3 { font-size: 18px; margin-top: 25px; margin-bottom: 10px; color: #eee; border-bottom: 1px solid #444; padding-bottom: 8px; }
-        #modal-content ul { list-style: none; padding: 0; max-height: 280px; overflow-y: auto; }
-        #modal-content li { padding: 12px 0; border-bottom: 1px solid #444; }
+        
+        /* MODIFIED: 移除了 max-height 和 overflow-y，因为滚动由 #modal-content 控制 */
+        #modal-content ul { list-style: none; padding: 0; }
+
+        /* MODIFIED: 修改了 li 样式以支持新布局 */
+        #modal-content li { 
+            padding: 12px 0; 
+            border-bottom: 1px solid #444;
+            display: flex;
+            flex-direction: column;
+        }
+
         #modal-content li:last-child { border-bottom: none; }
         #modal-content li a { text-decoration: none; color: #58a6ff; font-weight: bold; transition: color 0.2s; }
         #modal-content li a:hover { color: #80bfff; }
+        
+        /* --- NEW: 新增 Key Point 功能所需的所有样式 --- */
+        .exercise-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            width: 100%; 
+        }
+        .key-point-btn { 
+            background-color: #fd7e14; 
+            color: white; 
+            border: 1px solid #e66a00; 
+            border-radius: 5px; 
+            padding: 5px 12px; 
+            cursor: pointer; 
+            font-size: 12px; 
+            font-weight: bold; 
+            margin-left: 15px; 
+            flex-shrink: 0; 
+            transition: background-color 0.2s, transform 0.2s; 
+            user-select: none; 
+        }
+        .key-point-btn:hover { 
+            background-color: #ff912b; 
+            transform: translateY(-1px); 
+        }
+        .key-point-btn.active { 
+            background-color: #0d6efd; 
+            border-color: #0b5ed7; 
+            transform: translateY(0); 
+        }
+        .key-point-content { 
+            background-color: rgba(0, 0, 0, 0.2); 
+            border-left: 3px solid #fd7e14; 
+            color: #ddd; 
+            font-size: 14px; 
+            line-height: 1.6; 
+            max-height: 0; 
+            overflow: hidden; 
+            padding-left: 12px; 
+            padding-right: 12px; 
+            margin-top: 0; 
+            opacity: 0; 
+            transition: max-height 0.35s ease-in-out, margin-top 0.35s ease-in-out, padding-top 0.35s, padding-bottom 0.35s, opacity 0.3s; 
+        }
+        .key-point-content.visible { 
+            max-height: 400px; 
+            margin-top: 12px; 
+            padding-top: 10px; 
+            padding-bottom: 10px; 
+            opacity: 1; 
+        }
+        .key-point-content a { color: #ff912b; }
+        /* --- END OF NEW STYLES --- */
 
         @media (max-width: 768px) {
             #selector-panel {
@@ -133,12 +210,19 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
+    // --- NEW: 在这里定义所有按钮的【默认】名称 ---
+    const DEFAULT_KEY_POINT_LABEL = 'KEY POINT'; 
+
     const allRoadmaps = ROADMAP_DATA; 
     
     const colorPalette = {
         basic:        { main: '#0d6efd', border: '#58a6ff' },
         intermediate: { main: '#fd7e14', border: '#ffa94d' },
-        advanced:     { main: '#DC3545', border: '#E57373' }
+        advanced:     { main: '#DC3545', border: '#E57373' },
+        green:        { main: '#198754', border: '#4ae49a' },
+        purple:       { main: '#6f42c1', border: '#9a73d9' },
+        yellow:       { main: '#ffc107', border: '#ffd34d' },
+        grey:         { main: '#6c757d', border: '#9ea6ad' }, 
     };
 
     let cy;
@@ -148,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const isMobile = window.innerWidth <= 768;
 
-        // ✨ 步骤 1: 始终使用完整的节点和边数据来渲染
         const elements = [
             ...config.nodes.map(node => ({ data: node })),
             ...config.edges.map(edge => ({ data: { source: edge.from, target: edge.to } }))
@@ -188,65 +271,62 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // ✨ 步骤 2: 渲染完成后，先展示全貌，然后平滑动画展示局部
+        // --- RESTORED: 恢复了初始节点动画功能 ---
         if (config.nodes.length > 0) {
-        const adj = new Map();
-        const inDegree = new Map();
-        config.nodes.forEach(n => {
-            adj.set(n.id, []);
-            inDegree.set(n.id, 0);
-        });
-        config.edges.forEach(edge => {
-            if(adj.has(edge.from) && adj.has(edge.to)) {
-                adj.get(edge.from).push(edge.to);
-                inDegree.set(edge.to, (inDegree.get(edge.to) || 0) + 1);
+            const adj = new Map();
+            const inDegree = new Map();
+            config.nodes.forEach(n => {
+                adj.set(n.id, []);
+                inDegree.set(n.id, 0);
+            });
+            config.edges.forEach(edge => {
+                if(adj.has(edge.from) && adj.has(edge.to)) {
+                    adj.get(edge.from).push(edge.to);
+                    inDegree.set(edge.to, (inDegree.get(edge.to) || 0) + 1);
+                }
+            });
+            const queue = [];
+            const depth = new Map();
+            const initialVisibleNodesIds = new Set();
+            const targetDepth = isMobile ? 2 : 3; 
+
+            inDegree.forEach((degree, nodeId) => {
+                if (degree === 0) {
+                    queue.push(nodeId);
+                    depth.set(nodeId, 0);
+                }
+            });
+            if (queue.length === 0 && config.nodes.length > 0) {
+                queue.push(config.nodes.slice().sort(() => 0.5 - Math.random()) [0].id);
+                depth.set(queue.slice(-1)[0], 0);
             }
-        });
 
-        const queue = [];
-        const depth = new Map();
-        const initialVisibleNodesIds = new Set();
-        const targetDepth = isMobile ? 2 : 3; // 移动端展示前3层 (depth 0, 1, 2)，桌面端展示前4层 (depth 0, 1, 2, 3)
-
-        inDegree.forEach((degree, nodeId) => {
-            if (degree === 0) {
-                queue.push(nodeId);
-                depth.set(nodeId, 0);
-            }
-        });
-        if (queue.length === 0 && config.nodes.length > 0) {
-            queue.push(config.nodes.slice().sort(() => 0.5 - Math.random()) [0].id); // Fallback for disconnected graphs
-            depth.set(queue.slice(-1)[0], 0);
-        }
-
-        while (queue.length > 0) {
-            const u = queue.shift();
-            if (depth.get(u) > targetDepth) continue;
-            initialVisibleNodesIds.add(u);
-
-            if (adj.has(u)) {
-                for (const v of adj.get(u)) {
-                    if (!depth.has(v)) {
-                        depth.set(v, depth.get(u) + 1);
-                        queue.push(v);
+            while (queue.length > 0) {
+                const u = queue.shift();
+                if (depth.get(u) > targetDepth) continue;
+                initialVisibleNodesIds.add(u);
+                if (adj.has(u)) {
+                    for (const v of adj.get(u)) {
+                        if (!depth.has(v)) {
+                            depth.set(v, depth.get(u) + 1);
+                            queue.push(v);
+                        }
                     }
                 }
             }
+            if (initialVisibleNodesIds.size > 0) {
+                const selector = Array.from(initialVisibleNodesIds).map(id => `#${id}`).join(', ');
+                const initialVisibleElements = cy.elements(selector);
+                setTimeout(() => {
+                    cy.animate({
+                        fit: { eles: initialVisibleElements, padding: 40 },
+                        duration: 500,
+                        easing: 'ease-out-quad'
+                    });
+                }, 100);
+            }
         }
-
-        if (initialVisibleNodesIds.size > 0) {
-            const selector = Array.from(initialVisibleNodesIds).map(id => `#${id}`).join(', ');
-            const initialVisibleElements = cy.elements(selector);
-
-            setTimeout(() => {
-                cy.animate({
-                    fit: { eles: initialVisibleElements, padding: 40 },
-                    duration: 500,
-                    easing: 'ease-out-quad'
-                });
-            }, 100);
-        }
-    }
+        // --- END OF RESTORED BLOCK ---
 
         const modalOverlay = document.getElementById('modal-overlay');
         const modalContent = document.getElementById('modal-content');
@@ -259,16 +339,50 @@ document.addEventListener('DOMContentLoaded', function() {
             const titleColor = colorPalette[nodeType]?.border || '#ffffff';
 
             let contentHtml = `<h2 style="color:${titleColor}">${node.data('label')}</h2>`;
-            if (details.description) { contentHtml += `<p>${details.description}</p>`; }
+            // MODIFIED: 替换了原有的简单 description，以处理换行符
+            if (details.description) { contentHtml += `<p>${details.description.replace(/\n/g, '<br>')}</p>`; }
+            
+            // --- MODIFIED: 替换了整个练习题列表的生成逻辑，以支持 Key Point 功能 ---
             if (details.exercises && details.exercises.length > 0) {
                 const practiceTitle = (node.data('id').startsWith('sd_') || ['foundations', 'sde_mlops', 'data_science', 'qf_qe', 'machine_learning', 'deep_learning', 'reinforcement_learning'].includes(evt.target.cy().options.id)) 
-                                     ? 'Further Reading & Resources' : 'Practices & Resources';
+                                    ? 'Further Reading & Resources' : 'Practices & Resources';
                 contentHtml += `<h3>${practiceTitle}</h3><ul>`;
-                details.exercises.forEach(exercise => {
-                    contentHtml += `<li><a href="${exercise.url}" target="_blank">${exercise.title}</a></li>`;
+                
+                details.exercises.forEach((exercise, index) => {
+                    if (!exercise.key_point) {
+                        contentHtml += `<li><div class="exercise-header"><a href="${exercise.url}" target="_blank">${exercise.title}</a></div></li>`;
+                        return;
+                    }
+
+                    let buttonLabel = DEFAULT_KEY_POINT_LABEL;
+                    let keyPointContent = '';
+
+                    if (typeof exercise.key_point === 'object' && exercise.key_point !== null) {
+                        if (exercise.key_point.label) {
+                            buttonLabel = exercise.key_point.label;
+                        }
+                        keyPointContent = exercise.key_point.content || '';
+                    } else {
+                        keyPointContent = exercise.key_point;
+                    }
+
+                    if (!keyPointContent) return;
+
+                    const keyPointId = `key-point-${index}`;
+                    
+                    contentHtml += '<li>';
+                    contentHtml += '<div class="exercise-header">';
+                    contentHtml += `<a href="${exercise.url}" target="_blank">${exercise.title}</a>`;
+                    contentHtml += `<button class="key-point-btn" data-target="${keyPointId}">${buttonLabel}</button>`;
+                    contentHtml += '</div>';
+                    contentHtml += `<div class="key-point-content" id="${keyPointId}">${keyPointContent}</div>`;
+                    contentHtml += '</li>';
                 });
+                
                 contentHtml += '</ul>';
             }
+            // --- END OF MODIFIED LOGIC ---
+
             modalContent.innerHTML = contentHtml;
             modalOverlay.style.display = 'block';
         });
@@ -276,6 +390,22 @@ document.addEventListener('DOMContentLoaded', function() {
             if (event.target === modalOverlay) { modalOverlay.style.display = 'none'; }
         });
     }
+
+    // --- NEW: 新增的 Key Point 按钮点击事件委托 ---
+    const modal = document.getElementById('modal');
+    modal.addEventListener('click', function(event) {
+        const button = event.target.closest('.key-point-btn');
+        if (!button) return;
+
+        const targetId = button.dataset.target;
+        const contentPanel = document.getElementById(targetId);
+        
+        if (contentPanel) {
+            button.classList.toggle('active');
+            contentPanel.classList.toggle('visible');
+        }
+    });
+    // --- END OF NEW EVENT LISTENER ---
 
     const buttons = document.querySelectorAll('.topic-btn');
     buttons.forEach(button => {
@@ -292,10 +422,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ✨ 新增：通用化的鼠标拖拽滚动功能
     const panel = document.getElementById('selector-panel');
     const checkDraggable = () => {
-        // 只要内容高度或宽度超出面板，就启用拖拽
         if (panel.scrollHeight > panel.clientHeight || panel.scrollWidth > panel.clientWidth) {
             panel.classList.add('draggable');
         } else {
@@ -307,7 +435,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let startX, startY, scrollLeft, scrollTop;
 
     panel.addEventListener('mousedown', (e) => {
-        // 只在 draggable 类存在时才激活拖拽
         if (!panel.classList.contains('draggable')) return;
         isDown = true;
         panel.classList.add('grabbing');
@@ -329,13 +456,10 @@ document.addEventListener('DOMContentLoaded', function() {
         panel.scrollTop = scrollTop - walkY;
     });
 
-    // 初始加载
     if (buttons.length > 0) {
         buttons[0].click();
     }
-    // 页面加载后检查一次是否需要拖拽
     checkDraggable();
-    // 窗口大小改变时也检查
     window.addEventListener('resize', checkDraggable);
 });
 </script>
