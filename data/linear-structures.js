@@ -1,7 +1,7 @@
 // 初始化全局数据容器（如果不存在）
 if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
-ROADMAP_DATA.linear_algorithms = {
+ROADMAP_DATA.linear_structures = {
     nodes: [
         { id: 'list', label: 'Arrays & Dynamic Arrays', type: 'basic', details: { description: 'Array is the most basic data structure, in Python we use list to present array and dynamic array.', exercises: [{ title: 'LeetCode 1: Two Sum', url: 'https://leetcode.com/problems/two-sum/description/' }, { title: 'LeetCode 15: 3Sum', url: 'https://leetcode.com/problems/3sum/description/' }]}},
         { id: 'hashmap', label: 'HashSet & HashMap', type: 'basic', details: { description: 'HashSet (set) and HashMap (dict) can store unique keys. HashMap can store unique key-value pairs. Keys must use immutable elements.', exercises: [{ title: 'LeetCode 347. Top K Frequent Elements', url: 'https://leetcode.com/problems/top-k-frequent-elements/description/' }, { title: 'LeetCode 128. Longest Consecutive Sequence', url: 'https://leetcode.com/problems/longest-consecutive-sequence/description/' }]}},

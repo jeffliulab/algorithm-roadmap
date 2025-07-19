@@ -1,6 +1,6 @@
 if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
-ROADMAP_DATA.graph = {
+ROADMAP_DATA.graph_tree = {
     nodes: [
         { id: 'graph', label: 'Graph', type: 'basic', details: { description: 'A graph is a data structure consisting of nodes and edges.', exercises: [{ title: 'LeetCode 133: Clone Graph', url: 'https://leetcode.com/problems/clone-graph/description/' }]}},
         { id: 'dfs', label: 'Depth-First Search (DFS)', type: 'basic', details: { description: "DFS explores as far as possible along each branch before backtracking.", exercises: [{ title: "LeetCode 200: Number of Islands", url: "https://leetcode.com/problems/number-of-islands/description/" }]}},

@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
     <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
 
-    <script src="data/linear-algorithms.js"></script>
+    <script src="data/linear-structures.js"></script>
     <script src="data/graph-tree.js"></script>
     <script src="data/intermediate-algorithms.js"></script>
     <script src="data/advanced-algorithms.js"></script>
@@ -42,7 +42,18 @@
             flex-direction: column;
             gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            user-select: none;
+            /* ✨ 新增：限制面板最大高度，以便在小窗口下可以垂直滚动 */
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
         }
+        #selector-panel.draggable {
+            cursor: grab;
+        }
+        #selector-panel.grabbing {
+            cursor: grabbing;
+        }
+
         .topic-btn {
             background-color: #3a3a3a;
             color: #f0f0f0;
@@ -53,6 +64,7 @@
             font-weight: bold;
             text-align: left;
             transition: all 0.2s ease;
+            flex-shrink: 0; /* 防止按钮在flex布局中被压缩 */
         }
         .topic-btn:hover {
             background-color: #4f4f4f;
@@ -81,14 +93,25 @@
         #modal-content li:last-child { border-bottom: none; }
         #modal-content li a { text-decoration: none; color: #58a6ff; font-weight: bold; transition: color 0.2s; }
         #modal-content li a:hover { color: #80bfff; }
+
+        @media (max-width: 768px) {
+            #selector-panel {
+                top: 0; left: 0; right: 0; width: auto; max-height: none; border-radius: 0;
+                border-left: none; border-right: none; border-top: none;
+                padding: 8px; flex-direction: row; overflow-x: auto; overflow-y: hidden;
+                -ms-overflow-style: none; scrollbar-width: none;
+            }
+            #selector-panel::-webkit-scrollbar { display: none; }
+            .topic-btn { white-space: nowrap; }
+        }
     </style>
 </head>
 <body>
     <div id="cy"></div>
 
     <div id="selector-panel">
-        <button class="topic-btn active" data-topic="linear_algorithms">Linear Algorithms</button>
-        <button class="topic-btn" data-topic="graph">Graph & Tree</button>
+        <button class="topic-btn" data-topic="linear_structures">Linear Structures</button>
+        <button class="topic-btn" data-topic="graph_tree">Graph & Tree</button>
         <button class="topic-btn" data-topic="intermediate_algorithms">Intermediate Algorithms</button>
         <button class="topic-btn" data-topic="advanced_algorithms">Advanced Algorithms</button>
         <button class="topic-btn" data-topic="machine_learning">Machine Learning</button>
@@ -110,8 +133,6 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-    // 2. 从全局变量 ROADMAP_DATA 中获取所有天梯数据
-    // 这个变量是由 data/ 文件夹中的 .js 文件创建的
     const allRoadmaps = ROADMAP_DATA; 
     
     const colorPalette = {
@@ -123,10 +144,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let cy;
 
     function renderRoadmap(config) {
-        if (cy) {
-            cy.destroy();
-        }
+        if (cy) { cy.destroy(); }
 
+        const isMobile = window.innerWidth <= 768;
+
+        // ✨ 步骤 1: 始终使用完整的节点和边数据来渲染
         const elements = [
             ...config.nodes.map(node => ({ data: node })),
             ...config.edges.map(edge => ({ data: { source: edge.from, target: edge.to } }))
@@ -149,10 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (const [type, colors] of Object.entries(colorPalette)) {
             styles.push({
                 selector: `node[type='${type}']`,
-                style: {
-                    'background-color': colors.main,
-                    'border-color': colors.border
-                }
+                style: { 'background-color': colors.main, 'border-color': colors.border }
             });
         }
         
@@ -161,14 +180,76 @@ document.addEventListener('DOMContentLoaded', function() {
             elements: elements,
             style: styles,
             layout: {
-                name: 'dagre', rankDir: 'TB', spacingFactor: 1.2,
-                nodeSep: 60, rankSep: 70,
+                name: 'dagre',
+                rankDir: isMobile ? 'LR' : 'TB',
+                spacingFactor: 1.2,
+                nodeSep: isMobile ? 50 : 60,
+                rankSep: isMobile ? 60 : 70,
             }
         });
 
+        // ✨ 步骤 2: 渲染完成后，先展示全貌，然后平滑动画展示局部
+        if (config.nodes.length > 0) {
+        const adj = new Map();
+        const inDegree = new Map();
+        config.nodes.forEach(n => {
+            adj.set(n.id, []);
+            inDegree.set(n.id, 0);
+        });
+        config.edges.forEach(edge => {
+            if(adj.has(edge.from) && adj.has(edge.to)) {
+                adj.get(edge.from).push(edge.to);
+                inDegree.set(edge.to, (inDegree.get(edge.to) || 0) + 1);
+            }
+        });
+
+        const queue = [];
+        const depth = new Map();
+        const initialVisibleNodesIds = new Set();
+        const targetDepth = isMobile ? 2 : 3; // 移动端展示前3层 (depth 0, 1, 2)，桌面端展示前4层 (depth 0, 1, 2, 3)
+
+        inDegree.forEach((degree, nodeId) => {
+            if (degree === 0) {
+                queue.push(nodeId);
+                depth.set(nodeId, 0);
+            }
+        });
+        if (queue.length === 0 && config.nodes.length > 0) {
+            queue.push(config.nodes.slice().sort(() => 0.5 - Math.random()) [0].id); // Fallback for disconnected graphs
+            depth.set(queue.slice(-1)[0], 0);
+        }
+
+        while (queue.length > 0) {
+            const u = queue.shift();
+            if (depth.get(u) > targetDepth) continue;
+            initialVisibleNodesIds.add(u);
+
+            if (adj.has(u)) {
+                for (const v of adj.get(u)) {
+                    if (!depth.has(v)) {
+                        depth.set(v, depth.get(u) + 1);
+                        queue.push(v);
+                    }
+                }
+            }
+        }
+
+        if (initialVisibleNodesIds.size > 0) {
+            const selector = Array.from(initialVisibleNodesIds).map(id => `#${id}`).join(', ');
+            const initialVisibleElements = cy.elements(selector);
+
+            setTimeout(() => {
+                cy.animate({
+                    fit: { eles: initialVisibleElements, padding: 40 },
+                    duration: 500,
+                    easing: 'ease-out-quad'
+                });
+            }, 100);
+        }
+    }
+
         const modalOverlay = document.getElementById('modal-overlay');
         const modalContent = document.getElementById('modal-content');
-
         cy.on('tap', 'node', function(evt){
             const node = evt.target;
             const details = node.data('details');
@@ -178,25 +259,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const titleColor = colorPalette[nodeType]?.border || '#ffffff';
 
             let contentHtml = `<h2 style="color:${titleColor}">${node.data('label')}</h2>`;
-            if (details.description) {
-                contentHtml += `<p>${details.description}</p>`;
-            }
+            if (details.description) { contentHtml += `<p>${details.description}</p>`; }
             if (details.exercises && details.exercises.length > 0) {
-                contentHtml += '<h3>Practices on Leetcode</h3><ul>';
+                const practiceTitle = (node.data('id').startsWith('sd_') || ['foundations', 'sde_mlops', 'data_science', 'qf_qe', 'machine_learning', 'deep_learning', 'reinforcement_learning'].includes(evt.target.cy().options.id)) 
+                                     ? 'Further Reading & Resources' : 'Practices & Resources';
+                contentHtml += `<h3>${practiceTitle}</h3><ul>`;
                 details.exercises.forEach(exercise => {
                     contentHtml += `<li><a href="${exercise.url}" target="_blank">${exercise.title}</a></li>`;
                 });
                 contentHtml += '</ul>';
             }
-
             modalContent.innerHTML = contentHtml;
             modalOverlay.style.display = 'block';
         });
-
         modalOverlay.addEventListener('click', function(event) {
-            if (event.target === modalOverlay) {
-                modalOverlay.style.display = 'none';
-            }
+            if (event.target === modalOverlay) { modalOverlay.style.display = 'none'; }
         });
     }
 
@@ -207,12 +284,59 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.add('active');
             
             const topicId = button.dataset.topic;
-            renderRoadmap(allRoadmaps[topicId]);
+            if (allRoadmaps[topicId]) {
+                renderRoadmap(allRoadmaps[topicId]);
+            } else {
+                console.error(`Roadmap data for topic "${topicId}" not found!`);
+            }
         });
     });
 
+    // ✨ 新增：通用化的鼠标拖拽滚动功能
+    const panel = document.getElementById('selector-panel');
+    const checkDraggable = () => {
+        // 只要内容高度或宽度超出面板，就启用拖拽
+        if (panel.scrollHeight > panel.clientHeight || panel.scrollWidth > panel.clientWidth) {
+            panel.classList.add('draggable');
+        } else {
+            panel.classList.remove('draggable');
+        }
+    };
+
+    let isDown = false;
+    let startX, startY, scrollLeft, scrollTop;
+
+    panel.addEventListener('mousedown', (e) => {
+        // 只在 draggable 类存在时才激活拖拽
+        if (!panel.classList.contains('draggable')) return;
+        isDown = true;
+        panel.classList.add('grabbing');
+        startX = e.pageX - panel.offsetLeft;
+        startY = e.pageY - panel.offsetTop;
+        scrollLeft = panel.scrollLeft;
+        scrollTop = panel.scrollTop;
+    });
+    panel.addEventListener('mouseleave', () => { isDown = false; panel.classList.remove('grabbing'); });
+    panel.addEventListener('mouseup', () => { isDown = false; panel.classList.remove('grabbing'); });
+    panel.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - panel.offsetLeft;
+        const y = e.pageY - panel.offsetTop;
+        const walkX = (x - startX) * 2;
+        const walkY = (y - startY) * 2;
+        panel.scrollLeft = scrollLeft - walkX;
+        panel.scrollTop = scrollTop - walkY;
+    });
+
     // 初始加载
-    renderRoadmap(allRoadmaps.list);
+    if (buttons.length > 0) {
+        buttons[0].click();
+    }
+    // 页面加载后检查一次是否需要拖拽
+    checkDraggable();
+    // 窗口大小改变时也检查
+    window.addEventListener('resize', checkDraggable);
 });
 </script>
 

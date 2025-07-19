@@ -1,65 +1,106 @@
 if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
-// 这里就是定义ROADMAP_DATA的地方！
+// This roadmap is structured to follow the UC Berkeley CS 189/289A syllabus.
 ROADMAP_DATA.machine_learning = {
     nodes: [
-        { id: 'ml_foundations', label: 'ML Foundations', type: 'basic', details: {
-            description: "Start here. Understand the core concepts: What is Machine Learning? Types of learning (Supervised, Unsupervised, Reinforcement), and the vocabulary of features, labels, and models.",
-            exercises: [
-                { title: "Google's Machine Learning Crash Course", url: "https://developers.google.com/machine-learning/crash-course" },
-                { title: "Supervised vs. Unsupervised Learning", url: "https://www.geeksforgeeks.org/supervised-unsupervised-learning/" }
-            ]
+        { id: 'ml_root', label: 'UCB CS 189: Machine Learning', type: 'basic', details: {
+            description: "A roadmap structured according to the UC Berkeley CS 189 course, covering theoretical foundations, algorithms, and methodologies from classical ML to modern deep learning.",
+            exercises: [{ title: "CS 189/289A Course Website", url: "https://cs189.org" }]
         }},
-        { id: 'linear_regression', label: 'Linear Regression', type: 'basic', details: {
-            description: "The 'Hello World' of ML. Learn how to predict a continuous value (e.g., house price) from input features by fitting a straight line. Key concepts: cost function, gradient descent.",
-            exercises: [
-                { title: "Andrew Ng's Notes on Linear Regression", url: "https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf" },
-                { title: "Kaggle: House Prices Dataset", url: "https://www.kaggle.com/c/house-prices-advanced-regression-techniques" }
-            ]
+        
+        // --- Module 1: Probabilistic Foundations (Weeks 1-2) ---
+        { id: 'prob_foundations', label: 'Probabilistic Foundations', type: 'basic', details: {
+            description: "The theoretical bedrock of machine learning. This module covers how to frame learning problems using probability, focusing on Maximum Likelihood Estimation (MLE) and the properties of Gaussian distributions.",
+            exercises: [{ title: "Reading: Probability & MLE (Weeks 1-2)", url: "https://cs189.org" }]
+        }},
+        
+        // --- Module 2: Supervised Learning - Linear Models (Weeks 3-4) ---
+        { id: 'linear_regression', label: 'Linear Regression & Regularization', type: 'basic', details: {
+            description: "The starting point for supervised learning. Models data with a linear relationship. This also introduces crucial concepts like regularization (L1/Lasso, L2/Ridge) to prevent overfitting and Bayesian interpretations (MAP).",
+            exercises: [{ title: "Reading: Linear Regression (Week 3)", url: "https://cs189.org" }]
+        }},
+        { id: 'classification', label: 'Classification: Generative vs Discriminative', type: 'intermediate', details: {
+            description: "The two main approaches to classification. Generative models (like Naive Bayes) learn the distribution of each class, while Discriminative models (like Logistic Regression) learn the decision boundary between classes directly.",
+            exercises: [{ title: "Reading: Classification (Week 4)", url: "https://cs189.org" }]
         }},
         { id: 'logistic_regression', label: 'Logistic Regression', type: 'intermediate', details: {
-            description: "Despite its name, this is a classification algorithm. It's used to predict a binary outcome (0 or 1, True or False) by passing the linear output through a sigmoid function.",
+            description: "A fundamental discriminative algorithm for binary classification. It serves as the bridge from classical linear models to neural networks, as a single neuron with a sigmoid activation is essentially logistic regression.",
+        }},
+
+        // --- Module 3: Neural Networks & Deep Learning (Weeks 5-6) ---
+        { id: 'neural_networks_basics', label: 'Neural Networks & Backpropagation', type: 'intermediate', details: {
+            description: "Multi-layer perceptrons (MLPs) and the core algorithm that powers them: Backpropagation. This involves using the chain rule to efficiently compute gradients and update network weights with Gradient Descent.",
+            exercises: [{ title: "Reading: Backpropagation (Week 5)", url: "https://cs189.org" }]
+        }},
+        { id: 'cnn_transformers', label: 'Modern Architectures: CNNs & Transformers', type: 'advanced', details: {
+            description: "The specialized architectures that define modern deep learning. Convolutional Neural Networks (CNNs) with components like Batch Norm and ResNets for vision, and Transformers with the Attention mechanism for sequence data.",
             exercises: [
-                { title: "StatQuest: Logistic Regression Explained", url: "https://www.youtube.com/watch?v=yIYKR4sgzI8" },
-                { title: "Kaggle: Titanic - Machine Learning from Disaster", url: "https://www.kaggle.com/c/titanic" }
+                { title: "Reading: CNNs & Transformers (Week 6)", url: "https://cs189.org" },
+                { title: "The Illustrated Transformer", url: "http://jalammar.github.io/illustrated-transformer/" }
             ]
         }},
-        { id: 'decision_trees', label: 'Decision Trees & Forests', type: 'intermediate', details: {
-            description: "Learn about tree-based models that make decisions by splitting data based on feature values. Random Forests are an ensemble of many trees, improving robustness and reducing overfitting.",
-            exercises: [
-                { title: "StatQuest: Decision Trees Explained", url: "https://www.youtube.com/watch?v=7VeUPuFGJHk" },
-                { title: "StatQuest: Random Forests Explained", url: "https://www.youtube.com/watch?v=J4Wdy0Wc_xQ" }
-            ]
+
+        // --- Module 4: Unsupervised & Instance-Based Learning (Weeks 7-8) ---
+        { id: 'dimensionality_reduction', label: 'Dimensionality Reduction', type: 'intermediate', details: {
+            description: "Techniques for reducing the number of features in a dataset while preserving important information. Principal Component Analysis (PCA) finds directions of maximum variance, while t-SNE is used for visualization.",
+            exercises: [{ title: "Reading: PCA & t-SNE (Week 7)", url: "https://cs189.org" }]
         }},
-        { id: 'unsupervised_learning', label: 'Unsupervised Learning', type: 'intermediate', details: {
-            description: "Finding patterns in data without pre-existing labels. Key algorithms include K-Means for clustering and PCA for dimensionality reduction.",
-            exercises: [
-                { title: "K-Means Clustering Explained", url: "https://developers.google.com/machine-learning/clustering/k-means/introduction" },
-                { title: "Principal Component Analysis (PCA)", url: "https://www.youtube.com/watch?v=FgakZw6K1QQ" }
-            ]
+        { id: 'clustering_neighbors', label: 'Clustering & Nearest Neighbors', type: 'intermediate', details: {
+            description: "Methods for finding structure in unlabeled data. Clustering algorithms like K-Means and Gaussian Mixture Models (GMMs) group similar data points. K-Nearest Neighbors (KNN) is a simple instance-based method for classification.",
+            exercises: [{ title: "Reading: Clustering & KNN (Week 8)", url: "https://cs189.org" }]
         }},
-        { id: 'dl_intro', label: 'Intro to Deep Learning', type: 'advanced', details: {
-            description: "The gateway to modern AI. Understand the basic building blocks: neurons, layers, and activation functions. This leads to Neural Networks (NNs), Convolutional NNs (CNNs) for images, and Recurrent NNs (RNNs) for sequences.",
-            exercises: [
-                { title: "3Blue1Brown: Neural Networks Series", url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" },
-                { title: "TensorFlow Playground", url: "https://playground.tensorflow.org/" }
-            ]
+
+        // --- Module 5: Trees, Ensembles, & Model Theory (Week 9-10) ---
+        { id: 'model_theory', label: 'Model Theory: Bias-Variance Tradeoff', type: 'intermediate', details: {
+            description: "A fundamental concept in ML. The tradeoff between a model's bias (underfitting) and its variance (overfitting) helps diagnose model performance and guide model selection.",
+            exercises: [{ title: "Reading: Bias-Variance (Week 10)", url: "https://cs189.org" }]
         }},
-        { id: 'ml_practice', label: 'Practical Skills', type: 'advanced', details: {
-            description: "The skills that separate beginners from practitioners. Learn how to evaluate models (Accuracy, Precision, Recall, F1-Score), handle overfitting (Regularization), and engineer meaningful features.",
-            exercises: [
-                { title: "Accuracy, Precision, Recall, F1 Score", url: "https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9" },
-                { title: "Google's Guide to Regularization", url: "https://developers.google.com/machine-learning/crash-course/regularization-for-simplicity/l2-regularization" }
-            ]
+        { id: 'decision_trees_ensembles', label: 'Decision Trees & Ensembling', type: 'intermediate', details: {
+            description: "Tree-based models that are powerful and interpretable. Ensembling methods like Bagging (Random Forests) and Boosting combine many simple models to create a more powerful and robust one.",
+            exercises: [{ title: "Reading: Trees & Ensembling (Week 9)", url: "https://cs189.org" }]
+        }},
+        
+        // --- Module 6: Advanced Models (Weeks 10-14) ---
+        { id: 'graphical_models', label: 'Probabilistic Graphical Models', type: 'advanced', details: {
+            description: "Models that use a graph to represent conditional dependencies between random variables. Hidden Markov Models (HMMs) are a key example, used for modeling sequential data like speech or text.",
+            exercises: [{ title: "Reading: HMMs (Weeks 10-11)", url: "https://cs189.org" }]
+        }},
+        { id: 'generative_models', label: 'Generative Models', type: 'advanced', details: {
+            description: "Models that can generate new data samples. This includes Variational Autoencoders (VAEs) and Generative Adversarial Networks (GANs), which learn the underlying distribution of the training data.",
+            exercises: [{ title: "Reading: Generative Models (Weeks 11-12)", url: "https://cs189.org" }]
+        }},
+        { id: 'gnn', label: 'Graph Neural Networks (GNNs)', type: 'advanced', details: {
+            description: "Extending deep learning to graph-structured data. GNNs are essential for social network analysis, molecular chemistry, and recommendation systems.",
+            exercises: [{ title: "Reading: GNNs (Week 13)", url: "https://cs189.org" }]
+        }},
+        { id: 'kernel_methods', label: 'Kernel Methods (SVMs)', type: 'advanced', details: {
+            description: "A powerful class of algorithms for classification and regression, most famously Support Vector Machines (SVMs). The 'kernel trick' allows them to find complex, non-linear decision boundaries.",
+            exercises: [{ title: "Reading: Kernels (Week 14)", url: "https://cs189.org" }]
         }},
     ],
     edges: [
-        { from: 'ml_foundations', to: 'linear_regression' },
-        { from: 'linear_regression', to: 'logistic_regression' },
-        { from: 'logistic_regression', to: 'decision_trees' },
-        { from: 'ml_foundations', to: 'unsupervised_learning' },
-        { from: 'decision_trees', to: 'dl_intro' },
-        { from: 'unsupervised_learning', to: 'dl_intro' },
-        { from: 'dl_intro', to: 'ml_practice' }
+        // Foundational Flow
+        { from: 'ml_root', to: 'prob_foundations' },
+        { from: 'prob_foundations', to: 'linear_regression' },
+        { from: 'linear_regression', to: 'classification' },
+        { from: 'classification', to: 'logistic_regression' },
+        
+        // Path to Neural Networks
+        { from: 'logistic_regression', to: 'neural_networks_basics' },
+        { from: 'neural_networks_basics', to: 'cnn_transformers' },
+        
+        // Unsupervised Branch
+        { from: 'prob_foundations', to: 'dimensionality_reduction' },
+        { from: 'dimensionality_reduction', to: 'clustering_neighbors' },
+        
+        // Trees and Model Theory
+        { from: 'classification', to: 'model_theory' },
+        { from: 'model_theory', to: 'decision_trees_ensembles' },
+        
+        // Advanced Models build on everything
+        { from: 'decision_trees_ensembles', to: 'graphical_models' },
+        { from: 'cnn_transformers', to: 'generative_models' },
+        { from: 'generative_models', to: 'gnn' },
+        { from: 'gnn', to: 'kernel_methods' }
     ]
 };
