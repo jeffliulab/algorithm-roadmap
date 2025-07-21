@@ -7,18 +7,57 @@ if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 // green 绿色：代表一种特殊类型的题组
 // yellow 黄色：代表一种单独的特殊类型题
 
+// 笔记链接格式：
+// https://jeffliulab.github.io/algorithm-notes/algorithms/#recursion"
+
 ROADMAP_DATA.linear_structures = {
     nodes: [
         // 所有单独是一行的节点之后有时间都要重新捋一下，这些是INIT的时候设置的
-        { id: 'sorting', label: 'Sorting', type: 'basic', details: { description: 'Sorting is the process of arranging a set of elements in a specific order.', exercises: [{ title: 'LeetCode 912: Sort an Array', url: 'https://leetcode.com/problems/sort-an-array/description/' }, { title: 'LeetCode 75: Sort Colors', url: 'https://leetcode.com/problems/sort-colors/description/' }, { title: 'LeetCode 56: Merge Intervals', url: 'https://leetcode.com/problems/merge-intervals/description/' }]}},
         { id: 'searching', label: 'Searching', type: 'basic', details: { description: 'Binary search is an efficient search algorithm that works on a sorted data set.', exercises: [{ title: 'LeetCode 704: Binary Search', url: 'https://leetcode.com/problems/binary-search/description/' }, { title: 'LeetCode 33: Search in Rotated Sorted Array', url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/description/' }]}},
         { id: 'intervals', label: 'Intervals Problems', type: 'green', details: { description: "Interval problems involve dealing with ranges or segments of data. Sorting is often the first step.", exercises: [{ title: "LeetCode 56: Merge Intervals", url: "https://leetcode.com/problems/merge-intervals/description/" }, { title: "LeetCode 57: Insert Interval", url: "https://leetcode.com/problems/insert-interval/description/" }, { title: "LeetCode 253: Meeting Rooms II", url: "https://leetcode.com/problems/meeting-rooms-ii/description/" }]}},
         { id: 'matrix', label: 'Matrix', type: 'basic', details: { description: "Matrix problems involve traversing or modifying a 2D grid.", exercises: [{ title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" }, { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" }, { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" }]}},
         { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: { description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.', exercises: [{ title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' }]}},
         { id: 'stack_monotonic_stack', label: 'Monotonic Stack', type: 'basic', details: { description: 'A stack that maintains a monotonic order of elements.', exercises: [{ title: 'LeetCode 739: Daily Temperatures', url: 'https://leetcode.com/problems/daily-temperatures/description/' }, { title: 'LeetCode 853: Car Fleet', url: 'https://leetcode.com/problems/car-fleet/description/' }]}},
         { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'yellow', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
-        { id: 'recursion', label: 'Recursion', type: 'basic', details: { description: "Recursion is a function that calls itself. Its execution is managed by the call stack.", exercises: [{ title: "The concept of recursion:", url: "https://example.com" }]}},
         { id: 'backtracking', label: 'Backtracking (1D)', type: 'basic', details: { description: 'Backtracking is an algorithmic paradigm for solving problems recursively by trying to build a solution incrementally.', exercises: [{ title: 'LeetCode 78: Subsets', url: 'https://leetcode.com/problems/subsets/description/' }, { title: 'LeetCode 46: Permutations', url: 'https://leetcode.com/problems/permutations/description/' }]}},
+        // Recursion
+        { id: 'recursion', label: 'Recursion', type: 'basic', details: { 
+            description: `Recursion is a programming technique where a function calls itself to solve smaller instances of a problem.
+            Most recursion questions are in topics of Tree Traversal, Divide and Conquer, Backtracking, etc.`, exercises: [
+                { title: "The Concept of Recursion", url: "https://jeffliulab.github.io/algorithm-notes/algorithms/#recursion" 
+                },
+                { title: "LeetCode 509: Fibonacci Number", url: "https://leetcode.com/problems/fibonacci-number/description/"   
+                },
+            ]}
+        },
+        // Sorting                    快捷导航 navi:sorting / navi sorting
+        { id: 'sorting', label: 'Sorting', type: 'basic', details: { 
+            description: `Sorting is the process of arranging a set of elements in a specific order.
+            `, exercises: [
+                { title: "Tutorials: Quick Sort, Merge Sort, Bucket Sort", url: "https://jeffliulab.github.io/algorithm-notes/algorithms/#sorting" 
+                },
+                { title: "LeetCode 75: Sort Colors", url: "https://leetcode.com/problems/sort-colors/description/" 
+                },
+                { title: "LeetCode 912: Sort an Array", url: "https://leetcode.com/problems/sort-an-array/", 
+                },
+                { title: "LeetCode 179: Largest Number", url: "https://leetcode.com/problems/largest-number/description/", 
+                },
+                { title: "LeetCode 148. Sort List", url: "https://leetcode.com/problems/sort-list/description/", "key_point": {"label": "Hint","content": "Use Merge Sort."}
+                },
+                
+                
+            ]}
+        },
+        // Quick Select
+        { id: 'quick_select', label: 'Quick Select', type: 'basic', details: { 
+            description: `Quick select, especially 
+            `, exercises: [
+                { title: "LeetCode 215: Kth Largest Element in an Array", url: "https://leetcode.com/problems/kth-largest-element-in-an-array/description/" 
+                },
+                
+            ]}
+        },
+
         // 排列组合
         {"id": "permutations_combinations", "label": "Permutations & Combinations", "type": "intermediate", "details": {
                 "description": "Backtracking is a general algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point in time. It is commonly used for permutation and combination problems.",
@@ -178,7 +217,7 @@ ROADMAP_DATA.linear_structures = {
                 ]
             }
         },
-        // Linked List
+        // Linked List   navi:linked list
         { id: 'linked_list', label: 'Linked List', type: 'basic', details: { description: `
                 A linked list is a linear data structure where elements are not stored at contiguous memory locations.
                 `, 
@@ -364,14 +403,8 @@ ROADMAP_DATA.linear_structures = {
                 doubly linked list. In python, we use deque to solve queue problems.
                 `, 
                 exercises: [
-                    {
-  "title": "Data Structure of Queue and Deque",
-  "url": "https://leetcode.com/problems/implement-stack-using-queues/description/",
-  "key_point": {
-    "label": "Details",
-    "content": "<strong>QUEUE</strong><br><br>A Queue is an abstract data type that follows a strict First-In, First-Out (FIFO) principle. Think of it as a checkout line at a store: the first person to get in line is the first person to be served.<br><br><strong>Core Principle</strong>: First-In, First-Out (FIFO).<br><strong>Primary Operations</strong>:<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>Enqueue</code>: Adds an element to the rear (back) of the queue.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>Dequeue</code>: Removes and returns the element from the front of the queue.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>Peek</code> / <code>Front</code>: Returns the element at the front without removing it.<br><strong>Key Characteristic</strong>: Operations are restricted to the two ends (adding at the back, removing from the front). It is a highly specialized, one-way structure.<br><strong>Common Use Cases</strong>: Task scheduling (print queues, CPU tasks), Breadth-First Search (BFS) algorithms, and managing data buffers.<br><br><br><strong>DEQUE (DOUBLE-ENDED QUEUE)</strong><br><br>A Deque (pronounced \"deck\") is a more generalized version of a queue. It allows for the addition and removal of elements from both the front and the rear.<br><br><strong>Core Principle</strong>: A sequence container that can be expanded or contracted on both ends.<br><strong>Primary Operations</strong>:<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>addFirst</code> / <code>appendleft</code>: Adds an element to the front.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>addLast</code> / <code>append</code>: Adds an element to the rear.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>removeFirst</code> / <code>popleft</code>: Removes an element from the front.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>removeLast</code> / <code>pop</code>: Removes an element from the rear.<br><strong>Key Characteristic</strong>: Because it supports operations on both ends, a Deque can function as both a Queue (using <code>append</code> and <code>popleft</code>) and a Stack (using <code>append</code> and <code>pop</code>).<br><strong>Common Use Cases</strong>: Sliding window algorithms, implementing undo/redo functionality, and managing task schedules that require adding high-priority items to the front."
-  }
-},                                                                 
+                    {"title": "Data Structure of Queue and Deque", "url": "https://jeffliulab.github.io/algorithm-notes/data_structures/#queue-and-deque", "key_point": { "label": "Summary", "content": "<strong>QUEUE</strong><br><br>A Queue is an abstract data type that follows a strict First-In, First-Out (FIFO) principle. Think of it as a checkout line at a store: the first person to get in line is the first person to be served.<br><br><strong>Core Principle</strong>: First-In, First-Out (FIFO).<br><strong>Primary Operations</strong>:<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>Enqueue</code>: Adds an element to the rear (back) of the queue.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>Dequeue</code>: Removes and returns the element from the front of the queue.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>Peek</code> / <code>Front</code>: Returns the element at the front without removing it.<br><strong>Key Characteristic</strong>: Operations are restricted to the two ends (adding at the back, removing from the front). It is a highly specialized, one-way structure.<br><strong>Common Use Cases</strong>: Task scheduling (print queues, CPU tasks), Breadth-First Search (BFS) algorithms, and managing data buffers.<br><br><br><strong>DEQUE (DOUBLE-ENDED QUEUE)</strong><br><br>A Deque (pronounced \"deck\") is a more generalized version of a queue. It allows for the addition and removal of elements from both the front and the rear.<br><br><strong>Core Principle</strong>: A sequence container that can be expanded or contracted on both ends.<br><strong>Primary Operations</strong>:<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>addFirst</code> / <code>appendleft</code>: Adds an element to the front.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>addLast</code> / <code>append</code>: Adds an element to the rear.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>removeFirst</code> / <code>popleft</code>: Removes an element from the front.<br>&nbsp;&nbsp;&nbsp;&nbsp;- <code>removeLast</code> / <code>pop</code>: Removes an element from the rear.<br><strong>Key Characteristic</strong>: Because it supports operations on both ends, a Deque can function as both a Queue (using <code>append</code> and <code>popleft</code>) and a Stack (using <code>append</code> and <code>pop</code>).<br><strong>Common Use Cases</strong>: Sliding window algorithms, implementing undo/redo functionality, and managing task schedules that require adding high-priority items to the front."}
+                    },                                                                 
                     { title: 'LeetCode 225: Implement Stack Using Queues (Mark)', url: 'https://leetcode.com/problems/implement-stack-using-queues/description/' 
                     }, 
                     { title: 'LeetCode 232: Implement Queue Using Stacks (Mark)', url: 'https://leetcode.com/problems/implement-queue-using-stacks/description/' 
@@ -403,6 +436,7 @@ ROADMAP_DATA.linear_structures = {
         { from: 'two_pointers_array_string', to: 'sliding_window' },
         { from: 'list', to: 'sorting' },
         { from: 'sorting', to: 'searching' }, 
+        { from: 'sorting', to: 'quick_select'},
         { from: 'searching', to: 'binary_search' },
         { from: 'sorting', to: 'intervals' },
         { from: 'list', to: 'stack' },
