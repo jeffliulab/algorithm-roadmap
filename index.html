@@ -10,7 +10,7 @@
 
     <script src="data/linear-structures.js"></script>
     <script src="data/graph-tree.js"></script>
-    <script src="data/intermediate-algorithms.js"></script>
+    <script src="data/leetcode-algorithms.js"></script>
     <script src="data/advanced-algorithms.js"></script>
     <script src="data/machine-learning.js"></script>
     <script src="data/deep-learning.js"></script>
@@ -91,6 +91,26 @@
             flex-direction: column;
             max-height: calc(100vh - 40px);
         }
+        /* --- NEW: 新增的弹窗关闭按钮样式 --- */
+        #modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            padding: 0 5px;
+            line-height: 1;
+            transition: color 0.2s ease;
+            z-index: 101; /* 确保在内容之上 */
+        }
+        #modal-close-btn:hover {
+            color: #fff;
+        }
+        /* --- END OF NEW STYLES --- */
         #modal-content {
             /* 修改: 在这里添加内边距和滚动条 */
             padding: 25px 30px;
@@ -154,7 +174,7 @@
             font-size: 14px; 
             line-height: 1.6; 
             max-height: 0; 
-            overflow: hidden; 
+            overflow-y: auto; 
             padding-left: 12px; 
             padding-right: 12px; 
             margin-top: 0; 
@@ -189,7 +209,7 @@
     <div id="selector-panel">
         <button class="topic-btn" data-topic="linear_structures">Linear Structures</button>
         <button class="topic-btn" data-topic="graph_tree">Graph & Tree</button>
-        <button class="topic-btn" data-topic="intermediate_algorithms">Intermediate Algorithms</button>
+        <button class="topic-btn" data-topic="leetcode_others">Leetcode Algorithms</button>
         <button class="topic-btn" data-topic="advanced_algorithms">Advanced Algorithms</button>
         <button class="topic-btn" data-topic="machine_learning">Machine Learning</button>
         <button class="topic-btn" data-topic="deep_learning">Deep Learning</button>
@@ -203,6 +223,7 @@
 
     <div id="modal-overlay">
         <div id="modal">
+            <button id="modal-close-btn">&times;</button>
             <div id="modal-content"></div>
         </div>
     </div>
@@ -216,13 +237,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const allRoadmaps = ROADMAP_DATA; 
     
     const colorPalette = {
+        // Basic （蓝色系）
         basic:        { main: '#0d6efd', border: '#58a6ff' },
+        // Intermediate（橙色系）
         intermediate: { main: '#fd7e14', border: '#ffa94d' },
+        // Advanced（红色系）
         advanced:     { main: '#DC3545', border: '#E57373' },
+        magenta:        { main: '#AD1457', border: '#D81B60' },  // 洋红色
+        // 绿色系标签
         green:        { main: '#198754', border: '#4ae49a' },
-        purple:       { main: '#6f42c1', border: '#9a73d9' },
-        yellow:       { main: '#ffc107', border: '#ffd34d' },
+        dark_green:           { main: '#00695C', border: '#4DB6AC' },  // 深绿色
+        // 紫色系标签
+        purple:       { main: '#6f42c1', border: '#9a73d9' },        
+        slate_blue:     { main: '#483D8B', border: '#6A5ACD' },  // 选项 3: 优雅深邃的岩蓝色
+        // 灰色系标签
         grey:         { main: '#6c757d', border: '#9ea6ad' }, 
+        // 黄色系标签：用来放置具体的某个问题（在算法章节中）
+        yellow:         { main: '#D8A100', border: '#FAD454' }, 
+
+
     };
 
     let cy;
@@ -243,6 +276,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 'text-halign': 'center', 'font-size': '16px', 'font-weight': 'bold',
                 'shape': 'round-rectangle', 'width': 'label', 'padding': '16px 20px',
                 'height': '48px', 'border-width': 2.5,
+                /* --- NEW: 文字轮廓 暂时去掉，太丑了 --- */
+                //'text-outline-color': '#000000', /* 轮廓颜色：黑色 */
+                //'text-outline-width': '2px',  /* 轮廓宽度：2像素 */
+
             }},
             { selector: 'edge', style: {
                 'width': 2.5, 'line-color': '#6c757d', 'curve-style': 'bezier',
@@ -340,7 +377,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let contentHtml = `<h2 style="color:${titleColor}">${node.data('label')}</h2>`;
             // MODIFIED: 替换了原有的简单 description，以处理换行符
-            if (details.description) { contentHtml += `<p>${details.description.replace(/\n/g, '<br>')}</p>`; }
+            // 为了保证排版统一，暂时删除了自动替换换行符号为<br>，改成了自动替换为空格，这样比较符合我的书写习惯。
+            //if (details.description) { contentHtml += `<p>${details.description.replace(/\n/g, '<br>')}</p>`; }
+            if (details.description) { contentHtml += `<p>${details.description.replace(/\n/g, ' ')}</p>`; }
+
             
             // --- MODIFIED: 替换了整个练习题列表的生成逻辑，以支持 Key Point 功能 ---
             if (details.exercises && details.exercises.length > 0) {
@@ -389,6 +429,14 @@ document.addEventListener('DOMContentLoaded', function() {
         modalOverlay.addEventListener('click', function(event) {
             if (event.target === modalOverlay) { modalOverlay.style.display = 'none'; }
         });
+        
+        
+        // --- NEW: 给新增的关闭按钮绑定事件 ---
+        const closeBtn = document.getElementById('modal-close-btn');
+        closeBtn.addEventListener('click', function() {
+            modalOverlay.style.display = 'none';
+        });
+        // --- END OF NEW SCRIPT ---
     }
 
     // --- NEW: 新增的 Key Point 按钮点击事件委托 ---

@@ -3,6 +3,13 @@ if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
 ROADMAP_DATA.sde_mlops = {
     nodes: [
+        { id: 'test_exception', label: 'Learn Test and Exception', type: 'basic', details: {
+            description: `
+            In python, you can use assert to write a simple assertion.
+            <br>assertion bool_equation , "FALSE INFORMATION"
+            `,
+            exercises: [{ title: "...", url: "https://www.example.com" }]
+        }},
         { id: 'swe_foundations', label: 'Software Engineering', type: 'basic', details: {
             description: "The fundamentals of building robust and maintainable software. This includes version control with Git, agile methodologies, code reviews, and a strong testing culture (unit, integration, end-to-end).",
             exercises: [{ title: "Pro Git Book", url: "https://git-scm.com/book/en/v2" }]
