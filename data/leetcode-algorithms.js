@@ -2,33 +2,40 @@ if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
 ROADMAP_DATA.leetcode_others = {
     nodes: [
-        { id: 'greedy', label: 'Greedy Algorithms', type: 'basic', details: { 
-            description: "A greedy algorithm makes the locally optimal choice at each step, hoping to find the global optimum. It's simple and efficient, but its correctness must be rigorously proven.", 
-            exercises: [
-                { title: "LeetCode 55: Jump Game", url: "https://leetcode.com/problems/jump-game/description/" },
-                { title: "LeetCode 45: Jump Game II", url: "https://leetcode.com/problems/jump-game-ii/description/" },
-            ]
-        }},
-        { id: '1d_dp', label: '1D Dynamic Programming', type: 'basic', details: { 
-            description: `
-            Greedy doesn't consider the future situations. If we need consider future and past situations, we need use dynamic programming.
-            `, 
-            exercises: [
-                { title: "LeetCode ...", url: "aaaaa" },
-            ]
-        }},
-        { id: 'symbolic_computation', label: 'Symbolic Computation', type: 'advanced', details: { 
-            description: 'The manipulation of mathematical expressions in symbolic form, rather than by their numeric value. This often involves complex parsing and recursion.', 
-            exercises: [
-                { title: 'LeetCode 736: Parse Lisp Expression', url: 'https://leetcode.com/problems/parse-lisp-expression/description/' }, 
-                { title: 'LeetCode 770: Basic Calculator IV', url: 'https://leetcode.com/problems/basic-calculator-iv/description/' }
-            ]
-        }},
+        { id: 'math', label: 'Math', type: 'basic', details: { 
+                description: `
+                The foundational skills of binary search tree.
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 69', url: 'example' },
+                ]
+            }
+        },
+        { id: 'example', label: 'example', type: 'basic', details: { 
+                description: `.....
+                `,                 
+                exercises: [
+                    { title: 'example', url: 'example' },
+                    { title: 'LeetCode 33: Search in Rotated Sorted Array', 
+                        url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/description/',
+                        key_point: {
+                            label: 'Key Point (CN)', // 这是自定义的按钮名称
+                            content: `
+                                这道题比上面的153更难一点，不仅要判断出左右区间，还要判断怎么找到target。
+                                判断逻辑升级为：先判断一个区间（比如左区间）是否是有序的，如果是，那么判断是否在左区间；
+                                如果不是，说明右区间是有序的，那么就在右区间里判断是否有target。
+                           
+                            `
+                        },
+                    },
+                ]
+            }
+        },
 
 
     ],
     edges: [
         // --- New connecting edges from the root ---
-        { from: 'greedy', to: '1d_dp' },
+        { from: 'example', to: 'math' },
     ]
 };

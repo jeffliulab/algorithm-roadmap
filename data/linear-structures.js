@@ -63,50 +63,38 @@ ROADMAP_DATA.linear_structures = {
                 "description": "Backtracking is a general algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point in time. It is commonly used for permutation and combination problems.",
                 "exercises": [
                 {
-                    "title": "LeetCode 46: Permutations",
-                    "url": "https://leetcode.com/problems/permutations/",
-                    "key_point": {
-                    "label": "Hint",
+                    "title": "LeetCode 46: Permutations", "url": "https://leetcode.com/problems/permutations/",
+                    "key_point": { "label": "Hint",
                     "content": "<strong>Key Points:</strong> Permutation (order matters), no duplicate elements.<br><strong>Core Logic:</strong> Use a <code>used</code> array to track which elements have been selected. The <code>for</code> loop iterates from <code>0</code> to <code>n-1</code>, recursively calling <code>backtrack()</code>.<br><strong>Pruning:</strong> None."
                     }
                 },
                 {
-                    "title": "LeetCode 47: Permutations II",
-                    "url": "https://leetcode.com/problems/permutations-ii/",
-                    "key_point": {
-                    "label": "Hint",
+                    "title": "LeetCode 47: Permutations II", "url": "https://leetcode.com/problems/permutations-ii/",
+                    "key_point": { "label": "Hint",
                     "content": "<strong>Key Points:</strong> Permutation (order matters), with duplicate elements.<br><strong>Core Logic:</strong> Use a <code>used</code> array to track selected elements. The <code>for</code> loop iterates from <code>0</code> to <code>n-1</code>.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. The pruning condition is <code>if (i > 0 && nums[i] == nums[i-1] && !used[i-1])</code>. This ensures that for duplicate numbers, we only pick the first unused one, thus avoiding duplicate permutations."
                     }
                 },
                 {
-                    "title": "LeetCode 78: Subsets",
-                    "url": "https://leetcode.com/problems/subsets/",
-                    "key_point": {
-                    "label": "Hint",
+                    "title": "LeetCode 78: Subsets", "url": "https://leetcode.com/problems/subsets/",
+                    "key_point": { "label": "Hint",
                     "content": "<strong>Key Points:</strong> Combination (order does not matter), no duplicate elements.<br><strong>Core Logic:</strong> Use a <code>startIndex</code> to ensure elements are not picked again in the same combination and to avoid duplicate subsets. The <code>for</code> loop starts from <code>startIndex</code>, and recursively calls <code>backtrack(i + 1)</code>.<br><strong>Pruning:</strong> None."
                     }
                 },
                 {
-                    "title": "LeetCode 90: Subsets II",
-                    "url": "https://leetcode.com/problems/subsets-ii/",
-                    "key_point": {
-                    "label": "Hint",
+                    "title": "LeetCode 90: Subsets II", "url": "https://leetcode.com/problems/subsets-ii/",
+                    "key_point": { "label": "Hint",
                     "content": "<strong>Key Points:</strong> Combination (order does not matter), with duplicate elements.<br><strong>Core Logic:</strong> Use <code>startIndex</code> to mark the starting point and recursively call <code>backtrack(i + 1)</code>.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. Within the same level of recursion (the same for-loop), if the current element is the same as the previous one (<code>i > startIndex && nums[i] == nums[i-1]</code>), skip it to avoid generating duplicate subsets."
                     }
                 },
                 {
-                    "title": "LeetCode 39: Combination Sum",
-                    "url": "https://leetcode.com/problems/combination-sum/",
-                    "key_point": {
-                    "label": "Hint",
+                    "title": "LeetCode 39: Combination Sum", "url": "https://leetcode.com/problems/combination-sum/",
+                    "key_point": {   "label": "Hint",
                     "content": "<strong>Key Points:</strong> Combination (order does not matter), no duplicate elements in input, but each element can be <strong>reused infinitely</strong>.<br><strong>Core Logic:</strong> The <code>for</code> loop starts from <code>startIndex</code>. Recursively call <code>backtrack(i)</code>. Since elements can be reused, the starting point for the next recursion is still <code>i</code>, not <code>i+1</code>.<br><strong>Pruning:</strong> (Optional) You can sort the array first. If <code>sum + nums[i] > target</code>, then all subsequent elements will also exceed the target, so you can prune the branch directly."
                     }
                 },
                 {
-                    "title": "LeetCode 40: Combination Sum II",
-                    "url": "https://leetcode.com/problems/combination-sum-ii/",
-                    "key_point": {
-                    "label": "Hint",
+                    "title": "LeetCode 40: Combination Sum II", "url": "https://leetcode.com/problems/combination-sum-ii/",
+                    "key_point": { "label": "Hint",
                     "content": "<strong>Key Points:</strong> Combination (order does not matter), with duplicate elements, but each element can be <strong>used only once</strong>.<br><strong>Core Logic:</strong> Use <code>startIndex</code> to mark the starting point and recursively call <code>backtrack(i + 1)</code> because elements cannot be reused.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. Within the same level of recursion (the same for-loop), if the current element is the same as the previous one (<code>i > startIndex && nums[i] == nums[i-1]</code>), skip it to avoid generating duplicate combinations."
                     }
                 }
@@ -266,17 +254,17 @@ ROADMAP_DATA.linear_structures = {
              }
         },
         // Group and Reverse in Linked List
-        { id: 'group_reverse_linked_list', label: 'Group & Reverse in Linked List', type: 'intermediate', details: { description: `
+        { id: 'group_reverse_linked_list', label: 'Group & Reverse in Linked List (Mark)', type: 'intermediate', details: { description: `
                         Wait for filling.
                     `, 
                 exercises: [
-                    { title: 'LeetCode 25', url: 'example',
+                    { title: 'LeetCode 25 (Mark)', url: 'example',
                     }, 
-                    { title: 'LeetCode 24', url: 'example',
+                    { title: 'LeetCode 24 (Mark)', url: 'example',
                     }, 
-                    { title: 'LeetCode 92', url: 'example',
+                    { title: 'LeetCode 92 (Mark)', url: 'example',
                     }, 
-                    { title: 'LeetCode 328', url: 'example',
+                    { title: 'LeetCode 328 (Mark)', url: 'example',
                     }, 
                 ]
              }
@@ -312,15 +300,15 @@ ROADMAP_DATA.linear_structures = {
                 ]
             }
         },
-        { id: 'in_place_hashing', label: 'In-place Hashing', type: 'intermediate', details: { 
+        { id: 'in_place_hashing', label: 'In-place Hashing (Mark)', type: 'intermediate', details: { 
                 description: `In LeetCode 287, a new idea of "in-place hashing" or "index mapping" is a really amazing skill
                 `,                 
                 exercises: [
-                    { title: 'LeetCode 448', url: 'wwwwwww' },
-                    { title: 'LeetCode 442', url: 'wwwwwww' },
-                    { title: 'LeetCode 268', url: 'wwwwwww' },
-                    { title: 'LeetCode 645', url: 'wwwwwww' },
-                    { title: 'LeetCode 41', url: 'wwwwwww' },
+                    { title: 'LeetCode 448 (Mark)', url: 'wwwwwww' },
+                    { title: 'LeetCode 442 (Mark)', url: 'wwwwwww' },
+                    { title: 'LeetCode 268 (Mark)', url: 'wwwwwww' },
+                    { title: 'LeetCode 645 (Mark)', url: 'wwwwwww' },
+                    { title: 'LeetCode 41 (Mark)', url: 'wwwwwww' },
                  
                 ]
             }
@@ -359,14 +347,14 @@ ROADMAP_DATA.linear_structures = {
             ]}
         },
         // Group & Reverse in String
-        { id: 'group_reverse_string', label: 'Group & Reverse in String', type: 'intermediate', 
+        { id: 'group_reverse_string', label: 'Group & Reverse in String (Mark)', type: 'intermediate', 
             details: { description: 'To be continued...', 
                 exercises: [
-                    { title: 'LeetCode 151', url: 'aaaaaaaa' 
+                    { title: 'LeetCode 151 (Mark)', url: 'aaaaaaaa' 
                     }, 
-                    { title: 'LeetCode 541', url: 'aaaaaaaa' 
+                    { title: 'LeetCode 541 (Mark)', url: 'aaaaaaaa' 
                     }, 
-                    { title: 'LeetCode 186', url: 'aaaaaaaa' 
+                    { title: 'LeetCode 186 (Mark)', url: 'aaaaaaaa' 
                     }, 
                 ]}
         },
@@ -398,7 +386,7 @@ ROADMAP_DATA.linear_structures = {
                 ]}
         },
         // Queue
-        { id: 'queue', label: 'Queue', type: 'basic', 
+        { id: 'queue', label: 'Queue Implementation (Mark)', type: 'basic', 
             details: { description: `A queue is a Fisrt-In-First-Out (FIFO) data structure, and it is implemented based on
                 doubly linked list. In python, we use deque to solve queue problems.
                 `, 
