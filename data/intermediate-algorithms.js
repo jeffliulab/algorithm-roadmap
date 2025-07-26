@@ -1,6 +1,6 @@
 if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
-ROADMAP_DATA.leetcode_algorithms = {
+ROADMAP_DATA.intermediate_algorithms = {
     nodes: [
         
 
