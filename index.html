@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>Algorithm Roadmap Themer (Modular)</title>
+    <title>Algorithm Roadmap - Full Featured</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Cytoscape 库 -->
     <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
     <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
     <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
 
+    <!-- 你的路线图数据文件 (请确保路径正确) -->
     <script src="data/linear-structures.js"></script>
     <script src="data/graph-tree.js"></script>
     <script src="data/leetcode-algorithms.js"></script>
@@ -20,177 +23,208 @@
     <script src="data/system-design.js"></script>
     <script src="data/data-science.js"></script>
     <script src="data/qf-qe.js"></script>
-    
+
+    <!-- Google Fonts 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+        
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            margin: 0; padding: 0; background-color: #1a1a1a; color: #f0f0f0;
-            overflow: hidden;
-        }
-        #cy { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 1; }
-        #selector-panel {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: rgba(30, 30, 30, 0.85);
-            backdrop-filter: blur(5px);
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 10px;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            user-select: none;
-            max-height: calc(100vh - 40px);
-            overflow-y: auto;
-        }
-        #selector-panel.draggable {
-            cursor: grab;
-        }
-        #selector-panel.grabbing {
-            cursor: grabbing;
+        /* --- 主题定义 (CSS 变量) --- */
+        :root {
+            /* 日间模式: 【纸草 & 墨水】 */
+            --font-family: 'Lato', sans-serif;
+            --bg-color: #F8F5F1;
+            --text-color: #2D3748;
+            --text-color-light: #FFFFFF;
+            --panel-bg: rgba(255, 255, 255, 0.85);
+            --panel-border: #E2E8F0;
+            --btn-bg: #3a3a3a;
+            --btn-text: #f0f0f0;
+            --btn-border: #555;
+            --btn-hover-bg: #4f4f4f;
+            --btn-hover-border: #777;
+            --btn-active-bg: #4A5568;
+            --btn-active-border: #2D3748;
+            --modal-bg: #FFFFFF;
+            --modal-border: #E2E8F0;
+            --modal-text-strong: #2D3748;
+            --modal-text-normal: #4A5568;
+            --modal-link: #B7791F;
+            --modal-link-hover: #D69E2E;
+            --modal-separator: #EDF2F7;
+            --key-point-btn-bg: #B7791F;
+            --key-point-btn-border: #9C6B1B;
+            --key-point-btn-hover-bg: #D69E2E;
+            --key-point-content-bg: rgba(0, 0, 0, 0.05);
+            --key-point-content-border: #B7791F;
+            --transition-speed: 0.3s;
         }
 
+        body.dark-mode {
+            /* 夜间模式: 【深海 & 科技】 */
+            --font-family: 'Inter', sans-serif;
+            --bg-color: #0A192F;
+            --text-color: #E6F1FF;
+            --panel-bg: rgba(19, 47, 81, 0.85);
+            --panel-border: #1E293B;
+            --btn-bg: #1E293B;
+            --btn-text: #E6F1FF;
+            --btn-border: #334155;
+            --btn-hover-bg: #334155;
+            --btn-hover-border: #4A5568;
+            --btn-active-bg: #3A7CB8;
+            --btn-active-border: #60A5FA;
+            --modal-bg: #111827;
+            --modal-border: #1E293B;
+            --modal-text-strong: #E6F1FF;
+            --modal-text-normal: #94A3B8;
+            --modal-link: #3A7CB8;
+            --modal-link-hover: #60A5FA;
+            --modal-separator: #1E293B;
+            --key-point-btn-bg: #B45309;
+            --key-point-btn-border: #92400E;
+            --key-point-btn-hover-bg: #FBBF24;
+            --key-point-content-bg: rgba(255, 255, 255, 0.05);
+            --key-point-content-border: #FBBF24;
+        }
+        /* --- 结束主题定义 --- */
+
+        body {
+            font-family: var(--font-family);
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+        #cy { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 1; }
+        
+        #selector-panel {
+            position: fixed; top: 20px; right: 20px;
+            background-color: var(--panel-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px; padding: 10px; z-index: 10;
+            display: flex; flex-direction: column; gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            user-select: none; max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+        }
+        #selector-panel.draggable { cursor: grab; }
+        #selector-panel.grabbing { cursor: grabbing; }
+
         .topic-btn {
-            background-color: #3a3a3a;
-            color: #f0f0f0;
-            border: 1px solid #555;
-            padding: 10px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            text-align: left;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--btn-border);
+            padding: 10px 15px; border-radius: 6px; cursor: pointer;
+            font-weight: bold; text-align: left;
+            transition: all 0.2s ease; flex-shrink: 0;
         }
         .topic-btn:hover {
-            background-color: #4f4f4f;
-            border-color: #777;
+            background-color: var(--btn-hover-bg);
+            border-color: var(--btn-hover-border);
         }
         .topic-btn.active {
-            background-color: #0d6efd;
-            border-color: #58a6ff;
+            background-color: var(--btn-active-bg);
+            border-color: var(--btn-active-border);
             color: white;
-            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+            box-shadow: 0 0 10px var(--btn-active-bg);
         }
+
         #modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.6); z-index: 99;
         }
-
-        /* --- MODIFIED: 修改了弹窗样式以支持内容滚动 --- */
         #modal {
             position: fixed; z-index: 100; left: 50%; top: 50%; transform: translate(-50%, -50%);
-            width: 90%; max-width: 600px; background-color: #2c2c2c; border: 1px solid #444;
-            border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); 
-            /* 修改: 移除内边距 padding, 改为 flex 布局 */
-            padding: 0;
-            display: flex;
-            flex-direction: column;
+            width: 90%; max-width: 600px;
+            background-color: var(--modal-bg);
+            border: 1px solid var(--modal-border);
+            border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            padding: 0; display: flex; flex-direction: column;
             max-height: calc(100vh - 40px);
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
         }
-        /* --- NEW: 新增的弹窗关闭按钮样式 --- */
         #modal-close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 28px;
-            font-weight: bold;
-            color: #aaa;
-            cursor: pointer;
-            padding: 0 5px;
-            line-height: 1;
-            transition: color 0.2s ease;
-            z-index: 101; /* 确保在内容之上 */
+            position: absolute; top: 10px; right: 15px;
+            background: none; border: none; font-size: 28px;
+            font-weight: bold; color: #aaa; cursor: pointer;
+            padding: 0 5px; line-height: 1;
+            transition: color 0.2s ease; z-index: 101;
         }
-        #modal-close-btn:hover {
-            color: #fff;
-        }
-        /* --- END OF NEW STYLES --- */
-        #modal-content {
-            /* 修改: 在这里添加内边距和滚动条 */
-            padding: 25px 30px;
-            overflow-y: auto;
-        }
-        /* --- END OF MODIFICATION --- */
-        
-        #modal-content h2 { margin-top: 0; font-size: 24px; border-bottom: 1px solid #444; padding-bottom: 15px; margin-bottom: 15px; }
-        #modal-content p { line-height: 1.6; margin-bottom: 20px; color: #ccc; }
-        #modal-content h3 { font-size: 18px; margin-top: 25px; margin-bottom: 10px; color: #eee; border-bottom: 1px solid #444; padding-bottom: 8px; }
-        
-        /* MODIFIED: 移除了 max-height 和 overflow-y，因为滚动由 #modal-content 控制 */
+        #modal-close-btn:hover { color: #fff; }
+
+        #modal-content { padding: 25px 30px; overflow-y: auto; }
+        #modal-content h2 { margin-top: 0; font-size: 24px; border-bottom: 1px solid var(--modal-separator); padding-bottom: 15px; margin-bottom: 15px; }
+        #modal-content p { line-height: 1.6; margin-bottom: 20px; color: var(--modal-text-normal); }
+        #modal-content h3 { font-size: 18px; margin-top: 25px; margin-bottom: 10px; color: var(--modal-text-strong); border-bottom: 1px solid var(--modal-separator); padding-bottom: 8px; }
         #modal-content ul { list-style: none; padding: 0; }
-
-        /* MODIFIED: 修改了 li 样式以支持新布局 */
-        #modal-content li { 
-            padding: 12px 0; 
-            border-bottom: 1px solid #444;
-            display: flex;
-            flex-direction: column;
-        }
-
+        #modal-content li { display: flex; flex-direction: column; padding: 12px 0; border-bottom: 1px solid var(--modal-separator); }
         #modal-content li:last-child { border-bottom: none; }
-        #modal-content li a { text-decoration: none; color: #58a6ff; font-weight: bold; transition: color 0.2s; }
-        #modal-content li a:hover { color: #80bfff; }
-        
-        /* --- NEW: 新增 Key Point 功能所需的所有样式 --- */
-        .exercise-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            width: 100%; 
-        }
-        .key-point-btn { 
-            background-color: #fd7e14; 
-            color: white; 
-            border: 1px solid #e66a00; 
-            border-radius: 5px; 
-            padding: 5px 12px; 
-            cursor: pointer; 
-            font-size: 12px; 
-            font-weight: bold; 
-            margin-left: 15px; 
-            flex-shrink: 0; 
-            transition: background-color 0.2s, transform 0.2s; 
-            user-select: none; 
-        }
-        .key-point-btn:hover { 
-            background-color: #ff912b; 
-            transform: translateY(-1px); 
-        }
-        .key-point-btn.active { 
-            background-color: #0d6efd; 
-            border-color: #0b5ed7; 
-            transform: translateY(0); 
-        }
-        .key-point-content { 
-            background-color: rgba(0, 0, 0, 0.2); 
-            border-left: 3px solid #fd7e14; 
-            color: #ddd; 
-            font-size: 14px; 
-            line-height: 1.6; 
-            max-height: 0; 
-            overflow-y: auto; 
-            padding-left: 12px; 
-            padding-right: 12px; 
-            margin-top: 0; 
-            opacity: 0; 
-            transition: max-height 0.35s ease-in-out, margin-top 0.35s ease-in-out, padding-top 0.35s, padding-bottom 0.35s, opacity 0.3s; 
-        }
-        .key-point-content.visible { 
-            max-height: 400px; 
-            margin-top: 12px; 
-            padding-top: 10px; 
-            padding-bottom: 10px; 
-            opacity: 1; 
-        }
-        .key-point-content a { color: #ff912b; }
-        /* --- END OF NEW STYLES --- */
+        #modal-content li a { text-decoration: none; color: var(--modal-link); font-weight: bold; transition: color 0.2s; }
+        #modal-content li a:hover { color: var(--modal-link-hover); }
 
+        .exercise-header { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .key-point-btn {
+            background-color: var(--key-point-btn-bg);
+            color: white;
+            border: 1px solid var(--key-point-btn-border);
+            border-radius: 5px; padding: 5px 12px; cursor: pointer;
+            font-size: 12px; font-weight: bold; margin-left: 15px;
+            flex-shrink: 0; user-select: none;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .key-point-btn:hover {
+            background-color: var(--key-point-btn-hover-bg);
+            transform: translateY(-1px);
+        }
+        .key-point-content {
+            background-color: var(--key-point-content-bg);
+            border-left: 3px solid var(--key-point-content-border);
+            color: var(--modal-text-normal);
+            font-size: 14px; line-height: 1.6; max-height: 0;
+            overflow: hidden; padding: 0 12px;
+            margin-top: 0; opacity: 0;
+            transition: all 0.35s ease-in-out;
+        }
+        .key-point-content.visible {
+            max-height: 400px; margin-top: 12px;
+            padding-top: 10px; padding-bottom: 10px;
+            opacity: 1;
+        }
+        .key-point-content a { color: var(--modal-link); }
+        
+        #theme-switcher-floater {
+            position: fixed;
+            top: 20px;
+            right: 250px; /* 位于菜单面板左侧 */
+            z-index: 10;
+        }
+        .theme-switcher { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .theme-switcher input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            border-radius: 26px;
+            transition: 0.3s;
+        }
+        .slider:before {
+            position: absolute; content: "☀️"; font-size: 16px; line-height: 20px; text-align: center;
+            height: 20px; width: 20px; left: 3px; bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        input:checked + .slider { background-color: var(--btn-active-bg); }
+        input:checked + .slider:before { 
+            transform: translateX(24px); 
+            content: "🌙";
+        }
+
+        /* 响应式布局: 严格保留原始逻辑 */
         @media (max-width: 768px) {
             #selector-panel {
                 top: 0; left: 0; right: 0; width: auto; max-height: none; border-radius: 0;
@@ -200,6 +234,12 @@
             }
             #selector-panel::-webkit-scrollbar { display: none; }
             .topic-btn { white-space: nowrap; }
+
+            #theme-switcher-floater {
+                top: auto;
+                bottom: 80px; /* 位于底部菜单之上 */
+                right: 20px;
+            }
         }
     </style>
 </head>
@@ -208,9 +248,9 @@
 
     <div id="selector-panel">
         <button class="topic-btn" data-topic="linear_structures">Linear Structures</button>
-        <button class="topic-btn" data-topic="graph_tree">Graph & Tree</button>
-        <button class="topic-btn" data-topic="leetcode_others">Leetcode Algorithms</button>
-        <button class="topic-btn" data-topic="advanced_algorithms">Advanced Algorithms</button>
+        <button class="topic-btn" data-topic="graph_tree">Nonlinear Structures</button>
+        <button class="topic-btn" data-topic="leetcode_algorithms">Intermediate Algorithms</button>
+        <!-- <button class="topic-btn" data-topic="advanced_algorithms">Advanced Algorithms</button>
         <button class="topic-btn" data-topic="machine_learning">Machine Learning</button>
         <button class="topic-btn" data-topic="deep_learning">Deep Learning</button>
         <button class="topic-btn" data-topic="reinforcement_learning">Reinforcement Learning</button>
@@ -218,7 +258,14 @@
         <button class="topic-btn" data-topic="sde_mlops">SDE & MLOps</button>
         <button class="topic-btn" data-topic="system_design">System Design</button>
         <button class="topic-btn" data-topic="data_science">Data Science</button>
-        <button class="topic-btn" data-topic="qf_qe">QF & QE</button>
+        <button class="topic-btn" data-topic="qf_qe">QF & QE</button> -->
+    </div>
+
+    <div id="theme-switcher-floater">
+        <label class="theme-switcher">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
     </div>
 
     <div id="modal-overlay">
@@ -231,68 +278,80 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- NEW: 在这里定义所有按钮的【默认】名称 ---
-    const DEFAULT_KEY_POINT_LABEL = 'KEY POINT'; 
-
-    const allRoadmaps = ROADMAP_DATA; 
-    
-    const colorPalette = {
-        // Basic （蓝色系）
-        basic:        { main: '#0d6efd', border: '#58a6ff' },
-        // Intermediate（橙色系）
-        intermediate: { main: '#fd7e14', border: '#ffa94d' },
-        // Advanced（红色系）
-        advanced:     { main: '#DC3545', border: '#E57373' },
-        magenta:        { main: '#AD1457', border: '#D81B60' },  // 洋红色
-        // 绿色系标签
-        green:        { main: '#198754', border: '#4ae49a' },
-        dark_green:           { main: '#00695C', border: '#4DB6AC' },  // 深绿色
-        // 紫色系标签
-        purple:       { main: '#6f42c1', border: '#9a73d9' },        
-        slate_blue:     { main: '#483D8B', border: '#6A5ACD' },  // 选项 3: 优雅深邃的岩蓝色
-        // 灰色系标签
-        grey:         { main: '#6c757d', border: '#9ea6ad' }, 
-        // 黄色系标签：用来放置具体的某个问题（在算法章节中）
-        yellow:         { main: '#D8A100', border: '#FAD454' }, 
-
-
+    // --- 主题和颜色定义 ---
+    const themes = {
+        day: { // 【纸草 & 墨水】
+            font: "'Lato', sans-serif",
+            textColor: '#FFFFFF',
+            edgeColor: '#A0AEC0',
+            foundation: { main: '#4A5568', border: '#718096' },
+            basic: { main: '#2F855A', border: '#48BB78' },
+            intermediate: { main: '#B7791F', border: '#D69E2E' },
+            advanced: { main: '#9B2C2C', border: '#C53030' },
+            grey: { main: '#718096', border: '#A0AEC0' }
+        },
+        night: { // 【深海 & 科技】
+            font: "'Inter', sans-serif",
+            textColor: '#E6F1FF',
+            edgeColor: '#334155',
+            foundation: { main: '#132F51', border: '#3A7CB8' },
+            basic: { main: '#115E59', border: '#2DD4BF' },
+            intermediate: { main: '#B45309', border: '#FBBF24' },
+            advanced: { main: '#991B1B', border: '#F87171' },
+            grey: { main: '#334155', border: '#64748B' }
+        }
     };
-
+    let colorPalette = themes.day;
+    
+    // --- 原始逻辑变量 ---
+    const DEFAULT_KEY_POINT_LABEL = 'KEY POINT'; 
+    const allRoadmaps = typeof ROADMAP_DATA !== 'undefined' ? ROADMAP_DATA : {};
     let cy;
+    let currentRoadmapConfig = null;
 
+    // --- 主题切换核心函数 ---
+    function setTheme(themeName, isInitialLoad = false) {
+        document.body.classList.toggle('dark-mode', themeName === 'night');
+        colorPalette = themes[themeName];
+        localStorage.setItem('roadmapTheme', themeName);
+        if (!isInitialLoad && currentRoadmapConfig) {
+            renderRoadmap(currentRoadmapConfig);
+        }
+    }
+
+    // --- 渲染图表的函数 ---
     function renderRoadmap(config) {
+        currentRoadmapConfig = config;
         if (cy) { cy.destroy(); }
-
+        
         const isMobile = window.innerWidth <= 768;
-
         const elements = [
-            ...config.nodes.map(node => ({ data: node })),
-            ...config.edges.map(edge => ({ data: { source: edge.from, target: edge.to } }))
+            ...(config.nodes || []).map(node => ({ data: node })),
+            ...(config.edges || []).map(edge => ({ data: { source: edge.from, target: edge.to } }))
         ];
 
         const styles = [
             { selector: 'node', style: {
-                'label': 'data(label)', 'color': '#ffffff', 'text-valign': 'center',
+                'label': 'data(label)', 'color': colorPalette.textColor, 'text-valign': 'center',
                 'text-halign': 'center', 'font-size': '16px', 'font-weight': 'bold',
+                'font-family': colorPalette.font,
                 'shape': 'round-rectangle', 'width': 'label', 'padding': '16px 20px',
                 'height': '48px', 'border-width': 2.5,
-                /* --- NEW: 文字轮廓 暂时去掉，太丑了 --- */
-                //'text-outline-color': '#000000', /* 轮廓颜色：黑色 */
-                //'text-outline-width': '2px',  /* 轮廓宽度：2像素 */
-
             }},
             { selector: 'edge', style: {
-                'width': 2.5, 'line-color': '#6c757d', 'curve-style': 'bezier',
-                'target-arrow-shape': 'triangle', 'target-arrow-color': '#6c757d',
+                'width': 2.5, 'line-color': colorPalette.edgeColor, 'curve-style': 'bezier',
+                'target-arrow-shape': 'triangle', 'target-arrow-color': colorPalette.edgeColor,
                 'arrow-scale': 1.2
             }}
         ];
 
         for (const [type, colors] of Object.entries(colorPalette)) {
-            styles.push({
-                selector: `node[type='${type}']`,
-                style: { 'background-color': colors.main, 'border-color': colors.border }
-            });
+            if (typeof colors === 'object' && colors.main) {
+                styles.push({
+                    selector: `node[type='${type}']`,
+                    style: { 'background-color': colors.main, 'border-color': colors.border }
+                });
+            }
         }
         
         cy = cytoscape({
@@ -308,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // --- RESTORED: 恢复了初始节点动画功能 ---
+        // --- 初始节点动画功能 ---
         if (config.nodes.length > 0) {
             const adj = new Map();
             const inDegree = new Map();
@@ -334,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             if (queue.length === 0 && config.nodes.length > 0) {
-                queue.push(config.nodes.slice().sort(() => 0.5 - Math.random()) [0].id);
+                queue.push(config.nodes.slice().sort(() => 0.5 - Math.random())[0].id);
                 depth.set(queue.slice(-1)[0], 0);
             }
 
@@ -363,8 +422,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 100);
             }
         }
-        // --- END OF RESTORED BLOCK ---
 
+        // --- 弹窗和 Key Point 的完整逻辑 ---
         const modalOverlay = document.getElementById('modal-overlay');
         const modalContent = document.getElementById('modal-content');
         cy.on('tap', 'node', function(evt){
@@ -373,19 +432,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!details) return;
 
             const nodeType = node.data('type');
-            const titleColor = colorPalette[nodeType]?.border || '#ffffff';
+            const titleColor = colorPalette[nodeType]?.border || colorPalette.edgeColor;
 
             let contentHtml = `<h2 style="color:${titleColor}">${node.data('label')}</h2>`;
-            // MODIFIED: 替换了原有的简单 description，以处理换行符
-            // 为了保证排版统一，暂时删除了自动替换换行符号为<br>，改成了自动替换为空格，这样比较符合我的书写习惯。
-            //if (details.description) { contentHtml += `<p>${details.description.replace(/\n/g, '<br>')}</p>`; }
             if (details.description) { contentHtml += `<p>${details.description.replace(/\n/g, ' ')}</p>`; }
-
             
-            // --- MODIFIED: 替换了整个练习题列表的生成逻辑，以支持 Key Point 功能 ---
             if (details.exercises && details.exercises.length > 0) {
-                const practiceTitle = (node.data('id').startsWith('sd_') || ['foundations', 'sde_mlops', 'data_science', 'qf_qe', 'machine_learning', 'deep_learning', 'reinforcement_learning'].includes(evt.target.cy().options.id)) 
-                                    ? 'Further Reading & Resources' : 'Practices & Resources';
+                const practiceTitle = (node.data('id').startsWith('sd_') || ['foundations', 'sde_mlops', 'data_science', 'qf_qe', 'machine_learning', 'deep_learning', 'reinforcement_learning'].includes(node.cy().options.id)) ? 'Further Reading & Resources' : 'Practices & Resources';
                 contentHtml += `<h3>${practiceTitle}</h3><ul>`;
                 
                 details.exercises.forEach((exercise, index) => {
@@ -393,74 +446,39 @@ document.addEventListener('DOMContentLoaded', function() {
                         contentHtml += `<li><div class="exercise-header"><a href="${exercise.url}" target="_blank">${exercise.title}</a></div></li>`;
                         return;
                     }
-
                     let buttonLabel = DEFAULT_KEY_POINT_LABEL;
                     let keyPointContent = '';
-
                     if (typeof exercise.key_point === 'object' && exercise.key_point !== null) {
-                        if (exercise.key_point.label) {
-                            buttonLabel = exercise.key_point.label;
-                        }
+                        if (exercise.key_point.label) buttonLabel = exercise.key_point.label;
                         keyPointContent = exercise.key_point.content || '';
                     } else {
                         keyPointContent = exercise.key_point;
                     }
-
                     if (!keyPointContent) return;
-
-                    const keyPointId = `key-point-${index}`;
-                    
-                    contentHtml += '<li>';
-                    contentHtml += '<div class="exercise-header">';
-                    contentHtml += `<a href="${exercise.url}" target="_blank">${exercise.title}</a>`;
-                    contentHtml += `<button class="key-point-btn" data-target="${keyPointId}">${buttonLabel}</button>`;
-                    contentHtml += '</div>';
-                    contentHtml += `<div class="key-point-content" id="${keyPointId}">${keyPointContent}</div>`;
-                    contentHtml += '</li>';
+                    const keyPointId = `key-point-${node.id()}-${index}`;
+                    contentHtml += `<li><div class="exercise-header"><a href="${exercise.url}" target="_blank">${exercise.title}</a><button class="key-point-btn" data-target="${keyPointId}">${buttonLabel}</button></div><div class="key-point-content" id="${keyPointId}">${keyPointContent.replace(/\n/g, '<br>')}</div></li>`;
                 });
-                
                 contentHtml += '</ul>';
             }
-            // --- END OF MODIFIED LOGIC ---
-
             modalContent.innerHTML = contentHtml;
             modalOverlay.style.display = 'block';
         });
-        modalOverlay.addEventListener('click', function(event) {
-            if (event.target === modalOverlay) { modalOverlay.style.display = 'none'; }
-        });
-        
-        
-        // --- NEW: 给新增的关闭按钮绑定事件 ---
-        const closeBtn = document.getElementById('modal-close-btn');
-        closeBtn.addEventListener('click', function() {
-            modalOverlay.style.display = 'none';
-        });
-        // --- END OF NEW SCRIPT ---
     }
 
-    // --- NEW: 新增的 Key Point 按钮点击事件委托 ---
-    const modal = document.getElementById('modal');
-    modal.addEventListener('click', function(event) {
-        const button = event.target.closest('.key-point-btn');
-        if (!button) return;
-
-        const targetId = button.dataset.target;
-        const contentPanel = document.getElementById(targetId);
-        
-        if (contentPanel) {
-            button.classList.toggle('active');
-            contentPanel.classList.toggle('visible');
-        }
-    });
-    // --- END OF NEW EVENT LISTENER ---
+    // --- 初始化和事件监听 ---
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('change', () => setTheme(themeToggle.checked ? 'night' : 'day'));
+    const savedTheme = localStorage.getItem('roadmapTheme') || 'day';
+    themeToggle.checked = savedTheme === 'night';
+    setTheme(savedTheme, true);
 
     const buttons = document.querySelectorAll('.topic-btn');
+    let didDrag = false; // Flag to distinguish click from drag
     buttons.forEach(button => {
         button.addEventListener('click', () => {
+            if (didDrag) return; // If a drag happened, don't process the click
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            
             const topicId = button.dataset.topic;
             if (allRoadmaps[topicId]) {
                 renderRoadmap(allRoadmaps[topicId]);
@@ -470,40 +488,69 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    const modal = document.getElementById('modal');
+    modal.addEventListener('click', function(event) {
+        const button = event.target.closest('.key-point-btn');
+        if (button) {
+            const contentPanel = document.getElementById(button.dataset.target);
+            if (contentPanel) contentPanel.classList.toggle('visible');
+        }
+    });
+    const modalOverlay = document.getElementById('modal-overlay');
+    const closeBtn = document.getElementById('modal-close-btn');
+    modalOverlay.addEventListener('click', (event) => {
+        if (event.target === modalOverlay) modalOverlay.style.display = 'none';
+    });
+    closeBtn.addEventListener('click', () => modalOverlay.style.display = 'none');
+
+    // --- 侧边栏拖拽逻辑 (已修正并增加触摸支持) ---
     const panel = document.getElementById('selector-panel');
     const checkDraggable = () => {
-        if (panel.scrollHeight > panel.clientHeight || panel.scrollWidth > panel.clientWidth) {
-            panel.classList.add('draggable');
-        } else {
-            panel.classList.remove('draggable');
-        }
+        panel.classList.toggle('draggable', panel.scrollHeight > panel.clientHeight || panel.scrollWidth > panel.clientWidth);
     };
+    let isDown = false, startX, startY, scrollLeft, scrollTop;
 
-    let isDown = false;
-    let startX, startY, scrollLeft, scrollTop;
-
-    panel.addEventListener('mousedown', (e) => {
-        if (!panel.classList.contains('draggable')) return;
+    const startDrag = (e) => {
+        if (!panel.classList.contains('draggable') || e.target.closest('.theme-switcher')) return;
         isDown = true;
+        didDrag = false; // Reset drag flag on new press
         panel.classList.add('grabbing');
-        startX = e.pageX - panel.offsetLeft;
-        startY = e.pageY - panel.offsetTop;
+        const pageX = e.pageX || e.touches[0].pageX;
+        const pageY = e.pageY || e.touches[0].pageY;
+        startX = pageX - panel.offsetLeft;
+        startY = pageY - panel.offsetTop;
         scrollLeft = panel.scrollLeft;
         scrollTop = panel.scrollTop;
-    });
-    panel.addEventListener('mouseleave', () => { isDown = false; panel.classList.remove('grabbing'); });
-    panel.addEventListener('mouseup', () => { isDown = false; panel.classList.remove('grabbing'); });
-    panel.addEventListener('mousemove', (e) => {
+    };
+
+    const endDrag = () => {
+        isDown = false;
+        panel.classList.remove('grabbing');
+    };
+
+    const doDrag = (e) => {
         if (!isDown) return;
         e.preventDefault();
-        const x = e.pageX - panel.offsetLeft;
-        const y = e.pageY - panel.offsetTop;
-        const walkX = (x - startX) * 2;
-        const walkY = (y - startY) * 2;
-        panel.scrollLeft = scrollLeft - walkX;
-        panel.scrollTop = scrollTop - walkY;
-    });
+        didDrag = true; // Set flag to true on move
+        const pageX = e.pageX || e.touches[0].pageX;
+        const pageY = e.pageY || e.touches[0].pageY;
+        const x = pageX - panel.offsetLeft;
+        const y = pageY - panel.offsetTop;
+        panel.scrollLeft = scrollLeft - (x - startX) * 2;
+        panel.scrollTop = scrollTop - (y - startY) * 2;
+    };
 
+    panel.addEventListener('mousedown', startDrag);
+    panel.addEventListener('mouseleave', endDrag);
+    panel.addEventListener('mouseup', endDrag);
+    panel.addEventListener('mousemove', doDrag);
+
+    panel.addEventListener('touchstart', startDrag);
+    panel.addEventListener('touchend', endDrag);
+    panel.addEventListener('touchcancel', endDrag);
+    panel.addEventListener('touchmove', doDrag);
+
+    // --- 初始加载 ---
     if (buttons.length > 0) {
         buttons[0].click();
     }

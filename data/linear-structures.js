@@ -13,96 +13,12 @@ if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 ROADMAP_DATA.linear_structures = {
     nodes: [
         // 所有单独是一行的节点之后有时间都要重新捋一下，这些是INIT的时候设置的
-        { id: 'searching', label: 'Searching', type: 'basic', details: { description: 'Binary search is an efficient search algorithm that works on a sorted data set.', exercises: [{ title: 'LeetCode 704: Binary Search', url: 'https://leetcode.com/problems/binary-search/description/' }, { title: 'LeetCode 33: Search in Rotated Sorted Array', url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/description/' }]}},
-        { id: 'intervals', label: 'Intervals Problems', type: 'green', details: { description: "Interval problems involve dealing with ranges or segments of data. Sorting is often the first step.", exercises: [{ title: "LeetCode 56: Merge Intervals", url: "https://leetcode.com/problems/merge-intervals/description/" }, { title: "LeetCode 57: Insert Interval", url: "https://leetcode.com/problems/insert-interval/description/" }, { title: "LeetCode 253: Meeting Rooms II", url: "https://leetcode.com/problems/meeting-rooms-ii/description/" }]}},
-        { id: 'matrix', label: 'Matrix', type: 'basic', details: { description: "Matrix problems involve traversing or modifying a 2D grid.", exercises: [{ title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" }, { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" }, { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" }]}},
         { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: { description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.', exercises: [{ title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' }]}},
-        { id: 'stack_monotonic_stack', label: 'Monotonic Stack', type: 'basic', details: { description: 'A stack that maintains a monotonic order of elements.', exercises: [{ title: 'LeetCode 739: Daily Temperatures', url: 'https://leetcode.com/problems/daily-temperatures/description/' }, { title: 'LeetCode 853: Car Fleet', url: 'https://leetcode.com/problems/car-fleet/description/' }]}},
-        { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'yellow', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
-        { id: 'backtracking', label: 'Backtracking (1D)', type: 'basic', details: { description: 'Backtracking is an algorithmic paradigm for solving problems recursively by trying to build a solution incrementally.', exercises: [{ title: 'LeetCode 78: Subsets', url: 'https://leetcode.com/problems/subsets/description/' }, { title: 'LeetCode 46: Permutations', url: 'https://leetcode.com/problems/permutations/description/' }]}},
-        // Recursion
-        { id: 'recursion', label: 'Recursion', type: 'basic', details: { 
-            description: `Recursion is a programming technique where a function calls itself to solve smaller instances of a problem.
-            Most recursion questions are in topics of Tree Traversal, Divide and Conquer, Backtracking, etc.`, exercises: [
-                { title: "The Concept of Recursion", url: "https://jeffliulab.github.io/algorithm-notes/algorithms/#recursion" 
-                },
-                { title: "LeetCode 509: Fibonacci Number", url: "https://leetcode.com/problems/fibonacci-number/description/"   
-                },
-            ]}
-        },
-        // Sorting                    快捷导航 navi:sorting / navi sorting
-        { id: 'sorting', label: 'Sorting', type: 'basic', details: { 
-            description: `Sorting is the process of arranging a set of elements in a specific order.
-            `, exercises: [
-                { title: "Tutorials: Quick Sort, Merge Sort, Bucket Sort", url: "https://jeffliulab.github.io/algorithm-notes/algorithms/#sorting" 
-                },
-                { title: "LeetCode 75: Sort Colors", url: "https://leetcode.com/problems/sort-colors/description/" 
-                },
-                { title: "LeetCode 912: Sort an Array", url: "https://leetcode.com/problems/sort-an-array/", 
-                },
-                { title: "LeetCode 179: Largest Number", url: "https://leetcode.com/problems/largest-number/description/", 
-                },
-                { title: "LeetCode 148. Sort List", url: "https://leetcode.com/problems/sort-list/description/", "key_point": {"label": "Hint","content": "Use Merge Sort."}
-                },
-                
-                
-            ]}
-        },
-        // Quick Select
-        { id: 'quick_select', label: 'Quick Select', type: 'basic', details: { 
-            description: `Quick select, especially 
-            `, exercises: [
-                { title: "LeetCode 215: Kth Largest Element in an Array", url: "https://leetcode.com/problems/kth-largest-element-in-an-array/description/" 
-                },
-                
-            ]}
-        },
-
-        // 排列组合
-        {"id": "permutations_combinations", "label": "Permutations & Combinations", "type": "intermediate", "details": {
-                "description": "Backtracking is a general algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point in time. It is commonly used for permutation and combination problems.",
-                "exercises": [
-                {
-                    "title": "LeetCode 46: Permutations", "url": "https://leetcode.com/problems/permutations/",
-                    "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Permutation (order matters), no duplicate elements.<br><strong>Core Logic:</strong> Use a <code>used</code> array to track which elements have been selected. The <code>for</code> loop iterates from <code>0</code> to <code>n-1</code>, recursively calling <code>backtrack()</code>.<br><strong>Pruning:</strong> None."
-                    }
-                },
-                {
-                    "title": "LeetCode 47: Permutations II", "url": "https://leetcode.com/problems/permutations-ii/",
-                    "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Permutation (order matters), with duplicate elements.<br><strong>Core Logic:</strong> Use a <code>used</code> array to track selected elements. The <code>for</code> loop iterates from <code>0</code> to <code>n-1</code>.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. The pruning condition is <code>if (i > 0 && nums[i] == nums[i-1] && !used[i-1])</code>. This ensures that for duplicate numbers, we only pick the first unused one, thus avoiding duplicate permutations."
-                    }
-                },
-                {
-                    "title": "LeetCode 78: Subsets", "url": "https://leetcode.com/problems/subsets/",
-                    "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Combination (order does not matter), no duplicate elements.<br><strong>Core Logic:</strong> Use a <code>startIndex</code> to ensure elements are not picked again in the same combination and to avoid duplicate subsets. The <code>for</code> loop starts from <code>startIndex</code>, and recursively calls <code>backtrack(i + 1)</code>.<br><strong>Pruning:</strong> None."
-                    }
-                },
-                {
-                    "title": "LeetCode 90: Subsets II", "url": "https://leetcode.com/problems/subsets-ii/",
-                    "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Combination (order does not matter), with duplicate elements.<br><strong>Core Logic:</strong> Use <code>startIndex</code> to mark the starting point and recursively call <code>backtrack(i + 1)</code>.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. Within the same level of recursion (the same for-loop), if the current element is the same as the previous one (<code>i > startIndex && nums[i] == nums[i-1]</code>), skip it to avoid generating duplicate subsets."
-                    }
-                },
-                {
-                    "title": "LeetCode 39: Combination Sum", "url": "https://leetcode.com/problems/combination-sum/",
-                    "key_point": {   "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Combination (order does not matter), no duplicate elements in input, but each element can be <strong>reused infinitely</strong>.<br><strong>Core Logic:</strong> The <code>for</code> loop starts from <code>startIndex</code>. Recursively call <code>backtrack(i)</code>. Since elements can be reused, the starting point for the next recursion is still <code>i</code>, not <code>i+1</code>.<br><strong>Pruning:</strong> (Optional) You can sort the array first. If <code>sum + nums[i] > target</code>, then all subsequent elements will also exceed the target, so you can prune the branch directly."
-                    }
-                },
-                {
-                    "title": "LeetCode 40: Combination Sum II", "url": "https://leetcode.com/problems/combination-sum-ii/",
-                    "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Combination (order does not matter), with duplicate elements, but each element can be <strong>used only once</strong>.<br><strong>Core Logic:</strong> Use <code>startIndex</code> to mark the starting point and recursively call <code>backtrack(i + 1)</code> because elements cannot be reused.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. Within the same level of recursion (the same for-loop), if the current element is the same as the previous one (<code>i > startIndex && nums[i] == nums[i-1]</code>), skip it to avoid generating duplicate combinations."
-                    }
-                }
-                ]
-            }
-        },
-        // Array, Hashing, List
-        {id: 'list', label: 'Arrays & Hashing', type: 'basic',
+        { id: 'stack_monotonic_stack', label: 'Monotonic Stack', type: 'intermediate', details: { description: 'A stack that maintains a monotonic order of elements.', exercises: [{ title: 'LeetCode 739: Daily Temperatures', url: 'https://leetcode.com/problems/daily-temperatures/description/' }, { title: 'LeetCode 853: Car Fleet', url: 'https://leetcode.com/problems/car-fleet/description/' }]}},
+        { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'advanced', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
+        
+        // Array, Hashing, List   | navi: list | navi:list
+        {id: 'list', label: 'Arrays & Hashing', type: 'foundation',
             details: {
                 description: 'A collection of fundamental problems focusing on array manipulations and the use of hash maps for efficient lookups and storage.',
                 exercises: [
@@ -115,8 +31,8 @@ ROADMAP_DATA.linear_structures = {
                 ]
             }
         },
-        // String
-        {id: 'string',  label: 'Strings',  type: 'basic',
+        // String    | navi:string   | navi: string
+        {id: 'string',  label: 'Strings',  type: 'foundation',
             details: {
                 description: 'A collection of problems focused on string manipulation, comparison, and encoding/decoding techniques.',
                 exercises: [
@@ -126,51 +42,7 @@ ROADMAP_DATA.linear_structures = {
                 ]
             }
         },
-        // Binary Search
-        { id: 'binary_search', label: 'Binary Search', type: 'basic', details: { 
-                description: `Binary Search is a very classic method to solve searching problems.
-                Search in Matrix is another skill. Treat the matrix as a flattened 1D array so it becomes a regular binary seach problem.
-                `,                 
-                exercises: [
-                    { title: 'LeetCode 704: Binary Search', url: 'https://leetcode.com/problems/binary-search/description/' },
-                    { title: 'LeetCode 74: Search a 2D Matrix', url: 'https://leetcode.com/problems/search-a-2d-matrix/description/' },
-                    { title: 'LeetCode 153: Find Minimum in Rotated Sorted Array', 
-                        url: 'https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/' ,
-                        key_point: {
-                            label: 'Key Point (CN)', // 这是自定义的按钮名称
-                            content: `这道题是二分搜索的一个经典变形，关键在于如何判断和收缩边界。
-                                <br><br>
-                                <strong>核心逻辑:</strong>
-                                <br>
-                                目标是找到旋转点（即最小值）。通过比较中间值 <code>nums[mid]</code> 和最右边的值 <code>nums[right]</code> 来判断哪部分是有序的：
-                                <br>
-                                1. 如果 <code>nums[mid] > nums[right]</code>，说明 <code>mid</code> 右侧到 <code>right</code> 的部分是乱序的，且最小值一定在这个区间内（不包括mid）。所以，我们应该收缩左边界: <code>left = mid + 1</code>。
-                                <br>
-                                2. 如果 <code>nums[mid] <= nums[right]</code>，说明 <code>mid</code> 到 <code>right</code> 的部分是有序的，最小值可能就是 <code>mid</code> 或者在 <code>mid</code> 的左侧。所以，我们应该收缩右边界: <code>right = mid</code>。
-                                <br><br>
-                                循环的最终结果是 <code>left</code> 和 <code>right</code> 相遇，此时指向的就是最小值。
-                                <br><br>
-                                <strong>参考:</strong>
-                                <br><a href="https://jeffliulab.github.io/algorithm-notes/Leetcode/leetcode_500/#153-find-minimum-in-rotated-sorted-array" target="_blank">刘杰夫的算法宝典讲解</a>
-                                <br><a href="https://www.youtube.com/watch?v=nIVW4P8b1VA" target="_blank">NeetCode 视频讲解 (YouTube)</a>
-                            `
-                        },
-                    },
-                    { title: 'LeetCode 33: Search in Rotated Sorted Array', 
-                        url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/description/',
-                        key_point: {
-                            label: 'Key Point (CN)', // 这是自定义的按钮名称
-                            content: `
-                                这道题比上面的153更难一点，不仅要判断出左右区间，还要判断怎么找到target。
-                                判断逻辑升级为：先判断一个区间（比如左区间）是否是有序的，如果是，那么判断是否在左区间；
-                                如果不是，说明右区间是有序的，那么就在右区间里判断是否有target。
-                           
-                            `
-                        },
-                    },
-                ]
-            }
-        },
+
 
         // { id: 'example_node', label: '节点名字', type: 'basic', details: { 
         //         description: `Binary Search is a very classic method to solve searching problems.
@@ -193,20 +65,9 @@ ROADMAP_DATA.linear_structures = {
         //         ]
         //     }
         // },
-        // Binary Search - Minimize Problem (KOKO Eating Bananas)
-        { id: 'binary_search_minimize_problem', label: 'Minimize K Problem', type: 'green', details: { 
-                description:`When you encounter a problem that requires you to find a "cost" (such as speed, capacity, cost, etc.) \
-                as small as possible while satisfying a CERTAIN CONSTRAINT \
-                 (such as time limit, quantity limit), this is usually a strong signal to use "binary search for the answer". \
-                `,  
-                exercises: [
-                    { title: 'LeetCode 875: Koko Eating Bananas', url: 'https://leetcode.com/problems/koko-eating-bananas/description/' },
-                    { title: 'LeetCode 1011: Capacity To Ship Packages Within D Days', url: 'https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/' },
-                ]
-            }
-        },
+
         // Linked List   navi:linked list
-        { id: 'linked_list', label: 'Linked List', type: 'basic', details: { description: `
+        { id: 'linked_list', label: 'Linked List', type: 'foundation', details: { description: `
                 A linked list is a linear data structure where elements are not stored at contiguous memory locations.
                 `, 
                 exercises: [
@@ -282,7 +143,7 @@ ROADMAP_DATA.linear_structures = {
                 ]
         }
         },
-        { id: 'fast_slow_pointers', label: 'Floyd\'s Cycle Detection', type: 'green', details: { 
+        { id: 'fast_slow_pointers', label: 'Floyd\'s Cycle Detection', type: 'intermediate', details: { 
                 description: `Fast and Slow Pointers are often used in linked list's cycle problem.
                 <br>(1) <strong>Find if there is a cycle:</strong> let fast go 2x speed.
                 <br>(2) <strong>Find the cycle's position:</strong>  Let D be the distance from the list head to the cycle entrance, K be the distance from the entrance to the meeting point, and L be the length of the cycle. This gives us D = n * L - K. In other words, if two pointers then move at the same speed, their meeting point will be the entrance of the circle.
@@ -313,17 +174,45 @@ ROADMAP_DATA.linear_structures = {
                 ]
             }
         },
-        // Two Pointers on Array/String
+        // Two Pointers on Array/String    | navi: two pointers | navi:twopointers
         { id: 'two_pointers_array_string', label: 'Two Pointers (Array/String)', type: 'basic',
             details: {
-                description: 'A set of classic problems that can be efficiently solved using the Two Pointers technique, typically on arrays and strings to find pairs or subarrays.',
+                description: `
+                There are mainly two kinds of two pointers problems:
+                <br><strong>(1) Palindrome Checking</strong>: To see if the string is palindrome (symmetrical). 
+                Normally set L & R, check if s[L]==s[R], if not equals, return False.
+                <br><strong>(2) Target Sum</strong>: Classical Two Sum problem. Remember <strong>sorting</strong> firstly,
+                then use L & R starting from two sides: if L + R < target, then move L, vice versa.
+                `,
                 exercises: [
                 { title: 'LeetCode 125: Valid Palindrome', url: 'https://leetcode.com/problems/valid-palindrome/' },
                 { title: 'LeetCode 167: Two Sum II - Input Array Is Sorted', url: 'https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/' },
                 { title: 'LeetCode 15: 3Sum', url: 'https://leetcode.com/problems/3sum/' },
                 { title: 'LeetCode 11: Container With Most Water', url: 'https://leetcode.com/problems/container-with-most-water/' },
-                { title: 'LeetCode 42: Trapping Rain Water', url: 'https://leetcode.com/problems/trapping-rain-water/' }
-                ]
+                { title: 'LeetCode 42: Trapping Rain Water', url: 'https://leetcode.com/problems/trapping-rain-water/' },
+                { title: 'LeetCode 80: Remove Duplicates from Sorted Array II', url: 'https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description/',
+                       key_point: {label: 'Best Practice', content: `
+                        L for writer, R for traversal pointer:
+                        <br>(1) L from 0
+                        <br>(2) Traverse nums, if R meets requirements, assign to L, move L at the same time.
+                        <br>(3) L is the length of valid nums, at the end.
+                        <br>
+                        <br>Here the requirements are:
+                        <br>(1) L < K (here K is 2)
+                        <br>(2) R != nums[L-K]
+                        <br>
+                        <br>Codes are really simple (for generalized K):
+                        <code>
+                        <br>L = 0
+                        <br>for R in range(len(nums)):
+                        <br>&nbsp;&nbsp;if L < K or nums[R] != nums[L-K]:
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;nums[L] = nums[R]
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;L += 1
+                        <br>return L
+                        </code>
+                        `},
+                },
+            ]
         }
         },
         // Two Pointers (Linked List)
@@ -358,23 +247,10 @@ ROADMAP_DATA.linear_structures = {
                     }, 
                 ]}
         },
-        // Basic Calculator Problem
-        { id: 'basic_calculator', label: 'Basic Calculator Problem', type: 'intermediate', details: { 
-            description: 'Use stacks to parse and evaluate mathematical expressions.', 
-            exercises: [{ title: 'LeetCode 224: Basic Calculator', url: 'https://leetcode.com/problems/basic-calculator/description/', }, 
-                { title: 'LeetCode 227: Basic Calculator II', url: 'https://leetcode.com/problems/basic-calculator-ii/description/', },
-            ]}
-        },
-        // Shunting Yard Algorithm
-        { id: 'shunting_yard', label: 'Shunting Yard Algorithm', type: 'advanced', details: { 
-            description: `Note: Basic Calculator IV is a totally different question. 
-            See "Symbolic Computation" at "Leetcode Algorithm" Section.`, 
-            exercises: [{ title: 'LeetCode 772: Basic Calculator III', url: 'https://leetcode.com/problems/basic-calculator-iii/description/', }, 
-            ]}
-        },
 
-        // Stack
-        { id: 'stack', label: 'Stack', type: 'basic', 
+
+        // Stack  | navi: stack | navi:stack
+        { id: 'stack', label: 'Stack', type: 'foundation', 
             details: { description: 'A stack is a Last-In-First-Out (LIFO) data structure.', 
                 exercises: [
                     { title: 'LeetCode 20: Valid Parentheses', url: 'https://leetcode.com/problems/valid-parentheses/description/' 
@@ -385,8 +261,8 @@ ROADMAP_DATA.linear_structures = {
                     },
                 ]}
         },
-        // Queue
-        { id: 'queue', label: 'Queue Implementation (Mark)', type: 'basic', 
+        // Queue    |  navi: queue
+        { id: 'queue', label: 'Queue', type: 'foundation', 
             details: { description: `A queue is a Fisrt-In-First-Out (FIFO) data structure, and it is implemented based on
                 doubly linked list. In python, we use deque to solve queue problems.
                 `, 
@@ -401,41 +277,109 @@ ROADMAP_DATA.linear_structures = {
                     }, 
                     { title: 'LeetCode 641: Design Circular Deque (Mark)', url: 'https://leetcode.com/problems/design-circular-deque/description/' 
                     }, 
-                       
-                     
-                     
                 ]}
         },
+        // Monotonic Deque
+        { id: 'monotonic_queue', label: 'Monotonic Queue', type: 'intermediate', details: { 
+            description:`
+            A monotonic deque is used for solving Sliding Window Maximum/Minimum problems.
+            Normal methods' limitation is on searching max in window, while monotonic deque
+            can use O(1) to find the max/min value in window.
+            <br><br>In a monotonic decreasing queue, all elements must be decreasing strictly.
+            <br>Implementation:
+            <br>(1) Keep queue monotonic, R index enqueue
+            <br>(2) Keep out dated head according to L
+            <br>(3) Slide window
+            `, 
+            exercises: [
+                {title: 'LeetCode 239: Sliding Window Maximum', url: 'https://leetcode.com/problems/sliding-window-maximum/description/',
+                        key_point: {label: 'Hint', content: `
+                                This question seems very easy, but if you don't use monotonic deque,
+                                find max(window) will cost O(K) and make total time complicity O(K*(N-K)).
+                                When N and K are large, this will cause time out.
+                            `},
+                },
+                {title: 'LeetCode 1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit', url: 'https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/',
+                        key_point: {label: 'Hint', content: `
+                            This is a very classic question.
+                            Since we cannot find maximum and minimum in one monotonic queue,
+                            we need use two queues to find the abs(max-min).
+                            `},
+                },
+                     
+            ]}
+        },
+        // Boyer-Moore Majority Vote Algorithm  | navi: boyer moore majority vote algorithm | navi: vote | navi:vote
+        { id: 'boyer_moore_majority_vote', label: 'Boyer-Moore Majority Vote', type: 'basic', details: { 
+                description: `
+                Find the majority element in a set, if one exists.
+                <br>
+                <br><strong>Note:</strong> A majority element is an element that appears more than n/2 times where n is the size of the set.
+                <br><br><strong>Core Idea:</strong> If a majority element exists in the set, we can find it by iterating through the elements from the beginning. We maintain a count for a candidate element. When we encounter the same element, we increment the count. When we encounter a different element, we decrement the count. If the count drops to zero, we switch our candidate to the next element we see. The element that remains as the candidate at the end of the iteration will be the majority element.
+                <br><br><strong>Best Practice</strong>: This can be implemented efficiently using only two variables: one to act as a counter, and another to store the current candidate element.
+                <br><code>Time Complexity: O(N); Space Complexity: O(1)</code>
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 169: Majority Element', url: 'https://leetcode.com/problems/majority-element/description/' },
+                    { title: 'LeetCode 229: Majority Element II', url: 'https://leetcode.com/problems/majority-element-ii/description/' },
+
+                ]
+            }
+        },
+                // Basic Calculator Problem
+        { id: 'basic_calculator', label: 'Basic Calculator Problem', type: 'intermediate', details: { 
+            description: 'Use stacks to parse and evaluate mathematical expressions.', 
+            exercises: [{ title: 'LeetCode 224: Basic Calculator', url: 'https://leetcode.com/problems/basic-calculator/description/', }, 
+                { title: 'LeetCode 227: Basic Calculator II', url: 'https://leetcode.com/problems/basic-calculator-ii/description/', },
+            ]}
+        },
+        // Shunting Yard Algorithm
+        { id: 'shunting_yard', label: 'Shunting Yard Algorithm', type: 'advanced', details: { 
+            description: `Note: Basic Calculator IV is a totally different question. 
+            See "Symbolic Computation"`, 
+            exercises: [{ title: 'LeetCode 772: Basic Calculator III', url: 'https://leetcode.com/problems/basic-calculator-iii/description/', }, 
+            ]}
+        },
+        //
+        //
+        
 
 
     ],
     edges: [
         { from: 'list', to: 'string' }, 
-        { from: 'list', to: 'matrix' },
-        { from: 'list', to: 'linked_list' }, 
+        {from:'list',to:'boyer_moore_majority_vote'},
         { from: 'linked_list', to: 'two_pointers_linked_list' },
         { from: 'linked_list', to: 'doubly_linked_list' },
-        { from: 'doubly_linked_list', to: 'queue' },
         { from: 'doubly_linked_list', to: 'group_reverse_linked_list' },
         { from: 'two_pointers_linked_list', to: 'fast_slow_pointers' },
         { from: 'fast_slow_pointers', to: 'in_place_hashing' },
-        { from: 'string', to: 'group_reverse_string' }, 
         { from: 'string', to: 'two_pointers_array_string' },
         { from: 'two_pointers_array_string', to: 'sliding_window' },
-        { from: 'list', to: 'sorting' },
-        { from: 'sorting', to: 'searching' }, 
-        { from: 'sorting', to: 'quick_select'},
-        { from: 'searching', to: 'binary_search' },
-        { from: 'sorting', to: 'intervals' },
-        { from: 'list', to: 'stack' },
+
+        
+        { from: 'sliding_window', to: 'monotonic_queue' },
+
+        // test
+        {from:'string', to:'stack'},
+        { from: 'string', to: 'queue' },
+        //{from:'queue',to:'monotonic_queue'},
+        {from:'queue',to:'linked_list'},
+        //{ from: 'monotonic_queue', to: 'two_pointers_linked_list' },
+
+
+        { from: 'group_reverse_linked_list', to: 'group_reverse_string' }, 
+
         { from: 'stack', to: 'stack_enhanced_stack' },
         { from: 'stack_enhanced_stack', to: 'stack_monotonic_stack' },
         { from: 'stack_monotonic_stack', to: 'stack_problem_largest_rectangle' },
+        
         { from: 'stack', to: 'basic_calculator' },
         { from: 'basic_calculator', to: 'shunting_yard' },
-        { from: 'stack', to: 'recursion' },
-        { from: 'recursion', to: 'backtracking' },
-        { from: 'backtracking', to: 'permutations_combinations' },
-        { from: 'binary_search', to: 'binary_search_minimize_problem'},
+
+
+
+
+
     ]
 };
