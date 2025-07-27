@@ -205,11 +205,116 @@ ROADMAP_DATA.intermediate_algorithms = {
                 ]
             }
         },
+        // navi: merge sort
+        { id: 'merge_sort', label: 'Merge Sort', type: 'basic', 
+            details: { 
+                description: `Merge Sort is a very classic sorting algorithm, it is very stable.
+                `,                 
+                exercises: [
+                    { title: 'Codes Review', 
+                        key_point: {
+                            label: 'Expand', 
+                            content: `<code>def mergeSort(arr, s, e):
+                            <br>&nbsp;&nbsp;    if e - s + 1 <= 1:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;    return arr
+                            <br>&nbsp;&nbsp;    m = (s+e)//2	   # mid of arr
+                            <br>&nbsp;&nbsp;    mergeSort(arr, s, m)   # sort left
+                            <br>&nbsp;&nbsp;    mergeSort(arr, m+1, e) # sort right
+                            <br>&nbsp;&nbsp;    merge(arr, s, m, e)    # merge two
+                            <br>&nbsp;&nbsp;    return arr
+                            <br>
+                            <br>def merge(arr, s, m, e):
+                            <br>&nbsp;&nbsp;    # copy sorted left and right halfs to temp arrays
+                            <br>&nbsp;&nbsp;    L = arr[s:m+1]
+                            <br>&nbsp;&nbsp;    R = arr[m+1:e+1]
+                            <br>
+                            <br>&nbsp;&nbsp;    i = 0 # index for L
+                            <br>&nbsp;&nbsp;    j = 0 # index for R
+                            <br>&nbsp;&nbsp;    k = s # index for arr
+                            <br>
+                            <br>&nbsp;&nbsp;    # Merge the two sorted halfs into the original array
+                            <br>&nbsp;&nbsp;    # Compare L and R's element, put smaller one into arr
+                            <br>&nbsp;&nbsp;    while i < len(L) and j < len(R):
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;    if L[i] <= R[j]:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        arr[k] = L[i]
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        i += 1
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;    else:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        arr[k] = R[j]
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        j += 1
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;    k += 1
+                            <br>
+                            <br>&nbsp;&nbsp;    # One of the halfs will have elements remaining
+                            <br>&nbsp;&nbsp;    while i < len(L):
+                            <br>&nbsp;&nbsp;&nbsp;    arr[k] = L[i]
+                            <br>&nbsp;&nbsp;&nbsp;    i += 1
+                            <br>&nbsp;&nbsp;&nbsp;    k += 1
+                            <br>&nbsp;&nbsp;    while j < len(R):
+                            <br>&nbsp;&nbsp;&nbsp;    arr[k] = R[j]
+                            <br>&nbsp;&nbsp;&nbsp;    j += 1
+                            <br>&nbsp;&nbsp;&nbsp;    k += 1
+                                </code>
+                                `
+                        },
+                    },
+                    { title: 'LeetCode 148: Sort List', url: 'https://leetcode.com/problems/sort-list/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                            It is totally same with array/list:
+                            <br>(1) Use head node instead of index
+                            <br>(2) When found mid, disconnect left and right part
+                            <br>
+                            <br>It is easy to take wrong in:
+                            <br>(1) when use mergeSort, base case is not head / not head.next
+                            <br>(2) When found mid, note the case of <strong>ONLY TWO NODES</strong>.
+                            Normally you can return the node before the mid node, if you use slow and fast pointers.
+                            <br>
+                            <br>The codes' details of slow and fast here:
+                            <br><code>slow = head
+                            <br>fast = head.next
+                            <br>while fast and fast.next:
+                            <br>&nbsp;&nbsp;    slow = slow.next
+                            <br>&nbsp;&nbsp;    fast = fast.next.next
+                            <br>right = slow.next
+                            <br>slow.next = None</code>
+                        
+
+                            `
+                        },
+                    },
+                ]
+            }
+        },
+        // navi: divide conquer
+        { id: 'divide_conquer', label: 'Divide & Conquer', type: 'foundation', details: { 
+            description: `
+                To make a complicated question into an easy one.
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 23: Merge K Sorted Lists', url: 'https://leetcode.com/problems/merge-k-sorted-lists/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                If you can solve 21. Merge Two Sorted Lists, then use divide and conquer, you can solve this more hard and complicated one.
+                                `
+                        },
+                    },
+                ]
+            },
+        },
+
+
+
+
+
+
+
 
         { id: 'greedy', label: 'Greedy', type: 'foundation', details: { description: '.....', }},
         { id: 'dp', label: 'Dynamic Programming', type: 'foundation', details: { description: '.....', }},
         { id: 'math', label: 'Math Foundations', type: 'foundation', details: { description: '.....', }},
         { id: 'bit', label: 'Bit Manipulation', type: 'foundation', details: { description: '.....', }},
+        { id: 'quick_sort', label: 'Quick Sort', type: 'basic', details: { description: '.....', }},
 
 
     ],
@@ -224,7 +329,10 @@ ROADMAP_DATA.intermediate_algorithms = {
         {from:'math',to:'bit'},
 
         // sorting
-        { from: 'sorting', to: 'quick_select'},
+        { from: 'sorting', to: 'quick_sort'},
+        { from: 'quick_sort', to: 'quick_select'},
+        {from:'quick_sort',to:'merge_sort'},
+        {from:'merge_sort',to:'divide_conquer'},
         {from:'sorting',to:'intervals'},
 
         // searching

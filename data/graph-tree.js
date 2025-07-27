@@ -128,7 +128,7 @@ ROADMAP_DATA.graph_tree = {
                 `,                 
                 exercises: [
                     { title: 'LeetCode 621: Task Scheduler', 
-                        url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/description/',
+                        url: 'https://leetcode.com/problems/task-scheduler/',
                         key_point: {
                             label: 'Hint', // 这是自定义的按钮名称
                             content: `

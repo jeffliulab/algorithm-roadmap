@@ -15,7 +15,6 @@
     <script src="data/graph-tree.js"></script>
     <script src="data/intermediate-algorithms.js"></script>
     <script src="data/advanced-algorithms.js"></script>
-    <script src="data/sde-mlops.js"></script>
     <script src="data/system-design.js"></script>
 
     <!-- Google Fonts 字体 -->
@@ -104,6 +103,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             user-select: none; max-height: calc(100vh - 40px);
             overflow-y: auto;
+            flex: 1;
             transition: background-color var(--transition-speed), border-color var(--transition-speed);
         }
         #selector-panel.draggable { cursor: grab; }
@@ -188,6 +188,7 @@
             max-height: 400px; margin-top: 12px;
             padding-top: 10px; padding-bottom: 10px;
             opacity: 1;
+            overflow-y: auto;
         }
         .key-point-content a { color: var(--modal-link); }
         
@@ -218,8 +219,8 @@
             content: "🌙";
         }
 
-        /* 响应式布局: 严格保留原始逻辑 */
-        @media (max-width: 768px) {
+        /* 响应式布局: 严格保留原始逻辑 768是断点，要修改两处768为992 */
+        @media (max-width: 992px) {
             #selector-panel {
                 top: 0; left: 0; right: 0; width: auto; max-height: none; border-radius: 0;
                 border-left: none; border-right: none; border-top: none;
@@ -245,7 +246,6 @@
         <button class="topic-btn" data-topic="graph_tree">Nonlinear Structures</button>
         <button class="topic-btn" data-topic="intermediate_algorithms">Intermediate Algorithms</button>
         <!-- <button class="topic-btn" data-topic="advanced_algorithms">Advanced Algorithms</button>
-        <button class="topic-btn" data-topic="sde_mlops">SDE & MLOps</button>
         <button class="topic-btn" data-topic="system_design">System Design</button> -->
 
     </div>
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentRoadmapConfig = config;
         if (cy) { cy.destroy(); }
         
-        const isMobile = window.innerWidth <= 768;
+        const isMobile = window.innerWidth <= 992; //768修改为992
         const elements = [
             ...(config.nodes || []).map(node => ({ data: node })),
             ...(config.edges || []).map(edge => ({ data: { source: edge.from, target: edge.to } }))
@@ -431,10 +431,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 contentHtml += `<h3>${practiceTitle}</h3><ul>`;
                 
                 details.exercises.forEach((exercise, index) => {
+                    // 1. Conditionally create the title. If a URL exists, create a link; otherwise, just display the title text.
+                    const titleElement = exercise.url ? `<a href="${exercise.url}" target="_blank">${exercise.title}</a>` : exercise.title;
+
                     if (!exercise.key_point) {
-                        contentHtml += `<li><div class="exercise-header"><a href="${exercise.url}" target="_blank">${exercise.title}</a></div></li>`;
+                        contentHtml += `<li><div class="exercise-header">${titleElement}</div></li>`;
                         return;
                     }
+                    
                     let buttonLabel = DEFAULT_KEY_POINT_LABEL;
                     let keyPointContent = '';
                     if (typeof exercise.key_point === 'object' && exercise.key_point !== null) {
@@ -443,9 +447,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         keyPointContent = exercise.key_point;
                     }
+
                     if (!keyPointContent) return;
+
                     const keyPointId = `key-point-${node.id()}-${index}`;
-                    contentHtml += `<li><div class="exercise-header"><a href="${exercise.url}" target="_blank">${exercise.title}</a><button class="key-point-btn" data-target="${keyPointId}">${buttonLabel}</button></div><div class="key-point-content" id="${keyPointId}">${keyPointContent.replace(/\n/g, '<br>')}</div></li>`;
+                    
+                    // 2. Change .replace(/\n/g, '<br>') to .replace(/\n/g, ' ') to prevent automatic line breaks.
+                    contentHtml += `<li><div class="exercise-header">${titleElement}<button class="key-point-btn" data-target="${keyPointId}">${buttonLabel}</button></div><div class="key-point-content" id="${keyPointId}">${keyPointContent.replace(/\n/g, ' ')}</div></li>`;
                 });
                 contentHtml += '</ul>';
             }

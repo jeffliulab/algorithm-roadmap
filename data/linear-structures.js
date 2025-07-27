@@ -347,28 +347,37 @@ ROADMAP_DATA.linear_structures = {
 
     ],
     edges: [
+        // Branch
         { from: 'list', to: 'string' }, 
+
+        // List
         {from:'list',to:'boyer_moore_majority_vote'},
-        { from: 'linked_list', to: 'two_pointers_linked_list' },
-        { from: 'linked_list', to: 'doubly_linked_list' },
-        { from: 'doubly_linked_list', to: 'group_reverse_linked_list' },
-        { from: 'two_pointers_linked_list', to: 'fast_slow_pointers' },
-        { from: 'fast_slow_pointers', to: 'in_place_hashing' },
+        {from:'string', to:'stack'},
+        { from: 'string', to: 'queue' },
+        {from:'queue',to:'linked_list'},
+
+        // String
         { from: 'string', to: 'two_pointers_array_string' },
         { from: 'two_pointers_array_string', to: 'sliding_window' },
+        { from: 'two_pointers_array_string', to: 'group_reverse_string' }, 
+
+        // Linked List
+        { from: 'linked_list', to: 'two_pointers_linked_list' },
+        { from: 'linked_list', to: 'doubly_linked_list' },
+        { from: 'two_pointers_linked_list', to: 'group_reverse_linked_list' },
+
+
+
+        { from: 'two_pointers_linked_list', to: 'fast_slow_pointers' },
+        { from: 'fast_slow_pointers', to: 'in_place_hashing' },
 
         
         { from: 'sliding_window', to: 'monotonic_queue' },
 
-        // test
-        {from:'string', to:'stack'},
-        { from: 'string', to: 'queue' },
-        //{from:'queue',to:'monotonic_queue'},
-        {from:'queue',to:'linked_list'},
-        //{ from: 'monotonic_queue', to: 'two_pointers_linked_list' },
+        
+    
 
 
-        { from: 'group_reverse_linked_list', to: 'group_reverse_string' }, 
 
         { from: 'stack', to: 'stack_enhanced_stack' },
         { from: 'stack_enhanced_stack', to: 'stack_monotonic_stack' },
