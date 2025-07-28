@@ -14,7 +14,6 @@ ROADMAP_DATA.linear_structures = {
     nodes: [
         // 所有单独是一行的节点之后有时间都要重新捋一下，这些是INIT的时候设置的
         { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: { description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.', exercises: [{ title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' }]}},
-        { id: 'stack_monotonic_stack', label: 'Monotonic Stack', type: 'intermediate', details: { description: 'A stack that maintains a monotonic order of elements.', exercises: [{ title: 'LeetCode 739: Daily Temperatures', url: 'https://leetcode.com/problems/daily-temperatures/description/' }, { title: 'LeetCode 853: Car Fleet', url: 'https://leetcode.com/problems/car-fleet/description/' }]}},
         { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'advanced', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
         
         // Array, Hashing, List   | navi: list | navi:list
@@ -130,7 +129,7 @@ ROADMAP_DATA.linear_structures = {
                 ]
              }
         },
-        // Sliding Window
+        // Sliding Window | navi: sliding window
         { id: 'sliding_window', label: 'Sliding Window', type: 'basic',
             details: {
                 description: 'A collection of problems that are solved using the sliding window technique, often paired with hash maps or arrays for efficient character or element frequency tracking.',
@@ -141,8 +140,9 @@ ROADMAP_DATA.linear_structures = {
                 { title: 'LeetCode 567: Permutation in String', url: 'https://leetcode.com/problems/permutation-in-string/' },
                 { title: 'LeetCode 76: Minimum Window Substring', url: 'https://leetcode.com/problems/minimum-window-substring/' }
                 ]
-        }
+            }
         },
+        // navi: fast slow pointers
         { id: 'fast_slow_pointers', label: 'Floyd\'s Cycle Detection', type: 'intermediate', details: { 
                 description: `Fast and Slow Pointers are often used in linked list's cycle problem.
                 <br>(1) <strong>Find if there is a cycle:</strong> let fast go 2x speed.
@@ -161,6 +161,7 @@ ROADMAP_DATA.linear_structures = {
                 ]
             }
         },
+        // navi: in place hashing
         { id: 'in_place_hashing', label: 'In-place Hashing (Mark)', type: 'intermediate', details: { 
                 description: `In LeetCode 287, a new idea of "in-place hashing" or "index mapping" is a really amazing skill
                 `,                 
@@ -259,6 +260,41 @@ ROADMAP_DATA.linear_structures = {
                     },
                     { title: 'LeetCode 150: Evaluate Reverse Polish Notation', url: 'https://leetcode.com/problems/evaluate-reverse-polish-notation/description/' 
                     },
+                ]}
+        },
+        // Stack  | navi: stack | navi:stack
+        { id: 'stack_monotonic_stack', label: 'Monotonic Stack', type: 'intermediate', 
+            details: { description: `
+                            <br>A <strong>monotonic stack</strong> is a stack where its elements are maintained in either a monotonically increasing or monotonically decreasing order from the bottom to the top.
+                            For <strong>"Next Greater Element"</strong> type problems, we typically use a <strong>monotonically decreasing stack</strong>.
+                            <br>
+                            <br><strong>Monotonic Stack "Aha Moment":</strong> The moment an element is popped from the stack is precisely when we have found its next greater element.
+                            <br>
+                            <br>Implementation logic for a monotonically decreasing stack:
+                            <br>(1) Maintain a stack that decreases from bottom to top, meaning the top element is always the smallest. (Note: The comparison is often strictly less than).
+                            <br>
+                            <br>(2) For a new element <code>x</code>, if it is smaller than the element at the top of the stack, push it onto the stack.
+                            <br>
+                            <br>(3) If the new element <code>x</code> is <strong>greater than the top</strong>, then <code>x</code> is the "next greater element" for that top element. Continuously pop from the stack until <code>x</code> is no longer greater than the new top. The "next greater element" has been found for all elements that were just popped.
+                            <br>
+                            <br><strong>Common Monotonic Stack Technique:</strong> Use a hash map to store the results, mapping each element from the input to its calculated next greater element.
+                `, 
+                exercises: [
+                    { title: 'LeetCode 739: Daily Temperatures', url: 'https://leetcode.com/problems/daily-temperatures/description/' }, 
+                    { title: 'LeetCode 853: Car Fleet', url: 'https://leetcode.com/problems/car-fleet/description/' },
+                    {title: 'LeetCode 496. Next Greater Element I ', url: 'https://leetcode.com/problems/next-greater-element-i/description/',
+                        key_point: {label: 'Hint', content: `
+                            <br><strong>KEY POINT:</strong> We should not iterate through <code>nums1</code> and then for each of its elements, search all of <code>nums2</code> to find its next greater value.
+                            <br>
+                            <br>Instead, the optimal approach is to <strong>directly process <code>nums2</code></strong> to find the next greater element for all of its numbers, and then <strong>store these results in a hash map</strong>.
+                            `},
+                    },
+                    {title: 'LeetCode 503. Next Greater Element II', url: 'https://leetcode.com/problems/next-greater-element-ii/description/',
+                        key_point: {label: 'Hint', content: `
+                            HINT: The simplest way is to double nums and then record the index. A better solution is to use modulo operation and loop through nums twice, which does not require additional space.
+                            `},
+                    },
+
                 ]}
         },
         // Queue    |  navi: queue

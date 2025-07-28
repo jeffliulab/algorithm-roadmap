@@ -212,6 +212,90 @@ ROADMAP_DATA.graph_tree = {
                 ]
             }
         },
+        // Merge K Ways   | navi: merge k sorted lists | navi: merge k ways
+        { id: 'merge_k_ways', label: 'Merge K Ways', type: 'basic', details: { 
+                description: `
+                Merge K ways, or merge K sorted lists, is different from normal heap. In a normal heap problem, if you want to find a Kth smallest element, you need to maintain a K max-heap. But if the lists are already sorted, you don't need to traverse all the elements, and you only need to maintain a <strong>min-heap to always get the smallest element</strong>.
+                <br>The steps includes: (Assume it is to find Kth Smallest)
+                <br>(1) Find the smallest element, push into heap
+                <br>(2) Traverse, always get the smallest one.
+                <br>(3) Put this smallest one's neighbors into heap. Note: think of the sequence of the tuple.
+                <br>(4) If the element has already visited, skip it. Note: usally use a visited set.
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 373:Kth Smallest Element in a Sorted Matrix', 
+                        url: 'https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                (1) Get the smallest one.
+                                <br>(2) Push its neighbors into result. Check if its neighbor is valid (not over boundry or be visited)
+                                <br>(3) Do this K times.
+                                <br><br><strong>Note: This is not the best solution. Can you find a solution using O(1) space and O(N) time?</strong>
+                            `
+                        },
+                    },
+                    { title: 'LeetCode 23: Merge K Sorted Lists', 
+                        url: 'https://leetcode.com/problems/merge-k-sorted-lists/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+                               This problem can be solved both by heap or divde & conquer.
+                               <br>(1) Get all head nodes, make tuple and push into heap.
+                               <br>(2) Traverse, always get the min tuple. Put it in the result list.
+                               <br>(3) Find the min node's neighbor, push into heap.
+                               <br>(4) Until there is no element in the heap, finished.
+                            `
+                        },
+                    },
+                    { title: 'LeetCode 378: Kth Smallest Element in a Sorted Matrix', 
+                        url: 'https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                               The smallest one must be matrix[0][0], and smaller one would be its neighbor. O(K) memory and O(KlogK) time.
+                            `
+                        },
+                    },
+                    { title: 'LeetCode 786: K-th Smallest Prime Fraction', 
+                        url: 'https://leetcode.com/problems/k-th-smallest-prime-fraction/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                               This is just another example of merge k ways problem.
+                            `
+                        },
+                    },
+                    { title: 'LeetCode 632: Smallest Range Covering Elements from K Lists', 
+                        url: 'https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/description/',
+                        key_point: {
+                            label: 'Solution', 
+                            content: `
+                               This problem is a little bit harder than previous ones.
+                               <br>
+                               <br><strong>Solution:</strong>
+                               <br><strong>1. Pre-Processing:</strong>
+                               <br>(1) Find smallest one in each way (row) and push into heap
+                               <br>(2) Record the maximum value of the heap
+                               <br>(3) Record the valid range as result: [c, d]
+                               <br><strong>2. Main Loop: while heap</strong>
+                               <br>(1) Pop heap top, push top's neighbor
+                               <br>(2) Update the maximum value of the heap
+                               <br>(3) Get the new range: [a, b]
+                               <br>(4) Compare [a, b] and [c, d], update result if necessary.
+                               <br><strong>3. Exit the Loop:</strong>
+                               <br>(※) If the neighbor doesn't exist, we need break the main loop. Because we cannot continue searching possible values if one way is finished searching.
+
+                            `
+                        },
+                    },
+                ]
+            }
+        }, 
+        { id: 'dag', label: 'Unweighted DAG', type: 'foundation', details: { description: '.....', }},
+        { id: 'weighted_undirected_graph', label: 'Weighted Undirected Graph & MST', type: 'foundation', details: { description: '.....', }},
+        { id: 'weighted_directed_graph', label: 'Weighted Directed Graph', type: 'foundation', details: { description: '.....', }},
+
         // example (template)
         // { id: 'example', label: 'example', type: 'basic', details: { 
         //         description: `.....
@@ -234,18 +318,30 @@ ROADMAP_DATA.graph_tree = {
         //....end...
     ],
     edges: [
-        { from: 'binary_tree_foundations', to: 'binary_tree_intermediate' }, 
-        { from: 'binary_tree_foundations', to: 'bst' }, 
-        
-        { from: 'heap', to: 'task_scheduler'},
-        { from: 'graph', to: 'topological_sort'},
-        { from: 'topological_sort', to: 'transitive_closure'},
+
+
+
 
         // Main Study Branch
         { from: 'matrix', to: 'transitive_closure'},
-        {from:'graph',to:'tree'},
+        { from: 'graph', to: 'tree'},
         { from: 'tree', to: 'binary_tree_foundations' }, 
         { from: 'binary_tree_foundations', to: 'heap' }, 
+
+        // graph
+        { from: 'graph', to: 'dag'},
+        { from: 'dag', to: 'topological_sort'},
+        { from: 'topological_sort', to: 'transitive_closure'},
+        { from: 'dag', to: 'weighted_undirected_graph'},
+        { from: 'weighted_undirected_graph', to: 'weighted_directed_graph'},
+
+        // binary tree
+        { from: 'binary_tree_foundations', to: 'binary_tree_intermediate' }, 
+        { from: 'binary_tree_foundations', to: 'bst' }, 
+
+        // heap
+        { from: 'heap', to: 'merge_k_ways'},
+        { from: 'merge_k_ways', to: 'task_scheduler'},
 
     ]
 };
