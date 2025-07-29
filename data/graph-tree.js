@@ -8,6 +8,7 @@ ROADMAP_DATA.graph_tree = {
         { id: 'tree', label: 'Tree', type: 'foundation', details: { 
                 description: `
                 Tree and Graph are two important non linear structures. Tree is a special graph.
+                <br> Traversal in tree: BFS/DFS/Iterative DFS, pre-order/in-order/post-order
                 `,                 
                 exercises: [
                     { title: 'Concept of Tree', url: 'https://jeffliulab.github.io/algorithm-notes/data_structures/#tree' },
@@ -144,7 +145,7 @@ ROADMAP_DATA.graph_tree = {
                 description: `Graph foundations:
                 <br>(1) Graph properties: Vetex, Edges
                 <br>(2) Graph representation: Adjacency Matrix, Adjacency List
-                <br>(3) Graph traversal: BFS/DFS
+                <br>(3) Graph traversal: BFS/DFS/Iterative DFS
                 `,                 
                 exercises: [
                     { title: 'LeetCode 200: number of island', url: 'https://leetcode.com/problems/number-of-islands/description/', },
@@ -311,22 +312,9 @@ ROADMAP_DATA.graph_tree = {
         },        
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        { id: 'dag', label: 'Unweighted DAG', type: 'foundation', details: { description: '.....', }},
-        { id: 'weighted_undirected_graph', label: 'Weighted Undirected Graph & MST', type: 'foundation', details: { description: '.....', }},
-        { id: 'weighted_directed_graph', label: 'Weighted Directed Graph', type: 'foundation', details: { description: '.....', }},
+        { id: 'dag', label: 'Unweighted DAG', type: 'sub_foundation', details: { description: '.....', }},
+        { id: 'weighted_undirected_graph', label: 'Weighted Undirected Graph & MST', type: 'sub_foundation', details: { description: '.....', }},
+        { id: 'weighted_directed_graph', label: 'Weighted Directed Graph', type: 'sub_foundation', details: { description: '.....', }},
 
         // example (template)
         // { id: 'example', label: 'example', type: 'basic', details: { 
@@ -351,22 +339,26 @@ ROADMAP_DATA.graph_tree = {
     ],
     edges: [
 
-
-
-
-        // Main Study Branch
+        // Root: tree >> graph
         { from: 'tree', to: 'graph'},
-        { from: 'graph', to: 'dsu'},
+
+
+        // tree
         { from: 'tree', to: 'trie' }, 
         { from: 'tree', to: 'binary_tree_foundations' }, 
         { from: 'binary_tree_foundations', to: 'heap' }, 
 
         // graph
+        { from: 'graph', to: 'dsu'},
+
+        // Main Graph Types
         { from: 'graph', to: 'dag'},
-        { from: 'dag', to: 'topological_sort'},
-        { from: 'topological_sort', to: 'transitive_closure'},
         { from: 'dag', to: 'weighted_undirected_graph'},
         { from: 'weighted_undirected_graph', to: 'weighted_directed_graph'},
+
+        // Graph: DAG
+        { from: 'dag', to: 'topological_sort'},
+        { from: 'topological_sort', to: 'transitive_closure'},
 
         // binary tree
         { from: 'binary_tree_foundations', to: 'binary_tree_intermediate' }, 
