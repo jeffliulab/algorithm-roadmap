@@ -15,7 +15,7 @@ ROADMAP_DATA.graph_tree = {
                 ]
             }
         },
-        { id: 'binary_tree_foundations', label: 'Binary Tree', type: 'foundation', details: { 
+        { id: 'binary_tree_foundations', label: 'Binary Tree', type: 'sub_foundation', details: { 
                 description: `
                 The foundational skills of binary tree.
                 `,                 
@@ -43,7 +43,7 @@ ROADMAP_DATA.graph_tree = {
                 ]
             }
         },
-        { id: 'bst', label: 'Binary Search Tree', type: 'basic', details: { 
+        { id: 'bst', label: 'Binary Search Tree', type: 'sub_foundation', details: { 
                 description: `
                 The foundational skills of binary search tree.
                 `,                 
