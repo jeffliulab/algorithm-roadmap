@@ -184,45 +184,7 @@ ROADMAP_DATA.intermediate_algorithms = {
                 ]
             }
         },
-        // Kadane's Algorithm   | navi: kadane algorithm  | navi: kadane's algorithm
-        { id: 'kadane_algorithm', label: 'Kadane\'s Algorithm', type: 'basic', details: { 
-                description: `
-                Find the contiguous subarray with the largest sum within a one-dimensional array.
-                <br><strong>Core Idea</strong>: If the sum of the current subarray becomes negative, 
-                discard it and start calculating a new subarray sum from the next element.
-                <br><strong>Best Practice</strong>:
-                <br>(1) Use a single variable if you only need to find the maximum sum.
-                <br>(2) If you need to find the actual sub-array that produces the maximum sum, use two pointers L & R, to record the window of that sub-array.
-                <br><code>Time Complexity: O(N), Space Complexity: O(1)</code>
-                
-                `,                 
-                exercises: [
-                    { title: 'LeetCode 53: Maximum Subarray', url: 'https://leetcode.com/problems/maximum-subarray/description/' },
-                    { title: 'LeetCode 918: Maximum Sum Circular Subarray', 
-                        url: 'https://leetcode.com/problems/maximum-sum-circular-subarray/description/',
-                        key_point: {
-                            label: 'Hint', 
-                            content: `
-                                This question is actually to find the max smallest sum sub-array.
-                                <br><code>Circular Max Sum Sub-array = max(normal max sub-array, array - min sum sub-array)</code>
-                                <br>Just don't forget the normal situation!
-                                <br>Special condition: all elements are negative numbers.
-                                `
-                        },
-                    },
-                    { title: 'LeetCode 978: Longest Turbulent Subarray', 
-                        url: 'https://leetcode.com/problems/longest-turbulent-subarray/description/',
-                        key_point: {
-                            label: 'Hint', 
-                            content: `
-                                Find the length of the longest subarray that is "alternatingly increasing and decreasing" or "alternatingly decreasing and increasing." Adjacent elements that are equal are not permitted.
-                                This problem is not strictly an application of Kadane's algorithm, but it employs a very similar thought process. The key difference is that instead of maximizing a sum, we are maximizing a length. Likewise, instead of resetting the calculation when the sum becomes negative, we reset the calculation when the sequence no longer meets the alternating requirement.
-                                `
-                        },
-                    },
-                ]
-            }
-        },
+        
         // navi: merge sort
         { id: 'merge_sort', label: 'Merge Sort', type: 'basic', 
             details: { 
@@ -500,8 +462,265 @@ ROADMAP_DATA.intermediate_algorithms = {
                 ]
             },
         },
+        // navi: dp | navi: dynamic programming
+        { id: 'dp', label: 'Dynamic Programming', type: 'foundation', details: { 
+            description: `
+                                A problem can be solved using Dynamic Programming if it exhibits two core properties:<br>
+                                <br>
+                                (1) <strong>Optimal Substructure</strong>: The optimal solution to the overall problem can be constructed from the optimal solutions of its subproblems.<br>
+                                (2) <strong>Overlapping Subproblems</strong>: The process of solving the problem involves repeatedly computing the solutions to the same subproblems.<br>
+                                <br>
+                                The <strong>optimal substructure</strong> property aligns perfectly with the idea of recursion.
+                                The statement, "the solution to a large problem depends on the solutions to its smaller subproblems," is the very definition of recursion.
+                                Therefore, a brute-force solution for almost any dynamic programming problem can first be written recursively.
+                                <br><br>Then, by introducing a memoization table (a "memo") to store the results of solved subproblems, we can avoid redundant computations.
+                                This completes the <strong>top-down dynamic programming</strong> approach.<br>
+                                <br>
+                                The <code>memo</code> table used in top-down dynamic programming is essentially the same as the <code>dp</code> table in the bottom-up approach.
+                                If we decide to fill this table iteratively from the base cases, it becomes the <strong>bottom-up, iterative DP</strong> method.
+                                The iterative approach is often preferred in engineering and competitive programming because it avoids the risk of stack overflow from deep recursion.
+                                <br><br>
+                                However, as mentioned, if one cannot immediately formulate the state transition equation for the iterative approach, a highly effective strategy is to start with the intuitive brute-force recursion, then add memoization to optimize it, and finally, refactor it into the bottom-up iterative solution.<br>
+                                `,                 
+            }, 
+        },
+        // 1D-DP | navi: 1d dp
+        { id: '1d_dp', label: 'Sequence DP (1D-DP)', type: 'foundation', details: { 
+            description: `
+                These types of problems usually involve operations or computations on a sequence where the solution for the current state only depends on the solutions of the previous one or two states. An iterative approach is often more concise and efficient, typically using a one-dimensional array, dp[n], to store the solutions of subproblems. Due to the simple dependencies, the space complexity can often be optimized to O(1).
+                <br><br>
+                <strong>Method 1: Top-Down Memoization</strong><br>
+                (Also known as: Optimization of Brute-force Recursion)
+                <br>
+                <strong>Template:</strong><br>
+                1. Write the standard recursion using a helper function.<br>
+                2. Introduce a cache. After the base case, modify the function to check the cache first.<br>
+                <br>
+                <strong>Method 2: Bottom-Up Tabulation</strong>
+                <br><strong>Template:</strong><br>
+                1. Pre-define the <code>dp</code> array.<br>
+                2. Iterate to perform the state transition.<br>
+                
+                
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 70: Climbing Stairs (Tutorial)', url: 'https://leetcode.com/problems/climbing-stairs/description/',
+                        key_point: {
+                            label: 'Tutorial', 
+                            content: `
+                                Using this problem (Climbing Stairs) as an example, let's learn the two main ways of thinking in DP: Top-Down with Memoization and Bottom-Up with Iteration.<br>
+                                <br>
+                                <strong>I. Top-Down with Memoization</strong><br>
+                                We will find that the number of ways to reach the Nth step is equal to the number of ways to reach the (N-1)th step (by taking one more step) plus the number of ways to reach the (N-2)th step (by taking two more steps).<br>
+                                So, we can write the recurrence relation: Ways(N) = Ways(N-1) + Ways(N-2)<br>
+                                Base Cases:<br>
+                                Ways(0) = 1, which can be understood as doing nothing at the starting point.<br>
+                                Ways(1) = 1, meaning there is only one way (taking one step).<br>
+                                <br>
+                                At this point, you'll notice there is no difference from a standard recursion! However, the biggest problem with recursion is that the algorithm performs a large number of redundant computations, leading to a time complexity of O(2^N) and causing a "Time Limit Exceeded" error. Additionally, recursive calls can lead to a "Stack Overflow" error.<br>
+                                <br>
+                                Therefore, we introduce a Cache to store the results that have already been computed, and then perform memoization (a search in memory). This way, before calculating a result, we first check if it has been calculated before: if it has, we can use it directly; if not, we calculate it and then store it.<br>
+                                <br>
+                                Generally, for DP, we don't perform the recursion on the main function itself but use a helper function to encapsulate the actual recursion and operate on the cache.<br>
+                                <br>
+                                Standard Recursion:<br>
+                                <code>
+                                &nbsp;&nbsp;if n == 0:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return 1<br>
+                                &nbsp;&nbsp;if n == 1:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return 1<br>
+                                &nbsp;&nbsp;return func(n-1) + func(n-2)<br>
+                                </code>
+                                <br>
+                                Adding a cache:<br>
+                                <code>
+                                &nbsp;&nbsp;cache = [None] * (n+1)<br>
+                                &nbsp;&nbsp;def dp(n):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if n == 1:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if cache[n] is None:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache[n] = dp(n-1) + dp(n-2)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return cache[n]<br>
+                                &nbsp;&nbsp;return dp(n)<br>
+                                </code>
+                                <br>
+                                <br>
+                                <strong>II. Bottom-Up Iterative Way</strong><br>
+                                <br>
+                                For convenience, the number of ways to reach the nth step is stored in <code>dp[n]</code>. The idea of the iterative method is to create an array and fill it from the beginning, so that the state at any moment is recorded.<br>
+                                <br>
+                                <code>
+                                &nbsp;&nbsp;dp = [None] * (n+1)<br>
+                                &nbsp;&nbsp;if n == 0:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return 0<br>
+                                &nbsp;&nbsp;if n == 1:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return 1<br>
+                                &nbsp;&nbsp;dp[0] = 1<br>
+                                &nbsp;&nbsp;dp[1] = 1<br>
+                                &nbsp;&nbsp;for i in range(2, len(dp)):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;dp[i] = dp[i-2] + dp[i-1]<br>
+                                <br>
+                                &nbsp;&nbsp;return dp[n]<br>
+                                </code>
+                                <br>
+                                <br>
+                                <strong>Space Optimization:</strong> Since only the two states <code>dp[i-2]</code> and <code>dp[i-1]</code> are used, we can use two variables, a and b, to store these values.<br>
+                            `
+                        },
+                    },
+                    { title: "LeetCode 198: House Robber", url: "https://leetcode.com/problems/house-robber/description/"   
+                    },
+                ]
+            },
+        },
+        // Kadane's Algorithm   | navi: kadane algorithm  | navi: kadane's algorithm
+        { id: 'kadane_algorithm', label: 'Kadane\'s Algorithm', type: 'basic', details: { 
+                description: `
+                Find the contiguous subarray with the largest sum within a one-dimensional array.
+                <br><strong>Core Idea</strong>: If the sum of the current subarray becomes negative, 
+                discard it and start calculating a new subarray sum from the next element.
+                <br><strong>Best Practice</strong>:
+                <br>(1) Use a single variable if you only need to find the maximum sum.
+                <br>(2) If you need to find the actual sub-array that produces the maximum sum, use two pointers L & R, to record the window of that sub-array.
+                <br><code>Time Complexity: O(N), Space Complexity: O(1)</code>
+                
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 53: Maximum Subarray', url: 'https://leetcode.com/problems/maximum-subarray/description/' },
+                    { title: 'LeetCode 918: Maximum Sum Circular Subarray', 
+                        url: 'https://leetcode.com/problems/maximum-sum-circular-subarray/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                This question is actually to find the max smallest sum sub-array.
+                                <br><code>Circular Max Sum Sub-array = max(normal max sub-array, array - min sum sub-array)</code>
+                                <br>Just don't forget the normal situation!
+                                <br>Special condition: all elements are negative numbers.
+                                `
+                        },
+                    },
+                    { title: 'LeetCode 978: Longest Turbulent Subarray', 
+                        url: 'https://leetcode.com/problems/longest-turbulent-subarray/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                Find the length of the longest subarray that is "alternatingly increasing and decreasing" or "alternatingly decreasing and increasing." Adjacent elements that are equal are not permitted.
+                                This problem is not strictly an application of Kadane's algorithm, but it employs a very similar thought process. The key difference is that instead of maximizing a sum, we are maximizing a length. Likewise, instead of resetting the calculation when the sum becomes negative, we reset the calculation when the sequence no longer meets the alternating requirement.
+                                `
+                        },
+                    },
+                ]
+            }
+        },
+        // navi: LIS navi: lis navi longest increasing subsequence
+        { id: 'LIS', label: 'LIS: Longest Increasing Subsequence', type: 'intermediate', details: { 
+                description: `
+                LIS is a series of classic 1D DP problems. The key point of LIS is on optimization.
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 300: Longest Increasing Subsequence', 
+                        url: 'https://leetcode.com/problems/longest-increasing-subsequence/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+                                    <strong>Problem-Solving Strategy:</strong><br>
+                                    <br>
+                                    (1) <strong>Definition of <code>dp[i]</code>:</strong> <code>dp[i]</code> represents the length of the Longest Increasing Subsequence (LIS) that ends with the number <code>nums[i]</code>.<br>
+                                    <br>
+                                    (2) To calculate <code>dp[i]</code>, we look back from <code>nums[i]</code>. For every preceding number <code>nums[j]</code> that is smaller than <code>nums[i]</code>, we take note of its <code>dp[j]</code> value. We scan all the way to the beginning, and whenever a larger <code>dp[j]</code> is found, we update our record of the maximum preceding length, <code>max_prev_len</code>.<br>
+                                    <br>
+                                    (3) After the scan is complete, update <code>dp[i]</code> to be <code>max_prev_len + 1</code>.<br>
+                                    <br>
+                                    (4) Finally, find the maximum value in the entire <code>dp</code> array.<br>
+                                    <br>
+                                    <br>
+                                    <strong>Note.1:</strong> The DP solution for this problem has a time complexity of O(N^2). It can be optimized to O(N log N) using a Greedy approach with Binary Search.<br>
+                                    <br>
+                                    <strong>Note.2:</strong> If we store the maximum length and its ending position from the <code>dp</code> array, we can reconstruct the subsequence itself. For finding the actual subsequence, the DP method is much more straightforward than the Greedy approach.<br>
+                                `
+                        },
+                    },
+                    
+                ]
+            }
+        },
+        // navi: 2d dp
+        { id: '2d_dp', label: '2-Dimension DP', type: 'foundation', details: { 
+                description: `
+                2D DP (Grid DP) typically includes classic problems such as Minimum Path Sum, Unique Paths, Unique Paths with Obstacles, Longest Common Subsequence, Longest Common Substring, and Edit Distance.
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 62: Unique Paths', 
+                        url: 'https://leetcode.com/problems/unique-paths/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                    The approach is not significantly different from 1D DP; the main distinction lies in the preprocessing. You need to handle the first row and first column separately first, and then proceed with state transitions through iteration.
+                                    `
+                        },
+                    },
+                    { title: 'LeetCode 63: Unique Paths II', 
+                        url: 'https://leetcode.com/problems/unique-paths-ii/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                This problem builds upon Unique Paths I by adding obstacles. As a result, the state transition includes an additional condition: if the current cell is an obstacle, the number of paths is set to 0. There's no need to separately analyze the cases to the right or below an obstacle, because the dp array already captures that information.                                    
+                                `
+                        },
+                    },
+                    
+                    
+                ]
+            }
+        },
+        // navi: lcs navi: longest common subsequence
+        { id: 'LCS', label: 'LCS: Longest Common Subsequence', type: 'intermediate', details: { 
+                description: `
+                LCS is another very important 2D DP application.
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 1143: Longest Common Subsequence', 
+                        url: 'https://leetcode.com/problems/longest-common-subsequence/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+                            This is the classic Longest Common Subsequence (LCS) problem.<br>
+                            <strong>Problem-Solving Strategy:</strong><br>
+                            <br>
+                            (1) Create a 2D <code>dp</code> table. The meaning of <code>dp[i][j]</code> is: the length of the longest common subsequence between the first <code>i</code> characters of <code>text1</code> and the first <code>j</code> characters of <code>text2</code>.<br>
+                            <br>
+                            (2) To handle the edge case of empty strings, the dimensions of the <code>dp</code> table are increased by 1 (length + 1). This allows <code>dp[0][j]</code> and <code>dp[i][0]</code> to represent comparisons with an empty string. The 0th row and 0th column are pre-filled with 0s, making it easier to align the ith character with the ith row.<br>
+                            <br>
+                            (3) The value of <code>dp[i][j]</code> depends on the ith character of <code>text1</code> (<code>text1[i-1]</code>) and the jth character of <code>text2</code> (<code>text2[j-1]</code>):<br>
+                            &nbsp;&nbsp;<br>a. <strong>If the two characters are equal</strong>, it means we have found a common character that can extend our subsequence. Therefore, the current longest length is 1 plus the value in the top-left cell: 
+                            <br><strong><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[i][j] = 1 + dp[i-1][j-1]</code></strong>. 
+                            <br>This rule implies that if the characters match, we can effectively remove them, and the solution for the remaining parts is already recorded in the top-left cell.<br>
+                            &nbsp;&nbsp;<br>b. <strong>If the two characters are not equal</strong>, we must choose one to discard: 
+                            <br><strong><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[i][j] = max(dp[i-1][j], dp[i][j-1])</code></strong>. 
+                            <br>This rule means that since the characters don't match, they don't contribute to extending the LCS. Therefore, the best result we can achieve up to this point is the maximum of the results we have already calculated from the cell above and the cell to the left.<br>
+                            <br>
+                            <code>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j=0&nbsp;&nbsp;j=1&nbsp;&nbsp;j=2&nbsp;&nbsp;j=3<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;""&nbsp;&nbsp;&nbsp;"a"&nbsp;&nbsp;"c"&nbsp;&nbsp;"e"<br>
+                            i=0&nbsp;&nbsp;""&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;0<br>
+                            i=1&nbsp;&nbsp;"a"&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;1<br>
+                            i=2&nbsp;&nbsp;"b"&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;1<br>
+                            i=3&nbsp;&nbsp;"c"&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;2<br>
+                            i=4&nbsp;&nbsp;"d"&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;2<br>
+                            i=5&nbsp;&nbsp;"e"&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3<br>
+                            </code>
+                                    `
+                        },
+                    },
 
-
+                    
+                    
+                ]
+            }
+        },
 
 
 
@@ -510,19 +729,17 @@ ROADMAP_DATA.intermediate_algorithms = {
         { id: 'math', label: 'Math & Geometry', type: 'foundation', details: { description: '.....', }},
         { id: 'quick_sort', label: 'Quick Sort', type: 'basic', details: { description: '.....', }},
         { id: 'independent', label: 'Independent Problems', type: 'foundation', details: { description: '.....', }},
-        { id: 'dp', label: 'Dynamic Programming', type: 'foundation', details: { description: '.....', }},
-        { id: 'dp_2d', label: 'Multi-Dimentional DP', type: 'foundation', details: { description: '.....', }},
-        { id: 'knapsack', label: '0/1 Knapsack', type: 'intermediate', details: { description: '.....', }},
 
 
     ],
     edges: [ 
         // Branch
-        { from: 'sorting', to: 'searching' }, 
+        {from: 'sorting', to: 'searching' }, 
         {from:'searching',to:'recursion'},
         {from:'recursion',to:'greedy'},
         {from:'greedy',to:'dp'},
-        {from:'dp',to:'dp_2d'},
+        {from:'dp',to:'1d_dp'},
+        {from:'1d_dp',to:'2d_dp'},
 
         // Independent Branch
         {from:'independent',to:'math'},
@@ -543,11 +760,12 @@ ROADMAP_DATA.intermediate_algorithms = {
         { from: 'recursion', to: 'backtracking' },
         { from: 'backtracking', to: 'permutations_combinations' },
 
-        // dynamic programming
-        {from:'dp',to:'kadane_algorithm'},
+        // 1D-DP (Sequence DP)
+        {from:'1d_dp',to:'kadane_algorithm'},
+        {from:'kadane_algorithm',to:'LIS'},
 
         // 2D-DP
-        {from:'dp_2d',to:'knapsack'},
+        {from:'2d_dp',to:'LCS'},
 
 
 
