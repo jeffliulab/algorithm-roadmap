@@ -4,9 +4,6 @@ if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
 ROADMAP_DATA.graph_tree = {
     nodes: [
-        // Matrix     | navi: matrix   | navi:matrix
-        { id: 'matrix', label: 'Matrix', type: 'foundation', details: { description: "Matrix problems involve traversing or modifying a 2D grid.", exercises: [{ title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" }, { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" }, { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" }]}
-        },
         // Tree | navi: tree | navi:tree
         { id: 'tree', label: 'Tree', type: 'foundation', details: { 
                 description: `
@@ -291,7 +288,42 @@ ROADMAP_DATA.graph_tree = {
                     },
                 ]
             }
-        }, 
+        },
+        // navi: trie
+        { id: 'trie', label: 'Trie', type: 'foundation', details: { 
+                description: `
+                ....
+                `,                 
+                exercises: [
+                    { title: 'aaaa', url: 'aaaa' },
+                ]
+            }
+        },
+        // navi: dsu
+        { id: 'dsu', label: 'DSU', type: 'foundation', details: { 
+                description: `
+                ....
+                `,                 
+                exercises: [
+                    { title: 'aaaa', url: 'aaaa' },
+                ]
+            }
+        },        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         { id: 'dag', label: 'Unweighted DAG', type: 'foundation', details: { description: '.....', }},
         { id: 'weighted_undirected_graph', label: 'Weighted Undirected Graph & MST', type: 'foundation', details: { description: '.....', }},
         { id: 'weighted_directed_graph', label: 'Weighted Directed Graph', type: 'foundation', details: { description: '.....', }},
@@ -323,8 +355,9 @@ ROADMAP_DATA.graph_tree = {
 
 
         // Main Study Branch
-        { from: 'matrix', to: 'transitive_closure'},
-        { from: 'graph', to: 'tree'},
+        { from: 'tree', to: 'graph'},
+        { from: 'graph', to: 'dsu'},
+        { from: 'tree', to: 'trie' }, 
         { from: 'tree', to: 'binary_tree_foundations' }, 
         { from: 'binary_tree_foundations', to: 'heap' }, 
 
@@ -338,6 +371,8 @@ ROADMAP_DATA.graph_tree = {
         // binary tree
         { from: 'binary_tree_foundations', to: 'binary_tree_intermediate' }, 
         { from: 'binary_tree_foundations', to: 'bst' }, 
+
+        // trie
 
         // heap
         { from: 'heap', to: 'merge_k_ways'},

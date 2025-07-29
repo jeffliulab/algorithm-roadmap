@@ -17,7 +17,9 @@ ROADMAP_DATA.linear_structures = {
         // 所有单独是一行的节点之后有时间都要重新捋一下，这些是INIT的时候设置的
         { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: { description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.', exercises: [{ title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' }]}},
         { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'advanced', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
-        
+        // Matrix     | navi: matrix   | navi:matrix
+        { id: 'matrix', label: 'Matrix', type: 'foundation', details: { description: "Matrix problems involve traversing or modifying a 2D grid.", exercises: [{ title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" }, { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" }, { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" }]}
+        },
         // Array, Hashing, List   | navi: list | navi:list
         {id: 'list', label: 'Arrays & Hashing', type: 'foundation',
             details: {
@@ -463,6 +465,7 @@ then a % k == b % k
     edges: [
         // Branch
         { from: 'list', to: 'string' }, 
+        { from: 'list', to: 'matrix' },
         {from:'string', to:'stack'},
         { from: 'string', to: 'queue' },
         {from:'queue',to:'linked_list'},
