@@ -1,3 +1,5 @@
+
+
 // 初始化全局数据容器（如果不存在）
 if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
@@ -27,6 +29,51 @@ ROADMAP_DATA.linear_structures = {
                 { title: 'LeetCode 238: Product of Array Except Self', url: 'https://leetcode.com/problems/product-of-array-except-self/' },
                 { title: 'LeetCode 36: Valid Sudoku', url: 'https://leetcode.com/problems/valid-sudoku/' },
                 { title: 'LeetCode 128: Longest Consecutive Sequence', url: 'https://leetcode.com/problems/longest-consecutive-sequence/' }
+                ]
+            }
+        },
+        // Prefix Sums | navi: prefix sums
+        {id: 'prefix_sums', label: 'Prefix Sums', type: 'intermediate',
+            details: {
+                description: `
+                If we want to find the sum of an interval, we can use extra space "prefix sums" to achieve O(1) time. Thus, with this technique, we can solve following problems:
+                <br>(1) Find specific sum of sub-array.
+                <br>(2) Find certain area of a matrix' sums.
+                <br>(3) Prefix product is quite similar.
+                `,
+                exercises: [
+                    { title: 'LeetCode 303: Range Sum Query', url: 'https://leetcode.com/problems/range-sum-query-immutable/description/' },
+                { title: 'LeetCode 304: Range Sum Query 2D ★', url: 'https://leetcode.com/problems/range-sum-query-2d-immutable/description/' ,
+                    key_point: {label: 'Key Points', content: `
+                        Assume we have following areas:
+
+[pre]      j-1      j
+   +-------+-----+
+   |       |     |
+i-1|   A   |  B  |
+   |       |     |
+   +-------+-----+
+i  |   C   |  D  |
+   +-------+-----+
+[/pre]
+
+<br>(1) Constructing a 2D prefix sums needs the idea of dynamic programming. Note that dp matrix has one more row and one more col, so dp[i][j]'s area actually corresponding to matrix[i-1][j-1]
+<br>
+<br>(2) The transition formular is: [pre]dp[i][j] = matrix[i-1][j-1] + dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1][/pre]
+<br>the meaning is:
+[pre]dp(D) = S(D) + dp(B) + dp(C) - dp(A)[/pre]
+<br>
+<br>(3) Finally we can use dp to calculate S(D):
+[pre]S(D) = dp(D) - dp(B) - dp(C) + dp(A)
+[/pre]
+`
+                    },
+                },
+                
+                { title: 'LeetCode aaaaa', url: 'aaaaa' },
+                { title: 'LeetCode aaaaa', url: 'aaaaa' },
+                { title: 'LeetCode aaaaa', url: 'aaaaa' },
+                { title: 'LeetCode aaaaa', url: 'aaaaa' },
                 ]
             }
         },
@@ -385,12 +432,14 @@ ROADMAP_DATA.linear_structures = {
     edges: [
         // Branch
         { from: 'list', to: 'string' }, 
-
-        // List
-        {from:'list',to:'boyer_moore_majority_vote'},
         {from:'string', to:'stack'},
         { from: 'string', to: 'queue' },
         {from:'queue',to:'linked_list'},
+
+        // List
+        {from:'list',to:'boyer_moore_majority_vote'},
+        {from:'boyer_moore_majority_vote',to:'prefix_sums'},
+
 
         // String
         { from: 'string', to: 'two_pointers_array_string' },

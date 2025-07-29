@@ -364,7 +364,7 @@ ROADMAP_DATA.intermediate_algorithms = {
                                         <br>&nbsp;&nbsp;n = n >> 1
                                         <br>&nbsp;&nbsp;x = x << 1
                                         <br>&nbsp;&nbsp;x = x | d
-                                        <br>return x</code>                    
+                                        <br>return x</code>               
                                     `
                         },
                     },
@@ -375,26 +375,24 @@ ROADMAP_DATA.intermediate_algorithms = {
                                     `
                         },
                     },
-                    { title: 'LeetCode 371: Sum of Two Integers', url: 'https://leetcode.com/problems/sum-of-two-integers/description/',
+                    { title: 'LeetCode 371: Sum of Two Integers★★', url: 'https://leetcode.com/problems/sum-of-two-integers/description/',
                         key_point: {
                             label: 'Key Points', 
                             content: `
                                 This is a very classic bit manipulating question.
                                 <br>
-                                <br><strong>Coding:</strong>
-                                <br><code>mask = 0xFFFFFFFF
-                                <br>
-                                <br>while (b&mask) != 0:
-                                <br>&nbsp;&nbsp;carry = (a & b) << 1
-                                <br>
-                                <br>&nbsp;&nbsp;a = a ^ b
-                                <br>
-                                <br>&nbsp;&nbsp;b = carry
-                                <br>
-                                <br>if (a & mask) > 0x7FFFFFFF:
-                                <br>&nbsp;&nbsp;return ~(a^mask)
-                                <br>else:
-                                <br>&nbsp;&nbsp;return a & mask</code>
+[pre]mask = 0xFFFFFFFF
+
+while (b & mask) != 0:
+    carry = (a & b) << 1
+    a = a ^ b
+    b = carry
+    
+    if (a & mask) > 0x7FFFFFFF: 
+    return ~(a^mask)
+else: 
+    return a & mask
+[/pre]
                             `
                         },
                     },
@@ -590,15 +588,16 @@ ROADMAP_DATA.intermediate_algorithms = {
                 `,                 
                 exercises: [
                     { title: 'LeetCode 53: Maximum Subarray', url: 'https://leetcode.com/problems/maximum-subarray/description/' },
-                    { title: 'LeetCode 918: Maximum Sum Circular Subarray', 
+                    { title: 'LeetCode 918: Maximum Sum Circular Subarray★', 
                         url: 'https://leetcode.com/problems/maximum-sum-circular-subarray/description/',
                         key_point: {
                             label: 'Hint', 
                             content: `
-                                This question is actually to find the max smallest sum sub-array.
-                                <br><code>Circular Max Sum Sub-array = max(normal max sub-array, array - min sum sub-array)</code>
-                                <br>Just don't forget the normal situation!
-                                <br>Special condition: all elements are negative numbers.
+                                The maximum sum of the sub-array in a circular array, only exists two situations:
+                                <br>(1) A normal sub-array, we can use Kadane to get the answer.
+                                <br>(2) A circular sub-array. To make this sub-array's sum maximum, we need to get the minimum sum's sub-array, then the remaining circular part will get the maximum value.
+                                <br>(3) Compare these two situations.
+                                <br>(4) A special condition: all negative numbers, then the max_sum one is the single max element in the array.
                                 `
                         },
                     },
@@ -640,6 +639,57 @@ ROADMAP_DATA.intermediate_algorithms = {
                                     <strong>Note.1:</strong> The DP solution for this problem has a time complexity of O(N^2). It can be optimized to O(N log N) using a Greedy approach with Binary Search.<br>
                                     <br>
                                     <strong>Note.2:</strong> If we store the maximum length and its ending position from the <code>dp</code> array, we can reconstruct the subsequence itself. For finding the actual subsequence, the DP method is much more straightforward than the Greedy approach.<br>
+                                `
+                        },
+                    },
+                    
+                ]
+            }
+        },
+        // navi: max product subarray
+        { id: 'max_product_subarray', label: 'Max Product Subarray', type: 'intermediate', details: { 
+                description: `
+                See 152's Key Points to learn the idea of max product subarray problem.
+                `,                 
+                exercises: [
+                    { title: '152: Maximum Product Subarray', 
+                        url: 'https://leetcode.com/problems/maximum-product-subarray/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+Solution1: (Kadane's and Corresponding Optmz.)
+[pre]Use Kadane's 0: 0 makes product 0, so divided by 0.
+1. Forward traversal:
+If the negative numbers % 2 == 0:
+we can get the max result.
+2. Reverse traversal
+If in 1. the neg.nums % 2 == 1:
+then the max range will be in the place
+after last neg. or before first neg.
+[/pre]
+Solution2 (General DP Solution):
+<br>A negative minimum number will become suddenly really large when it meets another negative number. So we trace the minimum number at the same time.
+<br>We also use 0 as a divided sign, then maintain a dp[i] represent the largest result/minimum result in current range, after last 0 occurs.
+[pre]Maintain two dp:
+1. max_dp[i] for max product of a sub-array 
+ending at index i:  max_dp[0] = nums[0]
+2. min_dp[i] for min product of a sub-array
+ending at index i:  min_dp[0] = nums[0]
+
+The max_dp[i] comes from one of the max value:
+1. nums[i]
+2. max_dp[i-1] * nums[i] (large pos. * pos.)
+3. min_dp[i-1] * nums[i] (large neg. * neg.)
+
+The min_dp[i] comes from one of the min value:
+1. nums[i]
+2. max_dp[i-1] * nums[i] (large pos. * neg.)
+3. min_dp[i-1] * nums[i] (large neg. * pos.)
+
+0 case: dp[i] would come from (0,0,0)
+result: max(max_dp)
+[/pre]
+
                                 `
                         },
                     },
@@ -762,7 +812,8 @@ ROADMAP_DATA.intermediate_algorithms = {
 
         // 1D-DP (Sequence DP)
         {from:'1d_dp',to:'kadane_algorithm'},
-        {from:'kadane_algorithm',to:'LIS'},
+        {from:'kadane_algorithm',to:'max_product_subarray'},
+        {from:'1d_dp',to:'LIS'},
 
         // 2D-DP
         {from:'2d_dp',to:'LCS'},

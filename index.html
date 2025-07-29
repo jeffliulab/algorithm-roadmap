@@ -5,28 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Cytoscape 库 -->
     <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
     <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
     <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
 
-    <!-- 你的路线图数据文件 (请确保路径正确) -->
     <script src="data/linear-structures.js"></script>
     <script src="data/graph-tree.js"></script>
     <script src="data/intermediate-algorithms.js"></script>
     <script src="data/advanced-algorithms.js"></script>
     <script src="data/system-design.js"></script>
 
-    <!-- Google Fonts 字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Inter:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet">
         
     <style>
         /* --- 主题定义 (CSS 变量) --- */
         :root {
             /* 日间模式: 【纸草 & 墨水】 */
             --font-family: 'Lato', sans-serif;
+            --font-family-code: 'Fira Code', monospace;
             --bg-color: #F8F5F1;
             --text-color: #2D3748;
             --text-color-light: #FFFFFF;
@@ -192,6 +190,22 @@
         }
         .key-point-content a { color: var(--modal-link); }
         
+        /* ✨ NEW: Styles for the code block ✨ */
+        #modal-content pre {
+            background-color: var(--key-point-content-bg);
+            border: 1px solid var(--modal-separator);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 0;
+            overflow: auto;
+        }
+        #modal-content code {
+            font-family: var(--font-family-code);
+            font-size: 14px;
+            color: var(--modal-text-normal);
+            white-space: pre; /* 这是保留空格和换行的关键 */
+        }
+        
         #theme-switcher-floater {
             position: fixed;
             top: 20px;
@@ -245,10 +259,7 @@
         <button class="topic-btn" data-topic="linear_structures">Linear Structures</button>
         <button class="topic-btn" data-topic="graph_tree">Nonlinear Structures</button>
         <button class="topic-btn" data-topic="intermediate_algorithms">Intermediate Algorithms</button>
-        <!-- <button class="topic-btn" data-topic="advanced_algorithms">Advanced Algorithms</button>
-        <button class="topic-btn" data-topic="system_design">System Design</button> -->
-
-    </div>
+        </div>
 
     <div id="theme-switcher-floater">
         <label class="theme-switcher">
@@ -259,7 +270,7 @@
 
     <div id="modal-overlay">
         <div id="modal">
-            <button id="modal-close-btn">&times;</button>
+            <button id="modal-close-btn">×</button>
             <div id="modal-content"></div>
         </div>
     </div>
@@ -294,6 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // --- 原始逻辑变量 ---
     const DEFAULT_KEY_POINT_LABEL = 'KEY POINT'; 
+    const PREFORMAT_TAG = '[pre]';
     const allRoadmaps = typeof ROADMAP_DATA !== 'undefined' ? ROADMAP_DATA : {};
     let cy;
     let currentRoadmapConfig = null;
@@ -431,7 +443,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 contentHtml += `<h3>${practiceTitle}</h3><ul>`;
                 
                 details.exercises.forEach((exercise, index) => {
-                    // 1. Conditionally create the title. If a URL exists, create a link; otherwise, just display the title text.
                     const titleElement = exercise.url ? `<a href="${exercise.url}" target="_blank">${exercise.title}</a>` : exercise.title;
 
                     if (!exercise.key_point) {
@@ -452,8 +463,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     const keyPointId = `key-point-${node.id()}-${index}`;
                     
-                    // 2. Change .replace(/\n/g, '<br>') to .replace(/\n/g, ' ') to prevent automatic line breaks.
-                    contentHtml += `<li><div class="exercise-header">${titleElement}<button class="key-point-btn" data-target="${keyPointId}">${buttonLabel}</button></div><div class="key-point-content" id="${keyPointId}">${keyPointContent.replace(/\n/g, ' ')}</div></li>`;
+                    // ✨✨✨ 核心更新：支持 [pre]...[/pre] 块 ✨✨✨
+                    const preBlockRegex = /\[pre\]([\s\S]*?)\[\/pre\]/g;
+                    const blocks = [];
+                    
+                    // 1. 先将 [pre]...[/pre] 块替换为占位符，并将其内容存起来
+                    let processedContent = keyPointContent.replace(preBlockRegex, (match, preContent) => {
+                        blocks.push(`<pre><code>${preContent}</code></pre>`);
+                        return '%%PRE_BLOCK%%';
+                    });
+
+                    // 2. 将剩余的普通文本中的换行符转换成空格
+                    processedContent = processedContent.replace(/\n/g, ' ');
+
+                    // 3. 将占位符替换回已经格式化好的HTML代码块
+                    let blockIndex = 0;
+                    const finalHtml = processedContent.replace(/%%PRE_BLOCK%%/g, () => {
+                        return blocks[blockIndex++];
+                    });
+
+                    contentHtml += `<li>
+                        <div class="exercise-header">
+                            ${titleElement}
+                            <button class="key-point-btn" data-target="${keyPointId}">${buttonLabel}</button>
+                        </div>
+                        <div class="key-point-content" id="${keyPointId}">
+                            ${finalHtml}
+                        </div>
+                    </li>`;
                 });
                 contentHtml += '</ul>';
             }
