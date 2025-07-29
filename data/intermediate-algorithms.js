@@ -6,12 +6,10 @@ ROADMAP_DATA.intermediate_algorithms = {
 
         
         { id: 'searching', label: 'Searching', type: 'foundation', details: { description: 'Binary search is an efficient search algorithm that works on a sorted data set.', exercises: [{ title: 'LeetCode 704: Binary Search', url: 'https://leetcode.com/problems/binary-search/description/' }, { title: 'LeetCode 33: Search in Rotated Sorted Array', url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/description/' }]}},
-        // Sorting                    快捷导航 navi:sorting / navi sorting
-        { id: 'sorting', label: 'Sorting', type: 'foundation', details: { 
-            description: `Sorting is the process of arranging a set of elements in a specific order.
+        // Sorting         navi: sorting           快捷导航 navi:sorting / navi sorting
+        { id: 'sorting', label: 'Basic Sorting Methods', type: 'foundation', details: { 
+            description: `Sorting is the process of arranging a set of elements in a specific order. Soring is the entrance algorithm for almost all new CS learners. We usally learn Selection Sort, Insertion Sort, Bubble Sort, and Bucket Sort at first. After learning recursion and divide & conquer, we will learn merge sort, quick sort, which are the common sorting techniques in most applications.
             `, exercises: [
-                { title: "Tutorials: Quick Sort, Merge Sort, Bucket Sort", url: "https://jeffliulab.github.io/algorithm-notes/algorithms/#sorting" 
-                },
                 { title: "LeetCode 75: Sort Colors", url: "https://leetcode.com/problems/sort-colors/description/" 
                 },
                 { title: "LeetCode 912: Sort an Array", url: "https://leetcode.com/problems/sort-an-array/", 
@@ -126,8 +124,21 @@ ROADMAP_DATA.intermediate_algorithms = {
             }
         },
         // Backtracking  | navi: backtracking
-        { id: 'backtracking', label: 'Backtracking (1D)', type: 'basic', details: { description: 'Backtracking is an algorithmic paradigm for solving problems recursively by trying to build a solution incrementally.', exercises: [{ title: 'LeetCode 78: Subsets', url: 'https://leetcode.com/problems/subsets/description/' }, { title: 'LeetCode 46: Permutations', url: 'https://leetcode.com/problems/permutations/description/' }]}},
+        { id: 'backtracking', label: 'Backtracking', type: 'basic', details: { description: 'Backtracking is an algorithmic paradigm for solving problems recursively by trying to build a solution incrementally.', exercises: [{ title: 'LeetCode 78: Subsets', url: 'https://leetcode.com/problems/subsets/description/' }, { title: 'LeetCode 46: Permutations', url: 'https://leetcode.com/problems/permutations/description/' }]}},
         
+        // Backtracking 2D | navi: backtracking 2d
+        { id: 'backtracking_2d', label: '2D Backtracking', type: 'intermediate', details: { 
+            description: `
+                Very famous questions such as N Queens, Sodoku, Maze Solving, etc.
+            `, exercises: [
+                { title: "aaaa", url: "aaaa" 
+                },
+                { title: "aaaa", url: "aaaa"   
+                },
+            ]}
+        },
+
+
         // Recursion | navi:recursion | navi: recursion
         { id: 'recursion', label: 'Recursion', type: 'foundation', details: { 
             description: `Recursion is a programming technique where a function calls itself to solve smaller instances of a problem.
@@ -142,8 +153,8 @@ ROADMAP_DATA.intermediate_algorithms = {
 
 
         // 排列组合
-        {"id": "permutations_combinations", "label": "Permutations & Combinations", "type": "intermediate", "details": {
-                "description": "Backtracking is a general algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point in time. It is commonly used for permutation and combination problems.",
+        {"id": "permutations_combinations", "label": "Combinatorics", "type": "intermediate", "details": {
+                "description": "Combinatorics including Permutations and Combinations. Backtracking is a general algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point in time. It is commonly used for permutation and combination problems.",
                 "exercises": [
                 {
                     "title": "LeetCode 46: Permutations", "url": "https://leetcode.com/problems/permutations/",
@@ -569,7 +580,29 @@ else:
                             `
                         },
                     },
+                    { title: 'LeetCode 746: Min Cost Climbing Stairs', 
+                        url: 'https://leetcode.com/problems/min-cost-climbing-stairs/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                <br>(1) dp[i] = min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2)
+                                <br>(2) The roof needs an extra stage.      
+                            `
+                        },
+                    },
                     { title: "LeetCode 198: House Robber", url: "https://leetcode.com/problems/house-robber/description/"   
+                    },
+                    { title: 'LeetCode 213: House Robber II', 
+                        url: 'https://leetcode.com/problems/house-robber-ii/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                This problem presents a very clever approach. The essence of the cycle constraint is that you cannot rob the first and last houses simultaneously. This effectively breaks the problem down into two sub-problems:
+                                <br>(1) Dynamic programming (DP) for the case where you do not rob the first house.
+                                <br>(2) Dynamic programming (DP) for the case where you do not rob the last house.
+                                <br><br><strong>Can you optimize into O(1) space?</strong>
+                            `
+                        },
                     },
                 ]
             },
@@ -721,6 +754,19 @@ result: max(max_dp)
                                 `
                         },
                     },
+                    { title: 'LeetCode 256: Paint House', 
+                        url: 'https://leetcode.com/problems/paint-house/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+This question is very classic, and the key point is on constructing the state transition equation.
+<br><br>dp[i][j] represents the i-th house (starts from 0), and the i-th house is painted in j color's accumulated minimum costs.
+<br><br>The transition equation:
+[pre]dp[i][cur_color] = costs[i][cur_color] 
++ min(dp[i-1][non_cur_color_1], dp[i-1][non_cur_color_2])[/pre]
+                            `
+                        },
+                    },
                     
                     
                 ]
@@ -796,11 +842,14 @@ result: max(max_dp)
         {from:'math',to:'bit'},
 
         // sorting
-        { from: 'sorting', to: 'quick_sort'},
-        { from: 'quick_sort', to: 'quick_select'},
-        {from:'quick_sort',to:'merge_sort'},
-        {from:'merge_sort',to:'divide_conquer'},
         {from:'sorting',to:'intervals'},
+
+        // Divide and Conquer
+        {from:'divide_conquer', to: 'quick_sort'},
+        {from:'quick_sort',to:'merge_sort'},
+        {from:'recursion',to:'divide_conquer'},
+        { from: 'quick_sort', to: 'quick_select'},
+
 
         // searching
         { from: 'searching', to: 'binary_search' },
@@ -809,6 +858,7 @@ result: max(max_dp)
         // recursion
         { from: 'recursion', to: 'backtracking' },
         { from: 'backtracking', to: 'permutations_combinations' },
+        { from: 'backtracking', to: 'backtracking_2d' },
 
         // 1D-DP (Sequence DP)
         {from:'1d_dp',to:'kadane_algorithm'},

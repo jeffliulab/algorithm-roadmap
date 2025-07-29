@@ -42,7 +42,7 @@ ROADMAP_DATA.linear_structures = {
                 <br>(3) Prefix product is quite similar.
                 `,
                 exercises: [
-                    { title: 'LeetCode 303: Range Sum Query', url: 'https://leetcode.com/problems/range-sum-query-immutable/description/' },
+                { title: 'LeetCode 303: Range Sum Query', url: 'https://leetcode.com/problems/range-sum-query-immutable/description/' },
                 { title: 'LeetCode 304: Range Sum Query 2D ★', url: 'https://leetcode.com/problems/range-sum-query-2d-immutable/description/' ,
                     key_point: {label: 'Key Points', content: `
                         Assume we have following areas:
@@ -70,11 +70,42 @@ i  |   C   |  D  |
                     },
                 },
                 
-                { title: 'LeetCode aaaaa', url: 'aaaaa' },
-                { title: 'LeetCode aaaaa', url: 'aaaaa' },
-                { title: 'LeetCode aaaaa', url: 'aaaaa' },
-                { title: 'LeetCode aaaaa', url: 'aaaaa' },
-                ]
+                { title: 'LeetCode 238: Product of Array Except Self', url: 'https://leetcode.com/problems/product-of-array-except-self/description/' ,
+                    key_point: {label: 'Hint', content: `
+                        The idea is totally the same with prefix sum, though it use prefix product.
+                        `},
+                },
+                { title: 'LeetCode 724: Find Pivot Index', url: 'https://leetcode.com/problems/find-pivot-index/description/' ,
+                    key_point: {label: 'Hint', content: `
+                        Hint: Prefix + Surfix. Use extra space O(N) or just variable to achieve space O(1).
+                        `},
+                },
+                { title: 'LeetCode 560: Subarray Sum Equals K ★★', url: 'https://leetcode.com/problems/subarray-sum-equals-k/description/' ,
+                    key_point: {label: 'Key Points', content: `
+<br>(1) The sequence is not sorted and might contain negative numbers, so sliding window with R doesn't work in this situation. You might use sliding window with L but its time is O(N^2).
+<br>(2) The best practice of this question is prefix sum + hashtable.
+[pre]prefix[i] <- sum from nums[0] to nums[i]
+sum(sub-array[j,i]) = prefix[i] - prefix[j-1]
+=> if sub-array[j,i] == k
+=> then prefix[i] - prefix[j-1] == k
+[/pre]
+So what we need to do next, is to check at every i, if there is any j before i, satisfy:
+[pre]prefix[j-1] == prefix[i] - k
+[/pre]
+Then sub-array[j,i] will be the satisfied one. We can store the count of each value of prefix[j-1] in a hashmap, make searching time O(N). Note that hashmap needs initially store {0:1}, assume we have a prefix 0 before the array, to consider the edge case of the total array is that sub-array.
+
+                        `},
+                },
+                { title: 'LeetCode 974: Subarray Sums Divisible by K', url: 'https://leetcode.com/problems/subarray-sums-divisible-by-k/description/' ,
+                    key_point: {label: 'Math Concept', content: `
+The hard point of this question is to transform the formular: [pre](prefix[i] - prefix[j-1]) % k == 0 [/pre]
+We need use the concept of <strong>Congruence Modulo</strong>:
+[pre]if (a - b) % k == 0,
+then a % k == b % k
+[/pre]
+                        `},
+                },
+              ]
             }
         },
         // String    | navi:string   | navi: string
