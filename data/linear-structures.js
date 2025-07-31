@@ -183,7 +183,7 @@ then a % k == b % k
                 ]
              }
         },
-        // Doubly Linkded List
+        // navi: doubly linked list | Navi: Doubly Linkded List
         { id: 'doubly_linked_list', label: 'Doubly Linked List', type: 'sub_foundation', details: { description: `
                 A doubly linked list is that every node has two pointers, one to prev, one to next.
                 `, 
@@ -193,19 +193,96 @@ then a % k == b % k
                 ]
              }
         },
-        // Group and Reverse in Linked List
-        { id: 'group_reverse_linked_list', label: 'Group & Reverse in Linked List (Mark)', type: 'intermediate', details: { description: `
-                        Wait for filling.
+        // navi: group and reverse in linked list | NAVI: Group and Reverse in Linked List
+        { id: 'group_reverse_linked_list', label: 'Group & Reverse (Linked List)', type: 'intermediate', details: { description: `
+                        The key technique in this domain is head insertion. For example, if the linked list now is:
+                        <br>[ pre >> first (start) >> second (temp) >> third >> end ]
+                        <br>Assume we want to reverse first ~ third, then head insertion's steps will be:
+                        <br>(1) first >> third (start.next = temp.next)
+                        <br>(2) second >> first (temp.next = pre.next)
+                        <br>(3) pre >> second (pre.next = temp)
                     `, 
                 exercises: [
-                    { title: 'LeetCode 25 (Mark)', url: 'example',
-                    }, 
-                    { title: 'LeetCode 24 (Mark)', url: 'example',
-                    }, 
-                    { title: 'LeetCode 92 (Mark)', url: 'example',
-                    }, 
-                    { title: 'LeetCode 328 (Mark)', url: 'example',
-                    }, 
+                    { title: 'LeetCode 92: Reverse Linked List II', 
+                        url: 'https://leetcode.com/problems/reverse-linked-list-ii/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+Note that both solutions are "1 Pass".
+<br>
+<br>Solution 1: Cut, Reverse, Reconnect
+[pre]1. Find pre_left, left_node, right_node, right_next
+2. Check if left_node, right_node are not None
+3. Cut off pre_left ~ left_node & right_node ~ right_next
+4. Reverse left_node >> ... >> right_node
+5. Reconnect pre_left ~ right_node $ left_node ~ right_next[/pre]
+Solution 2: Head Insertion
+[pre]1. find pre_left, break loop
+2. start from pre_left:
+left = pre_left
+for _ in range(right - left):
+    temp = left.next
+    left.next = temp.next
+    temp.next = pre_left.next
+    pre_left.next = temp
+3. after loop, the insertion is finished!
+[/pre]
+                            `
+                        },
+                    },    
+                    { title: 'LeetCode 328: Odd Even Linked List', 
+                        url: 'https://leetcode.com/problems/odd-even-linked-list/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+Always remember: if you set an index, don't forget ++!
+                            `
+                        },
+                    },   
+                    { title: 'LeetCode 24: Swap Nodes in Pairs', 
+                        url: 'https://leetcode.com/problems/swap-nodes-in-pairs/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+Always remember: Reverse need a prev node!
+                            `
+                        },
+                    },    
+                    { title: 'LeetCode 25: Reverse Nodes in k-Group', 
+                        url: 'https://leetcode.com/problems/reverse-nodes-in-k-group/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+Head insertion method:
+[pre]
+if not head or k == 1:
+    return head
+
+dummy = ListNode(0)
+dummy.next = head
+pre = dummy 
+
+while True:
+    node = pre
+    for _ in range(k):
+        node = node.next
+        if not node:
+            return dummy.next
+
+    start = pre.next 
+
+    for _ in range(k - 1):
+        curr = start.next          
+        start.next = curr.next     
+        curr.next = pre.next      
+        pre.next = curr       
+
+    pre = start
+[/pre]
+
+                            `
+                        },
+                    },     
                 ]
              }
         },

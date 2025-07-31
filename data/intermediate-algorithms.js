@@ -477,9 +477,9 @@ ROADMAP_DATA.intermediate_algorithms = {
             }
         },
         // navi: LIS navi: lis navi longest increasing subsequence
-        { id: 'LIS', label: 'LIS: Longest Increasing Subsequence', type: 'intermediate', details: { 
+        { id: 'LIS', label: 'LIS', type: 'intermediate', details: { 
                 description: `
-                LIS is a series of classic 1D DP problems. The key point of LIS is on optimization.
+                Longest Increasing Subsequence (LIS) is a series of classic 1D DP problems. The key point of LIS is on optimization.
                 `,                 
                 exercises: [
                     { title: 'LeetCode 300: Longest Increasing Subsequence', 
@@ -560,7 +560,7 @@ result: max(max_dp)
             }
         },
         // navi: 2d dp
-        { id: '2d_dp', label: '2-Dimension DP', type: 'sub_foundation', details: { 
+        { id: '2d_dp', label: '2D-DP', type: 'sub_foundation', details: { 
                 description: `
                 2D DP (Grid DP) typically includes classic problems such as Minimum Path Sum, Unique Paths, Unique Paths with Obstacles, Longest Common Subsequence, Longest Common Substring, and Edit Distance.
                 `,                 
@@ -602,9 +602,9 @@ This question is very classic, and the key point is on constructing the state tr
             }
         },
         // navi: lcs navi: longest common subsequence
-        { id: 'LCS', label: 'LCS: Longest Common Subsequence', type: 'intermediate', details: { 
+        { id: 'LCS', label: 'LCS', type: 'intermediate', details: { 
                 description: `
-                LCS is another very important 2D DP application.
+                Longest Common Subsequence (LCS) is another very important 2D DP application.
                 `,                 
                 exercises: [
                     { title: 'LeetCode 1143: Longest Common Subsequence', 
