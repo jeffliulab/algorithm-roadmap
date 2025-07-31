@@ -18,7 +18,7 @@ ROADMAP_DATA.linear_structures = {
         { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: { description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.', exercises: [{ title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' }]}},
         { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'advanced', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
         // Matrix     | navi: matrix   | navi:matrix
-        { id: 'matrix', label: 'Matrix', type: 'foundation', details: { description: "Matrix problems involve traversing or modifying a 2D grid.", exercises: [{ title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" }, { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" }, { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" }]}
+        { id: 'matrix', label: '2D Array (Matrix)', type: 'sub_foundation', details: { description: "Matrix problems involve traversing or modifying a 2D grid.", exercises: [{ title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" }, { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" }, { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" }]}
         },
         // Array, Hashing, List   | navi: list | navi:list
         {id: 'list', label: 'Arrays & Hashing', type: 'foundation',
@@ -184,7 +184,7 @@ then a % k == b % k
              }
         },
         // Doubly Linkded List
-        { id: 'doubly_linked_list', label: 'Doubly Linked List', type: 'basic', details: { description: `
+        { id: 'doubly_linked_list', label: 'Doubly Linked List', type: 'sub_foundation', details: { description: `
                 A doubly linked list is that every node has two pointers, one to prev, one to next.
                 `, 
                 exercises: [
@@ -214,11 +214,112 @@ then a % k == b % k
             details: {
                 description: 'A collection of problems that are solved using the sliding window technique, often paired with hash maps or arrays for efficient character or element frequency tracking.',
                 exercises: [
-                { title: 'LeetCode 121: Best Time to Buy and Sell Stock', url: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/' },
-                { title: 'LeetCode 3: Longest Substring Without Repeating Characters', url: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/' },
-                { title: 'LeetCode 424: Longest Repeating Character Replacement', url: 'https://leetcode.com/problems/longest-repeating-character-replacement/' },
-                { title: 'LeetCode 567: Permutation in String', url: 'https://leetcode.com/problems/permutation-in-string/' },
-                { title: 'LeetCode 76: Minimum Window Substring', url: 'https://leetcode.com/problems/minimum-window-substring/' }
+                    { title: '<strong>Sliding Window in Array >></strong>',
+                        key_point: {
+                            label: 'Introduction', 
+                            content: `Frequently tested, divided into two types: fixed window and variable window.
+                                    <br>Fixed window usually queries the number of subarrays that meet the requirements.
+                                    <br>Variable window usually finds the longest or shortest subarray that meets the requirements.
+                                    <br>Variable window typically involves traversing the R (right) pointer. It generally needs to be used with a hash set or hash map to handle the elements inside the window.
+                            `
+                        },
+                    },
+                    { title: 'LeetCode 219: Contains Duplicate II', 
+                        url: 'https://leetcode.com/problems/contains-duplicate-ii/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+                            Fixed window subarray queries: allow duplicate content.
+                            `
+                        },
+                    },     
+                    { title: 'LeetCode 1343: Number of Sub-arrays of Size K', 
+                        url: 'https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+                            Fixed window subarray queries: sum exceeds the threshold.
+                            `
+                        },
+                    },   
+                    { title: 'LeetCode 121: Best Time to Buy and Sell Stock', 
+                        url: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+                            Only one transaction allowed
+                            <br>Variable window to find the maximum difference, with the L pointer pointing to the minimum value on the left, and the R pointer looping sequentially.
+                            `
+                        },
+                    },   
+                    { title: 'LeetCode 209: Minimum Size Subarray Sum', 
+                        url: 'https://leetcode.com/problems/minimum-size-subarray-sum/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+                            Variable window minimum subarray: minimize the sum
+                            <br>HINT:
+                            <br>(1) This problem requires finding a sum that is greater than or equal to a target.
+                            <br>(2) Consider the edge case where the entire array consists of the same number.
+                            <br>(3) Note that is float('inf') and == float('inf') are different checks. is checks for object identity, while == checks for value equality. Except for None, avoid using is for other values. is None is reliable in Python because None always refers to the same unique object.
+                            `
+                        },
+                    },   
+                    
+                    
+
+                    { title: '<strong>Sliding Window in String >></strong>',
+                        key_point: {
+                            label: 'Introduction', 
+                            content: `String problems typically involve topics such as the maximum number of distinct letters, the maximum number of letter replacements, or repeated letters.
+                                    <br>These usually require building a hashmap to store the frequency of characters.
+                                    <br>Compared to subarray problems involving minimum or maximum sums, the challenge of sliding window problems on strings lies in character manipulation.
+                                    <br>General template:
+                                    <br>(1) Set L and R as the left and right boundaries; window size is R - L + 1.
+                                    <br>(2) Use a hashmap to store the state within the window, such as character frequencies.
+                                    <br>(3) Traverse the entire string using the R pointer.
+                                    <br>(4) Each time the window expands, check whether the current window is valid: if it’s no longer valid, shrink the window.
+                                    <br>(5) Use a while loop to shrink the window by moving the L pointer and updating the window state accordingly.
+                                    <br>(6) After shrinking, update the global or required value. This final value will be the answer.
+                                `
+                        },
+                    },
+                    { title: 'LeetCode 567: Permutation in String', 
+                        url: 'https://leetcode.com/problems/permutation-in-string/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+                            Fixed window character frequency check
+                            <br>Optimizations:
+                            <br>(1) Use an array instead of a hashmap. However, during interviews, it's recommended to use a hashmap first, and mention the array optimization afterward.
+                            <br>(2) Introduce a matches counter to only compare letters that have changed. When matches == 26, it means the two arrays are exactly the same. This optimization is also recommended to mention after completing the initial implementation.
+                            `
+                        },
+                    },   
+                    { title: 'LeetCode 3: Longest Substring Without Repeating Characters', 
+                        url: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+                            Variable window character repetition check
+                            <br>KEY POINTS:
+                            <br>(1) When shrinking the window, use the character at R to check for duplication.
+                            <br>(2) After all checks are completed, add the current character to the duplication set.
+                            `
+                        },
+                    },   
+                    { title: 'LeetCode 424: Longest Repeating Character Replacement', 
+                        url: 'https://leetcode.com/problems/longest-repeating-character-replacement/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+                            Variable window character frequency check
+                            <br>KEY POINTS:
+                            <br>(1) There's no need to track which specific letter appears most frequently — only the count of the most frequent letter is needed.
+                            <br>(2) In Python, the way to delete a key from a dictionary is: del dict[key]
+                            `
+                        },
+                    },     
                 ]
             }
         },

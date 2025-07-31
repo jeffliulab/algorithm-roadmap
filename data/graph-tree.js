@@ -7,11 +7,15 @@ ROADMAP_DATA.graph_tree = {
         // Tree | navi: tree | navi:tree
         { id: 'tree', label: 'Tree', type: 'foundation', details: { 
                 description: `
-                Tree and Graph are two important non linear structures. Tree is a special graph.
-                <br> Traversal in tree: BFS/DFS/Iterative DFS, pre-order/in-order/post-order
+                Tree and Graph are two important non linear structures. 
+                <br> Tree is a special graph. If you are doing leetcode, you can do tree's firstly, then graph's. 
+                <br>
+                <br> For a tree, you must know following techniques proficiently:
+                <br><strong>Traversal in tree: BFS / DFS / Iterative DFS</strong>
+                <br><strong>Three kinds of DFS: pre-order / in-order / post-order</strong>
                 `,                 
                 exercises: [
-                    { title: 'Concept of Tree', url: 'https://jeffliulab.github.io/algorithm-notes/data_structures/#tree' },
+
                 ]
             }
         },
@@ -290,16 +294,347 @@ ROADMAP_DATA.graph_tree = {
                 ]
             }
         },
-        // navi: trie
-        { id: 'trie', label: 'Trie', type: 'foundation', details: { 
+        // navi: trie navi: prefix tree
+        { id: 'trie', label: 'Trie / Prefix Tree', type: 'foundation', details: { 
                 description: `
-                ....
+Trie, or Prefix Tree:
+<br>Insert Word: O(1)
+<br>Search Word: O(1)
+<br>Search Prefix: O(1)
+                `,                 
+                exercises: [
+                    { 
+                        title: 'LeetCode 208: Implement Trie (Prefix Tree)', 
+                        url: 'https://leetcode.com/problems/implement-trie-prefix-tree/',
+                        key_point: {
+                            label: 'Full Implementation', 
+                            content: `
+The implementation of trie:
+[pre]class TrieNode:
+    def __init__(self):
+        self.children = {} 
+        self.is_end_of_word = False
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word: str) -> None:
+        curr = self.root
+        for char in word:
+            if char not in curr.children:
+                curr.children[char] = TrieNode()
+            curr = curr.children[char]
+        
+        curr.is_end_of_word = True
+
+    def search(self, word: str) -> bool:
+        curr = self.root
+        for char in word:
+            if char not in curr.children:
+                return False
+            curr = curr.children[char]
+        
+        return curr.is_end_of_word
+
+    def startsWith(self, prefix: str) -> bool:
+        curr = self.root
+        for char in prefix:  
+            if char not in curr.children:
+                return False
+            curr = curr.children[char]
+        
+        return True
+
+if __name__ == "__main__":
+    trie = Trie()
+    trie.insert("apple")
+    trie.insert("app")
+    print(f"Search 'apple': {trie.search('apple')}")
+    print(f"Search 'app': {trie.search('app')}")
+    print(f"Starts with 'app': {trie.startsWith('app')}")
+    print(f"Starts with 'appl': {trie.startsWith('appl')}")
+[/pre]
+                            `
+                        },
+                    },
+                    { title: '<strong>Word Search >></strong>',
+                    },
+                    { title: 'LeetCode 211: Design Add and Search Words DS ★', 
+                        url: 'https://leetcode.com/problems/design-add-and-search-words-data-structure/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                              The searching strategy needs using DFS/BFS.
+                            <br>(1) DFS: base case is finish checking all the character of word. index, word, node will be passing.
+                            <br>(2) BFS: (index, node) will be the tuple element in the queue.
+                            `
+                        },
+                    },
+                    { title: 'LeetCode 212: Word Search II ★★★', 
+                        url: 'https://leetcode.com/problems/word-search-ii/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+Level ★★★，involves 3 core skills：Modified Trie + DFS + Backtracking, and has many advanced pruning skills.
+<br>
+<br>Solution:
+<br>1. Use DFS to traverse graph.
+<br>2. Use backtracking to trace possibilities.
+<br>3. Use modified trie that store the whole word in the leaf node.
+<br>
+<br>Hints:
+<br>1. Don't use BFS. In <strong>specific shape path problem</strong>, use DFS. If you use BFS, you need store too many information in queue.
+<br>2. Pruning when no char in trie.
+<br>3. Don't pruning when you find a word, think about the situation of "oath" and "oaths".
+<br>
+<br>Advanced Pruning Skills:
+<br><strong>1. Adjacency Pre-check Pruning</strong>
+[pre]for r in range(m):
+    for c in range(n - 1):
+        has.add(board[r][c] + board[r][c + 1])
+for r in range(m - 1):
+    for c in range(n):
+        has.add(board[r][c] + board[r + 1][c])
+
+for word in words:
+    for i in range(len(word) - 1):
+        a, b = word[i], word[i + 1]
+        if a + b not in has and b + a not in has:
+            break
+    else:
+        ...
+[/pre]
+<br><strong>2. Char Frequency Pruning</strong>
+[pre]from collections import Counter
+
+board_counts = Counter(c for row in board for c in row)
+
+for word in words:
+    word_counts = Counter(word)
+    if any(word_counts[char] > board_counts.get(char, 0) for char in word_counts):
+        continue
+[/pre]
+<br><strong>3. Trie Node Dynamically Pruning</strong>
+[pre]board[i][j] = '$'
+for dx, dy in directions:
+    ni, nj = i + dx, j + dy
+    if 0 <= ni < rows and 0 <= nj < cols and board[ni][nj] != '$':
+        next_char = board[ni][nj]
+        if next_char in node.children:
+            tracking(ni, nj, node)
+            child_node = node.children[next_char]
+            if not child_node.children: 
+                del node.children[next_char]
+
+board[i][j] = cur_char
+[/pre]
+                            `
+                        },
+                    },
+                    { title: 'LeetCode 745. Prefix and Suffix Search ★★', 
+                        url: 'https://leetcode.com/problems/prefix-and-suffix-search/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+This problem involves two techniques: transforming the stored string + adding node weights.
+<br><br>The task is to find the word that matches both a given prefix and suffix, and return the one with the **largest index** among all that match.
+<br><br>The tricky part is returning the **index**. If we only needed to check for the existence of a prefix or suffix separately, we could store the words in a trie (prefix tree) directly or reversed. But since the prefix and suffix must belong to the **same word**, intersecting two separate tries can produce too many results.
+<br><br>So, how can we transform the "prefix + suffix" query into a **single query** and efficiently return the word with the maximum index?
+<br><br>Core Idea 1: Transform the word – store a modified version of the word as "suffix#prefix", and insert this new string into a trie.
+[pre]For example, for the word "apple":
+Take the suffix "e", generate the new string "e#apple", and insert it into the trie.
+Take the suffix "le", generate "le#apple", and insert it.
+Take the suffix "ple", generate "ple#apple", and insert it.
+... and so on, until the full word "apple#apple" is inserted.[/pre]
+At this point, if you want to search for a word with prefix "ap" and suffix "le", you're essentially looking for a string that starts with "le#ap".
+
+                            `
+                        },
+                    },
+                    { title: '<strong>Word Replace >></strong>',
+                    },
+                    { title: 'LeetCode 648: Replace Words', 
+                        url: 'https://leetcode.com/problems/prefix-and-suffix-search/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+In this question, a new python technique "for...else..." is perfectly fit:
+[pre]for char in word:
+    if char not in curr.children:
+        result.append(word)
+        break
+    else:
+        curr = curr.children[char]
+        if curr.word is not None:
+            result.append(curr.word)
+            break
+else:
+    result.append(word)
+[/pre]
+"for...else..." here means, if there is no break in the loop, then use else branch. Of course you can use a "switch" variable instead of using "for...else..."
+                            `
+                        },
+                    },
+                    { title: '<strong>Autocomplete >></strong>',
+                    },
+                    { title: 'LeetCode 1268: Search Suggestions System', 
+                        url: 'https://leetcode.com/problems/search-suggestions-system/description/',
+                        key_point: {
+                            label: 'Hints', 
+                            content: `
+Note that don't forget record the result of invalid char:
+[pre]curr = trie
+for char in searchWord:
+    if curr and char in curr.children:
+        ...
+    else:
+        curr = None
+        result.append([])
+[/pre]
+`
+                        },
+                    },
+                    
+
+                ]
+            }
+        },
+        // navi: virtual trie | navi: virtual trie
+        { id: 'virtual_trie', label: 'Virtual Trie', type: 'advanced', details: { 
+                description: `
+
+                `,                 
+                exercises: [
+                    { title: '<strong>Denary Trie >></strong>',
+                    },
+                    { title: 'LeetCode 386: Lexicographical Numbers', 
+                        url: 'https://leetcode.com/problems/lexicographical-numbers/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+A Denary Trie is a special type of Trie that deals with numerical data. The core solution is virtual traversal: instead of building a physical tree, we move conceptually across the tree structure. 
+<br><br>Let's see use LeetCode.386 as an example: Given an integer n, output all numbers in the range [1, n] in lexicographical order.<br>
+This problem serves as a teaching example to illustrate the concept of a denary trie.<br>
+<br>First of all, we cannot directly construct a Denary Trie.<br>
+If n = 10^9, then building such a tree would result in more than a billion nodes.<br>
+Constructing such a massive tree in memory is completely infeasible.<br>
+<br>Secondly, since the structure of a denary trie is stable and the decimal rules already define the structure of the tree, we do not need to traverse the nodes to know the content of each node. 
+<br>For example:
+<br>The children of node 1 will always be 10, 11, 12...
+<br>The children of node 12 will always be 120, 121, 122...
+<br>Their relationships are as follows:
+[pre]from a node to its child:
+child = parent * 10 + digit
+
+from a node to its next neighbor:
+sibling = node + 1
+[/pre]
+
+Example "Tree" Structure:
+[pre](root)
+ │
+ └── 1  (Layer 1)
+     │
+     ├── 10  (Layer 2)
+     │   │
+     │   ├── 100  (Layer 3)
+     │   ├── 101
+     │   │   ...
+     │   └── 109
+     ...[/pre]
+So if you want to travers in the order of 1, 10, 100..., it is obviously a pre-order traversal of tree. In above graph, layer 3 is the lowest layer and node 100 is the left most node.
+
+So, let 0 as root node, and for each node there are 10 child nodes: 0, 1, 2...8, 9. Suppose we need 1 - k's lexicographical numbers:
+[pre]def dfs(n):
+    if n > k:
+        return 
+    if n > 0:
+        result.append(n)
+    for i in range(10):
+        if n == 0 and i == 0:
+            continue
+        dfs(n * 10 + 1)
+[/pre]
+`
+                        },
+                    },
+                    { title: 'LeetCode 440: K-th Smallest in Lexicographical Order', 
+                        url: 'https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+This question is not hard, if n and k are quite small. But, if n is very large, for example, if n == 10^9, then pre-order traverse from root 0 or 1 will cost too much time!
+[br]To achieve high efficiency, we must use "skip and enter" strategy, for example:
+[pre]n = 999999999, k = 888888888,
+start from n == 1,
+skip 1 - 7, enter 8:
+    skip 81 - 87, enter 88:
+	skip 881 - 887, enter 888:
+	    skip 8881 - 8887, enter 8888:
+		...
+[/pre]
+So how could we achieve or implement this magic?
+[pre]INPUT: n, k (the Kth number we found)
+
+in range [1, n], found amount of numbers between [n1,n2)
+this means find the n1's block's amount of numbers
+def block(n, n1, n2):
+    steps = 0
+    while n1 <= n:
+	if n2 <= n + 1:
+	    steps += n2 - n1
+	else:
+	    steps += (n + 1) - n1
+
+	n1 *= 10
+	n2 *= 10
+    return steps
+
+curr = 1
+k -= 1
+while k > 0:
+    steps = block(n, curr, curr+1)
+    if steps <= k: we need skip this block
+	k -= steps
+	curr += 1
+    else: we need enter this block
+	k -= 1 (enter the block cost 1 step)
+	curr *= 10
+
+return curr
+[/pre]
+`
+                        },
+                    },
+
+                    { title: '<strong>Bit Trie and XOR Minimum >></strong>',
+                    },
+                ]
+            }
+        },
+        // navi: lcp | navi: longest common prefix
+        { id: 'lcp', label: 'LCP', type: 'basic', details: { 
+                description: `
+                Longest Common Prefix, also known as LCPP, is the core foundation of the advanced algorithm suffix array (Suffix Array).
                 `,                 
                 exercises: [
                     { title: 'aaaa', url: 'aaaa' },
                 ]
             }
-        },
+        },  
+        // navi: spell check | navi: spell check
+        { id: 'spell_check', label: 'Spell Check', type: 'intermediate', details: { 
+                description: `
+                <strong>★★★Prerequisite: Dynamic Programming★★★</strong>
+                <br>To unlock this branch, please firstly finished the foundation part of Dynamic Programming: 1D-DP & 2D-DP!
+                ...
+                `,                 
+                exercises: [
+                    { title: 'aaaa', url: 'aaaa' },
+                ]
+            }
+        },  
         // navi: dsu
         { id: 'dsu', label: 'DSU', type: 'foundation', details: { 
                 description: `
@@ -348,6 +683,11 @@ ROADMAP_DATA.graph_tree = {
         { from: 'tree', to: 'binary_tree_foundations' }, 
         { from: 'binary_tree_foundations', to: 'heap' }, 
 
+        // trie
+        { from: 'trie', to: 'lcp' }, 
+        { from: 'lcp', to: 'spell_check' }, 
+        { from: 'spell_check', to: 'virtual_trie' }, 
+
         // graph
         { from: 'graph', to: 'dsu'},
 
@@ -363,8 +703,6 @@ ROADMAP_DATA.graph_tree = {
         // binary tree
         { from: 'binary_tree_foundations', to: 'binary_tree_intermediate' }, 
         { from: 'binary_tree_foundations', to: 'bst' }, 
-
-        // trie
 
         // heap
         { from: 'heap', to: 'merge_k_ways'},
