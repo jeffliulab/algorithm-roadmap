@@ -43,6 +43,47 @@ ROADMAP_DATA.intermediate_algorithms = {
                 Search in Matrix is another skill. Treat the matrix as a flattened 1D array so it becomes a regular binary seach problem.
                 `,                 
                 exercises: [
+                    { title: 'LeetCode 35: Search Insert Position', 
+                        url: 'https://leetcode.com/problems/search-insert-position/' ,
+                        key_point: {
+                            label: 'Tutorials of Two Kinds', // 这是自定义的按钮名称
+                            content: `
+Familiar with two kinds of binary search:
+<br><strong>1. Closed Interval [left, right]</strong>
+<br>This is used on exact target searching.
+[pre]left = 0
+right = len(nums) - 1
+
+while left <= right:
+    mid = left + (right - left) // 2
+
+    if nums[mid] == target:
+        return mid
+    elif nums[mid] < target:
+        left = mid + 1 
+    else:  # nums[mid] > target
+        right = mid - 1 
+return -1
+[/pre]
+<br><strong>2. [left, right)</strong>
+<br>This is used on finding the first >= target pplace,
+<br>or the insertion of target to make array in order.
+[pre]left = 0
+right =len(nums)
+
+while left < right:
+    mid = left + (right - left) // 2
+
+    if nums[mid] < target:
+        left = mid + 1
+    else:  # nums[mid] >= target
+        right = mid 
+return left  # left is the first >= target element
+[/pre]
+
+                            `
+                        },
+                    },
                     { title: 'LeetCode 704: Binary Search', url: 'https://leetcode.com/problems/binary-search/description/' },
                     { title: 'LeetCode 74: Search a 2D Matrix', url: 'https://leetcode.com/problems/search-a-2d-matrix/description/' },
                     { title: 'LeetCode 153: Find Minimum in Rotated Sorted Array', 

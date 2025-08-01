@@ -3,6 +3,28 @@ if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
 ROADMAP_DATA.special_topics = {
     nodes: [
+
+
+
+
+// NP-Hard问题的求解，也放到Special Topics里头：
+// 2. NP-Hard问题的常见求解算法
+// 由于NP-Hard问题没有高效的确定性解法，我们通常会使用以下几类算法来求解：
+// 近似算法（Approximation Algorithms）：这类算法能够保证在多项式时间内找到一个解，并且这个解的质量（与最优解的差距）有一个可证明的界限。例如，对于TSP问题，存在一些近似算法能够保证找到的路径长度不会超过最优解的某个固定倍数。
+// 启发式算法（Heuristic Algorithms）：这类算法通常在实践中表现良好，能够快速找到一个“足够好”的解，但无法保证解的质量，也无法证明其与最优解的差距。模拟退火就属于这一类。其他例子包括遗传算法、蚁群算法等。
+// 回溯法/分支限界法（Backtracking / Branch and Bound）：这类算法是求解NP-Hard问题的精确解法。它们通过系统地遍历所有可能的解空间，并剪掉那些不满足条件的子树，来找到最优解。虽然在最坏情况下时间复杂度依然很高（指数级别），但在一些实例上表现良好。
+
+
+
+
+
+
+
+
+
+
+
+
         { id: 'math', label: 'Math & Geometry', type: 'foundation', details: { description: '.....', }},
 // bit manipulation | navi: bit
         { id: 'bit', label: 'Bit Manipulation', type: 'foundation', details: { 

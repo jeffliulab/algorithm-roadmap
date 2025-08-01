@@ -19,45 +19,535 @@ ROADMAP_DATA.graph_tree = {
                 ]
             }
         },
-        { id: 'binary_tree_foundations', label: 'Binary Tree', type: 'sub_foundation', details: { 
+        // navi: binary tree
+        { id: 'binary_tree', label: 'Binary Tree', type: 'foundation', details: { 
                 description: `
-                The foundational skills of binary tree.
+                aaaaaaaaaaaaaaaaaaaaaa
                 `,                 
                 exercises: [
-                    { title: 'LeetCode 226: Invert Binary Tree', url: 'https://leetcode.com/problems/invert-binary-tree/description/' },
-                    { title: 'LeetCode 104: Maximum Depth of Binary Tree', url: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/description/' },
-                    { title: 'LeetCode 662: Maximum Width of Binary Tree', url: 'https://leetcode.com/problems/maximum-width-of-binary-tree/description/' },
-                    { title: 'LeetCode 543: Diameter of Binary Tree', url: 'https://leetcode.com/problems/diameter-of-binary-tree/description/' },
-                    { title: 'LeetCode 110: Balanced Binary Tree', url: 'https://leetcode.com/problems/balanced-binary-tree/description/' },
-                    { title: 'LeetCode 100: Same Tree', url: 'https://leetcode.com/problems/same-tree/description/' },
-                    { title: 'LeetCode 572: Subtree of Another Tree', url: 'https://leetcode.com/problems/subtree-of-another-tree/description/' },
-                    { title: 'LeetCode 102: Binary Tree Level Order Traversal', url: 'https://leetcode.com/problems/binary-tree-level-order-traversal/description/' },
+                    { title: '<strong>classification1 >></strong>',
+                    },
+                    { title: 'LeetCode aaaaa ★', 
+                        url: 'aaaaa',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+aaaaaa
+                            `
+                        },
+                    },
+                    
+
                 ]
             }
         },
-        { id: 'binary_tree_intermediate', label: 'Binary Tree Intermediate', type: 'basic', details: { 
+        // navi: complete binary tree
+        { id: 'complete_binary_tree', label: 'Complete Binary Tree', type: 'sub_foundation', details: { 
                 description: `
-                The intermediate skills of binary tree.
+                aaaaaaaaaaaaaaaaaaaaaa
                 `,                 
                 exercises: [
-                    { title: 'LeetCode 199: Binary Tree Right Side View', url: 'https://leetcode.com/problems/binary-tree-right-side-view/description/' },
-                    { title: 'LeetCode 105: Construct Binary Tree from Preorder and Inorder Traversal', url: 'https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/' },
-                    { title: 'LeetCode 124: Binary Tree Maximum Path Sum', url: 'https://leetcode.com/problems/binary-tree-maximum-path-sum/description/' },
-                    { title: 'LeetCode 297: Serialize and Deserialize Binary Tree', url: 'https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/' },
+                    { title: '<strong>classification1 >></strong>',
+                    },
+                    { title: 'LeetCode aaaaa ★', 
+                        url: 'aaaaa',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+aaaaaa
+                            `
+                        },
+                    },
+                    
+
                 ]
             }
         },
+        // navi: balanced binary tree
+        { id: 'balanced_binary_tree', label: 'Balanced Binary Tree', type: 'sub_foundation', details: { 
+                description: `
+                aaaaaaaaaaaaaaaaaaaaaa
+                `,                 
+                exercises: [
+                    { title: '<strong>classification1 >></strong>',
+                    },
+                    { title: 'LeetCode aaaaa ★', 
+                        url: 'aaaaa',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+aaaaaa
+                            `
+                        },
+                    },
+                    
+
+                ]
+            }
+        },
+        // navi: bst | navi: binary search tree
         { id: 'bst', label: 'Binary Search Tree', type: 'sub_foundation', details: { 
                 description: `
-                The foundational skills of binary search tree.
+                The property of a BST is that the nodes in the left subtree are smaller than the root node, and the nodes in the right subtree are larger than the root node; at the same time, all subtrees are also BSTs. Because of this property, an in-order traversal will produce an ascending sequence.
                 `,                 
                 exercises: [
-                    { title: 'LeetCode 700: Search in a Binary Search Tree', url: 'https://leetcode.com/problems/search-in-a-binary-search-tree/description/' },
-                    { title: 'LeetCode 701: Insert into a Binary Search Tree', url: 'https://leetcode.com/problems/insert-into-a-binary-search-tree/description/' },
-                    { title: 'LeetCode 450: Delete Node in a BST', url: 'https://leetcode.com/problems/delete-node-in-a-bst/description/' },
-                    { title: 'LeetCode 235: Lowest Common Ancestor of a Binary Search Tree', url: 'https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/' },
-                    { title: 'LeetCode 98: Validate Binary Search Tree', url: 'https://leetcode.com/problems/validate-binary-search-tree/description/' },
-                    { title: 'LeetCode 230: Kth Smallest Element in a BST', url: 'https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/' },
+                { title: '<strong>1. Traverse, Search, Insertion in BST</strong>',
+                },
+                { title: 'LeetCode 94: Binary Tree Inorder Traversal', 
+                            url: 'https://leetcode.com/problems/binary-tree-inorder-traversal/description/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+                                    This question tests your understanding of in-order traversal of a binary search tree, that is, in-order traversal can obtain an ascending sequence.
+                                `
+                            },
+                },
+                { title: 'LeetCode 700: Search in a Binary Search Tree', 
+                            url: 'https://leetcode.com/problems/search-in-a-binary-search-tree/description/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+The best practice of searching in binary tree:
+[pre]Iterative DFS: 
+while node:
+    if node.val == target:
+        return node
+    elif node.val > target:
+        node = node.left
+    else:
+	node = node.right
+    return None
+
+Recursive DFS:
+def searchBST(node):
+    if not node or node.val == target:
+	return node
+    if node.val > target:
+	return searchBST(node.left)
+    else:
+	return searchBST(node.right)
+[/pre]
+
+                                `
+                            },
+                },
+                { title: 'LeetCode 701: Insert into a Binary Search Tree', 
+                            url: 'https://leetcode.com/problems/insert-into-a-binary-search-tree/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+
+[pre]Iterative DFS:
+...
+while True:
+    if val < node.val:
+        if not node.left:
+            node.left = TreeNode(val)
+            break
+        else:
+            node = node.left
+    else:
+        if not node.right:
+            node.right = TreeNode(val)
+            break
+        else:
+            node = node.right
+...
+
+Recursive DFS:
+...
+def dfs(node):
+    if not node:
+        return TreeNode(val)
+    
+    if val < node.val:
+        node.left = dfs(node.left)
+    else:
+        node.right = dfs(node.right)
+    
+    return node
+...
+[/pre]
+
+                                `
+                            },
+                },
+                { title: '<strong>2. Delete Node in BST</strong>',
+                },
+                { title: 'LeetCode 450: Delete Node in a BST', 
+                            url: 'https://leetcode.com/problems/delete-node-in-a-bst/description/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+
+
+
+Hint:
+[pre]
+1. target is leaf node: remove
+2. target has one child node: connect parent and child
+3. target has two children:
+  (1) Find Successor: smallest node at right sub-tree
+  (2) Switch successor and target
+  (3) Delete target (after switching)
+
+When we modify the tree, we need know the parent, and modify parent's left and right pointing. So use recursion is more easy in deleting BST node:
+
+def deleteNode(root, target):
+    if not node:
+        return None
+    if target < node.val:
+        node.left = deleteNode(node.left, target)
+    elif target > node.val:
+	node.right = deleteNode(node.right, target)
+    else:
+	if not node.left: return node.right
+	if not node.right: return node.left
+
+	successor = node.right
+	while successor.left:
+	    successor = successor.left
+
+	node.val = successor.val
+
+	node.right = deleteNode(node.right, successor.val)
+
+    return node
+[/pre]
+
+
+                                `
+                            },
+                },
+                { title: '<strong>3. Validate BST</strong>',
+                },
+                { title: 'LeetCode 98: Validate BST', 
+                            url: 'https://leetcode.com/problems/validate-binary-search-tree/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+A BST is valid only when all left children < root, and all right children > root, and all node fit this requirement.
+[pre]This is an invalid BST:
+
+    5
+   / \
+  1   6
+     / \
+    3   7
+
+Because 3 < 5, but 3 is in the right children of 5
+
+-----------
+Solution 1. Recursion
+
+def dfs(root, low, high):
+    if not root:
+	return True
+
+    if not low < root.val < high:
+	return False
+
+    return dfs(root.left, low, root.val) and dfs(root.right, root.val, high)
+
+------------
+Solution 2. Inorder Check
+
+BST's inorder must be strictly increasing.
+So we can also use inorder traversal,
+and check if cur_val is larger than last_val.
+[/pre]
+                                `
+                            },
+                },
+                { title: 'LeetCode 255: Verify Preorder Sequence in BST ★★', 
+                            url: 'https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/description/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+
+<strong>Solution 1. Constructing and Check idx</strong>
+<br><br>
+In LeetCode 1008, we learn how to construct a BST. When we constructing a BST, the recursive function will only add the valid element in the tree. 
+<br><br>
+So if the preorder is invalid, then some elements will be left behind, and we can build a tree, then check idx, see if idx == len(preorder); if not equals, then the preorder list is invalid.
+<br><br>
+<strong>Solution 2. Mono Stack (Recommend)</strong>
+<br><br>
+We use partial idea from constructing: lower bound. Starting with lower bound == -float('inf), and let this lower bound represent the left children side's bound. 
+<br><br>
+In constructing, when we go to left side, we don't change the lower bound; when we go to the right side, we change the lower bound into root's value. So, if in the right side, we find a node's value < lower bound, then this preorder list must be invalid.
+[pre]Use a monotonic stack to check preorder.
+
+stack = []
+
+low = -float('inf')
+
+for num in preorder:
+    if num < low:
+	return False
+
+    while stack and num > stack[-1]:
+	low = stack.pop()
+    
+    stack.append(num)
+
+return True
+[/pre]
+
+The monotonic stack is difficult to understand. Let's walk through it using the following diagram as an example:
+
+[pre]10, 5, 1, 7, 12, 11, 15, 9
+          
+           10
+          /  \\
+        /     \\
+       5       12
+      / \\     /  \\
+     /   \\   /    \\
+    1     7 11    15
+                   |
+                   9
+[/pre]
+The core logic is:
+<br><strong>1. Lower Bound check:</strong> Take a number. If it is less than the bound, it is out of bounds.
+<br><strong>2. Go left:</strong> If the number is greater than the bound but less than the top of the stack, push it onto the stack.
+<br><strong>3. Go right:</strong> If the number is greater than the top of the stack, start popping the stack until the number is less than the top of the stack or the stack is empty, then push the number onto the stack.
+
+
+
+
+                                `
+                            },
+                },
+                { title: '<strong>4. Construct & Reconstruct BST</strong>',
+                },
+                { title: 'LeetCode 1008: Construct BST from Preorder Traversal ★★', 
+                            url: 'https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/description/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+
+
+To construct a binary, we need at least two orders. But BST has special property, so we can build BST with only one preorder list or postorder list. Note, we cannot reconstruct a certain BST with only inorder list, because we cannot find the root node. But, we can construct a balanced BST with inorder list only. (See LeetCode 108.)
+<br><br>
+Use preorder as an example, introduce the essential method of constructing a BST:
+[pre]
+Assume the preorder sequence are many workers,
+and we need to give job for each worker.
+Note that in a BST, left is always < root, so:
+
+         low,  high
+          [worker]
+        /         \\
+ low, worker   worker, high
+
+We can assign job to the worker from left, then to the right.
+For example, assign workers: [8, 5, 1, 7, 10, 12]
+   
+        -inf, +inf
+            [ 8 ]
+             /
+         -inf, 8              
+         [ 5 ]
+        /     \\
+    -inf, 5   5, 8
+    [ 1 ]    [ 7 ]
+    /    \\
+-inf, 1   1, 5
+[None]   [None]
+
+8 -> 5 -> 1 -> None -> None -> 7 -> ....
+
+-------------------------
+Let's see the codes:
+
+workers = [8, 5, 1, 7, 10, 12]
+
+idx = 0
+
+def assign(workers, low, high):
+    if idx == len(workers):
+	return None
+
+    worker_val = workers[idx]
+
+    if not low < worker_val < high:
+	return None
+
+    root = TreeNode(worker_val)
+
+    idx += 1
+    root.left = assign(workers, low, worker_val)
+    root.right = assign(workers, worker_val, high)
+
+    return root
+
+---------------------------
+FULL CODES:
+
+INPUT: preorder (list, not empty)
+
+idx = 0
+
+def build(low, high):
+    nonlocal idx
+
+    if idx == len(preorder):
+	return None    
+
+    root_val = preorder[idx]
+
+    if not low < root_val < high:
+	return None
+    idx += 1
+
+    root = TreeNode(root_val)
+    root.left = build(low, root_val)
+    root.right = build(root_val, high)
+
+    return root
+
+OUTPUT: build(-float('inf'), float('inf'))
+[/pre]
+
+
+
+                                `
+                            },
+                },
+                { title: 'LeetCode 108: Convert Sorted Array to Binary Search Tree', 
+                            url: 'https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+
+
+Hint: With inorder list only, we cannot construct or rebuild a certain BST. But, we can build a highly balanced BST, a special conditioned BST.
+
+[pre]INPUT: nums
+
+def construct(left, right):
+    if left > right:
+        return
+    
+    mid = (left+right)//2
+
+    root = TreeNode(nums[mid])
+    root.left = construct(left, mid-1)
+    root.right = construct(mid+1,right)
+
+    return root
+
+OUTPUT: construct(0, len(nums)-1)
+[/pre]
+
+
+                                `
+                            },
+                },
+                { title: '<strong>5. Minimum Absolute Difference</strong>',
+                },
+                { title: 'LeetCode 530: Minimum Absolute Difference in BST', 
+                            url: 'https://leetcode.com/problems/minimum-absolute-difference-in-bst/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+
+In a BST, an inorder traversal produces an ascending sequence, and then finds the minimum absolute difference within that sequence. Alternatively, a constant variable can be used to continuously update the minimum absolute difference, avoiding additional space overhead.
+
+Solution 1. Inorder and record in a list.
+
+Solution 2. Record last visited val, cal diff when traversing.
+
+                                `
+                            },
+                },
+                { title: '<strong>6. Ancestor / Predecessor / Successor</strong>',
+                },
+                { title: 'LeetCode 235: Lowest Common Ancestor of a Binary Search Tree', 
+                            url: 'https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+[pre]
+
+node = root
+
+while node:
+    if node.val < p.val and node.val < q.val:
+        node = node.right
+    elif node.val > p.val and node.val > q.val:
+        node = node.left
+    else:
+        return node
+return None
+[/pre]
+
+                                `
+                            },
+                },
+
+                { title: 'LeetCode 285: Inorder Successor in BST', 
+                            url: 'https://leetcode.com/problems/inorder-successor-in-bst/description/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+
+
+In a BST:
+[pre][3, 5, 6, 9, 10, 12, 15][/pre]
+Use 5 as an example, 3 is its <strong>Predecessor</strong>, 6 is its <strong>Successor</strong>
+
+If p has right children, then this question is similar to <strong>Delete a Node</strong>. But in this question, we need to consider a situation, that p doesn't have a right child! So when p doesn't have a child, we need find a p's ancestor and which is larger than p.
+
+In the process of approaching p, record the nodes that are larger than p. If you encounter a node that is larger than p but smaller than the one you have already recorded, update it. In this way, when you find p, the node that is recorded is the node we are looking for.
+
+[pre]if p.right:
+    find p.right's smallest one
+else:
+    anc = root
+    record = None
+    while anc:
+        if anc.val < p.val:
+	    anc = anc.right
+	elif p.val < anc.val:
+	    record = anc
+	    anc = anc.left
+	else:
+	    return record
+[/pre]
+
+
+
+                                `
+                            },
+                },
+                { title: '<strong>7. Kth Smallest</strong>',
+                },
+                { title: 'LeetCode 230: Kth Smallest Element in a BST', 
+                            url: 'https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/',
+                            key_point: {
+                                label: 'Hint', 
+                                content: `
+This question is easy, use inorder we can get an ascending sequence. We should think further, if this BST is frequently modified with insertion or deletion, and you need frequently find Kth smallest element, what should you do?
+
+In such case, we can modify the data structure of TreeNode:
+[pre]class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.left_subtree_size = 0  # << add this!
+[/pre]
+
+                                `
+                            },
+                },
+                
+                
+                
+                
+                
                 ]
             }
         },
@@ -297,10 +787,10 @@ ROADMAP_DATA.graph_tree = {
         // navi: trie navi: prefix tree
         { id: 'trie', label: 'Trie / Prefix Tree', type: 'foundation', details: { 
                 description: `
-Trie, or Prefix Tree:
-<br>Insert Word: O(1)
-<br>Search Word: O(1)
-<br>Search Prefix: O(1)
+                            Trie, or Prefix Tree:
+                            <br>Insert Word: O(1)
+                            <br>Search Word: O(1)
+                            <br>Search Prefix: O(1)
                 `,                 
                 exercises: [
                     { 
@@ -676,12 +1166,8 @@ return curr
 
         // Root: tree >> graph
         { from: 'tree', to: 'graph'},
-
-
-        // tree
         { from: 'tree', to: 'trie' }, 
-        { from: 'tree', to: 'binary_tree_foundations' }, 
-        { from: 'binary_tree_foundations', to: 'heap' }, 
+        { from: 'tree', to: 'binary_tree' }, 
 
         // trie
         { from: 'trie', to: 'lcp' }, 
@@ -701,8 +1187,10 @@ return curr
         { from: 'topological_sort', to: 'transitive_closure'},
 
         // binary tree
-        { from: 'binary_tree_foundations', to: 'binary_tree_intermediate' }, 
-        { from: 'binary_tree_foundations', to: 'bst' }, 
+        { from: 'binary_tree', to: 'bst' }, 
+        { from: 'binary_tree', to: 'complete_binary_tree' }, 
+        { from: 'binary_tree', to: 'balanced_binary_tree' }, 
+        { from: 'complete_binary_tree', to: 'heap' }, 
 
         // heap
         { from: 'heap', to: 'merge_k_ways'},
