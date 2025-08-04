@@ -1125,21 +1125,59 @@ return curr
                 ]
             }
         },  
-        // navi: dsu
-        { id: 'dsu', label: 'DSU', type: 'foundation', details: { 
+     
+        // navi: undirected graph
+        { id: 'undirected_graph', label: 'Undirected Graph', type: 'sub_foundation', details: { 
                 description: `
-                ....
+                Undirected Graph, ...
                 `,                 
                 exercises: [
                     { title: 'aaaa', url: 'aaaa' },
                 ]
             }
-        },        
+        },  
+        // navi: directed graph
+        { id: 'directed_graph', label: 'Directed Graph', type: 'sub_foundation', details: { 
+                description: `
+                Undirected Graph, ...
+                `,                 
+                exercises: [
+                    { title: 'aaaa', url: 'aaaa' },
+                ]
+            }
+        }, 
+        // navi: directed graph | navi: dag
+        { id: 'dag', label: 'DAG', type: 'sub_foundation', details: { 
+                description: `
+                Undirected Graph, MST, ...
+                `,                 
+                exercises: [
+                    { title: 'aaaa', url: 'aaaa' },
+                ]
+            }
+        }, 
+        // navi: 
+        { id: 'directed_cyclic_graph', label: 'Directed Cyclic Graph', type: 'sub_foundation', details: { 
+                description: `
+                Undirected Graph, MST, ...
+                `,                 
+                exercises: [
+                    { title: 'aaaa', url: 'aaaa' },
+                ]
+            }
+        }, 
+        // navi: mst
+        { id: 'mst', label: 'MST', type: 'intermediate', details: { 
+                description: `
+                MST: Kruskal, Prim
+                `,                 
+                exercises: [
+                    { title: 'aaaa', url: 'aaaa' },
+                ]
+            }
+        }, 
 
 
-        { id: 'dag', label: 'Unweighted DAG', type: 'sub_foundation', details: { description: '.....', }},
-        { id: 'weighted_undirected_graph', label: 'Weighted Undirected Graph & MST', type: 'sub_foundation', details: { description: '.....', }},
-        { id: 'weighted_directed_graph', label: 'Weighted Directed Graph', type: 'sub_foundation', details: { description: '.....', }},
 
         // example (template)
         // { id: 'example', label: 'example', type: 'basic', details: { 
@@ -1161,6 +1199,19 @@ return curr
         //     }
         // },
         //....end...
+
+        // navi: union find | navi: disjoint set
+        { id: 'union_find', label: 'Union-Find / DSU', type: 'foundation', details: { 
+                description: `
+                Union-Find, also known as Disjoint Set Union, is a data structure used to do find and union manipulations. 
+                Union-Find usally implemented as a set of disjoint tree (called "forest").
+                Union-Find usally used in undirected graph's connectivity problem and connected components problem.
+                `,                 
+                exercises: [
+                    { title: 'aaaa', url: 'aaaa' },
+                ]
+            }
+        },  
     ],
     edges: [
 
@@ -1168,28 +1219,36 @@ return curr
         { from: 'tree', to: 'graph'},
         { from: 'tree', to: 'trie' }, 
         { from: 'tree', to: 'binary_tree' }, 
+        //{ from: 'tree', to: 'union_find' }, 
 
         // trie
         { from: 'trie', to: 'lcp' }, 
         { from: 'lcp', to: 'spell_check' }, 
         { from: 'spell_check', to: 'virtual_trie' }, 
 
-        // graph
-        { from: 'graph', to: 'dsu'},
+        // Graph
+        { from: 'graph', to: 'undirected_graph'},
+        { from: 'graph', to: 'directed_graph'},
 
-        // Main Graph Types
-        { from: 'graph', to: 'dag'},
-        { from: 'dag', to: 'weighted_undirected_graph'},
-        { from: 'weighted_undirected_graph', to: 'weighted_directed_graph'},
+        // Undirected Graph
+        { from: 'undirected_graph', to: 'mst'},
+        { from: 'union_find', to: 'mst'},
 
-        // Graph: DAG
+        // Directed Graph
+        { from: 'directed_graph', to: 'dag'},
+        { from: 'directed_graph', to: 'directed_cyclic_graph'},
+        { from: 'directed_graph', to: 'transitive_closure'},
+
+        // Graph: DAG (Directed Acyclic Graph)
         { from: 'dag', to: 'topological_sort'},
-        { from: 'topological_sort', to: 'transitive_closure'},
+        
+
+
 
         // binary tree
         { from: 'binary_tree', to: 'bst' }, 
-        { from: 'binary_tree', to: 'complete_binary_tree' }, 
         { from: 'binary_tree', to: 'balanced_binary_tree' }, 
+        { from: 'balanced_binary_tree', to: 'complete_binary_tree' }, 
         { from: 'complete_binary_tree', to: 'heap' }, 
 
         // heap

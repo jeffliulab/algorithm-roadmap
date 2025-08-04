@@ -137,9 +137,6 @@ return left  # left is the first >= target element
                 ]
             }
         },
-        // Intervals
-        { id: 'intervals', label: 'Intervals Problems', type: 'basic', details: { description: "Interval problems involve dealing with ranges or segments of data. Sorting is often the first step.", exercises: [{ title: "LeetCode 56: Merge Intervals", url: "https://leetcode.com/problems/merge-intervals/description/" }, { title: "LeetCode 57: Insert Interval", url: "https://leetcode.com/problems/insert-interval/description/" }, { title: "LeetCode 253: Meeting Rooms II", url: "https://leetcode.com/problems/meeting-rooms-ii/description/" }]}},
-
         // Binary Search on the answer | navi: binary search on the answer
         { id: 'binary_search_on_the_answer', label: 'Binary Search on the Answer', type: 'intermediate', details: { 
                 description:`Minimize K, Maximum K, Minimize Maximum, Maximum Minimum, all belong to this problem.
@@ -170,9 +167,104 @@ return left  # left is the first >= target element
                 ]
             }
         },
+        // partition binary search | navi: partition binary search
+        { id: 'partition_binary_search', label: 'Partition Binary Search', type: 'advanced', details: { 
+                description:`
+                    Use binary search to find the partition, instead of finding the value.
+                `,  
+                exercises: [
+                    { title: 'LeetCode 4: Median of Two Sorted Arrays', url: 'https://leetcode.com/problems/median-of-two-sorted-arrays/description/',
+                        key_point: {
+                            label: 'Hint', // 这是自定义的按钮名称
+                            content: `
+[pre]The partition i and j in application:
+
+nums1: 1  2     3       |    4      5   6   7   8
+             nums[i-1]  i  nums[i]
+                L1          R1
+
+nums2: 1  2     3        |     4        5
+             nums[j-1]   j   nums[j]
+                L2             R2
+
+We will find:
+(1) L1 <= R2
+(2) L2 <= R1
+(3) Left Part == Right Part (+1)
+
+Partition Formula of left part: 
+
+         k  =  (m + n + 1) // 2     <= +1 makes odd, even situations are same, k will always be the left part's partition, and Kth element will always be the last element on the left side of "merged array".
+[/pre]
+
+Coding Hints:
+<br>1. Always search on the short array
+<br>2. Edge manipulated as float('inf')
+<br>3. Left side contain one more element.
+[pre]
+def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        m, n = len(short_array), len(long_array)
+
+	if m > n:
+	    return findMedianSortedArrays(nums2, nums1)
+
+    k = (m + n + 1) // 2  # Left Side always has one more element
+
+    low, high = 0, m
+
+    while low <= high:
+        i = (low+high)//2
+        j = k - i
+
+        L1 = float('-inf') if i == 0 else short_array[i-1]
+        R1 = float('inf') if i == m else short_array[i]
+
+        L2 = float('-inf') if j == 0 else long_array[j-1]
+        R2 = float('inf') if j == n else long_array[j]
+
+        if L1 <= R2 and L2 <= R1:
+            if (m+n)%2 == 1:
+                return max(L1, L2)
+            else:
+                l = max(L1, L2)
+                r = min(R1, R2)
+                return (l+r) / 2.0
+
+
+        elif L1 > R2:
+            # i too large
+            high = i - 1
+        else:
+            # i too small
+            low = i + 1
+[/pre]
+                            `
+                        }, 
+                    },
+                    { title: 'LeetCode 378: Kth Smallest Element in a Sorted Matrix', url: 'https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/',
+                        key_point: {
+                            label: 'Hint', // 这是自定义的按钮名称
+                            content: `We need to find the Kth smallest number, that is, the smallest number among the numbers that are less than or equal to it and that meet the condition. That is, the first T in the sequence [F,F, F, ..., F, T, T,...]                            
+                            `
+                        }, 
+                    },
+                    { title: 'LeetCode 1011: Capacity To Ship Packages Within D Days', url: 'https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/',
+                        key_point: {
+                            label: 'Hint', // 这是自定义的按钮名称
+                            content: `If the capacity is too small, it cannot be transported; if the capacity is larger, it can be transported. What we are looking for is the lowest carrying capacity, that is, the first T in the result sequence of check(x) [F, F, F, .... F, T, T, ... T].
+                            `
+                        }, 
+                    },
+                ]
+            }
+        },
+
+        // Intervals | navi: intervals
+        { id: 'intervals', label: 'Intervals Problems', type: 'basic', details: { description: "Interval problems involve dealing with ranges or segments of data. Sorting is often the first step.", exercises: [{ title: "LeetCode 56: Merge Intervals", url: "https://leetcode.com/problems/merge-intervals/description/" }, { title: "LeetCode 57: Insert Interval", url: "https://leetcode.com/problems/insert-interval/description/" }, { title: "LeetCode 253: Meeting Rooms II", url: "https://leetcode.com/problems/meeting-rooms-ii/description/" }]}},
+  
         // Backtracking  | navi: backtracking
         { id: 'backtracking', label: 'Backtracking', type: 'basic', details: { description: 'Backtracking is an algorithmic paradigm for solving problems recursively by trying to build a solution incrementally.', exercises: [{ title: 'LeetCode 78: Subsets', url: 'https://leetcode.com/problems/subsets/description/' }, { title: 'LeetCode 46: Permutations', url: 'https://leetcode.com/problems/permutations/description/' }]}},
-        
+
         // Backtracking 2D | navi: backtracking 2d
         { id: 'backtracking_2d', label: '2D Backtracking', type: 'intermediate', details: { 
             description: `
@@ -199,46 +291,302 @@ return left  # left is the first >= target element
 
 
 
-        // 排列组合
+        // 排列组合 navi: permutations navi: combinations navi: combinatorics
         {"id": "permutations_combinations", "label": "Combinatorics", "type": "intermediate", "details": {
                 "description": "Combinatorics including Permutations and Combinations. Backtracking is a general algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point in time. It is commonly used for permutation and combination problems.",
                 "exercises": [
+                    {
+                    "title": "Strategies on Permutations, Subsets, Combinations", 
+                    "key_point": { "label": "Hint",
+                    "content": `
+[pre]1. Repeat using INPUT elements
+
+Yes >> backtrack(i)
+No >> used + backtrack(i+1)
+
+2. Duplicate numbers in INPUT
+
+Yes >> if i > start_index && if !used[i-1]
+No >> no action needs
+
+3. The order in OUTPUT
+
+[1,2], [2,1] are same >> subsets/combination >> use start_index
+[1,2], [2,1] are different >> permutation >> use used
+[/pre]
+                            `
+                    }
+                },
                 {
                     "title": "LeetCode 46: Permutations", "url": "https://leetcode.com/problems/permutations/",
                     "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Permutation (order matters), no duplicate elements.<br><strong>Core Logic:</strong> Use a <code>used</code> array to track which elements have been selected. The <code>for</code> loop iterates from <code>0</code> to <code>n-1</code>, recursively calling <code>backtrack()</code>.<br><strong>Pruning:</strong> None."
+                    "content": `
+                            Permutations concern the order, so [1,2] and [2,1] are different results. To find all permutations, we need use every possible element to choose in each layer.
+
+Essentials:
+[pre]1. use an array used to trace the using status in the array.
+2. backtrack
+3. when len(path) == len(nums), result.append(list(path))
+[/pre]
+
+Template Codes:
+[pre]def permute(self, nums: List[int]) -> List[List[int]]:
+    path = []
+    result = []
+    used = [0] * len(nums)
+
+    def backtrack():
+        if len(path) == len(nums):
+            result.append(list(path))
+            return
+        
+        for i in range(len(nums)):
+            if used[i] == 1:
+                continue
+            
+            path.append(nums[i])
+            used[i] = 1
+
+            backtrack()
+
+            path.pop()
+            used[i] = 0
+    
+    backtrack()
+    return result
+[/pre]
+                            `
                     }
                 },
                 {
                     "title": "LeetCode 47: Permutations II", "url": "https://leetcode.com/problems/permutations-ii/",
                     "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Permutation (order matters), with duplicate elements.<br><strong>Core Logic:</strong> Use a <code>used</code> array to track selected elements. The <code>for</code> loop iterates from <code>0</code> to <code>n-1</code>.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. The pruning condition is <code>if (i > 0 && nums[i] == nums[i-1] && !used[i-1])</code>. This ensures that for duplicate numbers, we only pick the first unused one, thus avoiding duplicate permutations."
+                    "content": `
+Essentials:
+[pre]1. Sort
+2. used store visited info
+3. if used[i-1] == 0 and nums[i-1]==nums[i], skip
+4. backtrack and record
+[/pre]
+
+Template Codes:
+[pre]def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+    nums.sort()
+    
+    path = []
+    result = []
+
+    used = [0] * len(nums)
+
+    def backtrack():
+        if len(path) == len(nums):
+            result.append(list(path))
+            return
+        
+        for i in range(len(nums)):
+            if used[i] == 1:
+                continue
+            
+            if i > 0 and used[i-1] == 0 and nums[i-1] == nums[i]:
+                continue
+            
+            used[i] = 1
+            path.append(nums[i])
+
+            backtrack()
+
+            used[i] = 0
+            path.pop()
+    
+    backtrack()
+    return result
+[/pre]
+                    `
                     }
                 },
                 {
-                    "title": "LeetCode 78: Subsets", "url": "https://leetcode.com/problems/subsets/",
+                    "title": "LeetCode 78: Subset I", "url": "https://leetcode.com/problems/subsets/description/",
                     "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Combination (order does not matter), no duplicate elements.<br><strong>Core Logic:</strong> Use a <code>startIndex</code> to ensure elements are not picked again in the same combination and to avoid duplicate subsets. The <code>for</code> loop starts from <code>startIndex</code>, and recursively calls <code>backtrack(i + 1)</code>.<br><strong>Pruning:</strong> None."
+                    "content": `
+Subsets problem aims to find all possible subsets, including empty path, all 1 element, all 2 elements, etc. Subset doesn't focus on order, but cannot make duplicate results. Normally we use <strong>start_index</strong> to avoid duplicates.
+<br><br>
+Essentials:
+[pre]1. use start_index
+2. backtrack(i+1)
+[/pre]
+Template Codes:
+[pre]path = []
+result = []
+
+def backtrack(start_index):
+    result.append(list(path))
+
+    for i in range(start_index, len(nums)):
+	path.append(nums[i])
+	backtrack(i+1)
+	path.pop()
+
+backtrack(0)
+return result
+[/pre]
+
+                    `
                     }
                 },
                 {
-                    "title": "LeetCode 90: Subsets II", "url": "https://leetcode.com/problems/subsets-ii/",
+                    "title": "LeetCode 90: Subset II", "url": "https://leetcode.com/problems/subsets-ii/description/",
                     "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Combination (order does not matter), with duplicate elements.<br><strong>Core Logic:</strong> Use <code>startIndex</code> to mark the starting point and recursively call <code>backtrack(i + 1)</code>.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. Within the same level of recursion (the same for-loop), if the current element is the same as the previous one (<code>i > startIndex && nums[i] == nums[i-1]</code>), skip it to avoid generating duplicate subsets."
+                    "content": `
+When INPUT numbers include duplicates, like [1, 2, 2], but OUTPUT cannot include duplicate subset, we need manipulate this by pruning.
+<br><br>
+Essentials:
+[pre]1. sort
+2. use start_index to track
+3. WHEN i > start_index AND nums[i-1] == nums[i], pruning
+4. backtrack(i+1)
+[/pre]
+The pruning's idea: use [1, 2a, 2b] as an example. when start_index == 0, we will have three path starting with: 1, 2a, and 2b, in the first layer's loop. So in this case, we only consider 2a, and don't consider 2b. If we use 2b, then in start_index == 1, we will again use 2a and get [2b, 2a], which will be duplicated with [2a, 2b].
+<br><br>
+Template Codes:
+[pre]nums.sort()
+
+path = []
+result = []
+
+nums.sort()
+
+def backtrack(start):
+    result.append(list(path))
+
+    for i in range(start, len(nums)):
+        if i > start and nums[i-1] == nums[i]:
+            continue
+        path.append(nums[i])
+        backtrack(i+1)
+        path.pop()
+    
+backtrack(0)
+return result
+[/pre]
+
+                    `
+                    }
+                },
+                {
+                    "title": "LeetCode 77: Combinations", "url": "https://leetcode.com/problems/combinations/description/",
+                    "key_point": { "label": "Hint",
+                    "content": `
+
+Combinations are actually certain length's subset.
+
+Template Codes:
+[pre]def combine(self, n: int, k: int) -> List[List[int]]:
+
+    path = []
+    result = []
+
+    def backtrack(start_index):
+        if len(path) == k:
+            result.append(list(path))
+            return
+        
+        for i in range(start_index, n+1):
+            path.append(i)
+
+            backtrack(i+1)
+
+            path.pop()
+    
+    backtrack(1)
+
+    return result
+[/pre]
+
+
+                    `
                     }
                 },
                 {
                     "title": "LeetCode 39: Combination Sum", "url": "https://leetcode.com/problems/combination-sum/",
-                    "key_point": {   "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Combination (order does not matter), no duplicate elements in input, but each element can be <strong>reused infinitely</strong>.<br><strong>Core Logic:</strong> The <code>for</code> loop starts from <code>startIndex</code>. Recursively call <code>backtrack(i)</code>. Since elements can be reused, the starting point for the next recursion is still <code>i</code>, not <code>i+1</code>.<br><strong>Pruning:</strong> (Optional) You can sort the array first. If <code>sum + nums[i] > target</code>, then all subsequent elements will also exceed the target, so you can prune the branch directly."
+                    "key_point": { "label": "Hint",
+                    "content": `
+
+Essentials:
+[pre]1. Combination is the certain length version of subset
+2. This question can use duplicate element, so backtrack(i)
+3. Pruning on cur_sum > target situations.
+[/pre]
+
+
+[pre]def combinationSum(self, candidates, target):
+    path = []
+    result = []
+
+    def backtrack(start_index):
+        cur_sum = sum(path)
+
+        if cur_sum == target:
+            result.append(list(path))
+            return
+        
+        if cur_sum > target:
+            return
+        
+        for i in range(start_index, len(candidates)):
+            path.append(candidates[i])
+            backtrack(i)
+            path.pop()
+    
+    backtrack(0)
+    return result
+[/pre]
+
+                    `
                     }
                 },
                 {
-                    "title": "LeetCode 40: Combination Sum II", "url": "https://leetcode.com/problems/combination-sum-ii/",
+                    "title": "LeetCode 40: Combination Sum II", "url": "https://leetcode.com/problems/combination-sum-ii/description/",
                     "key_point": { "label": "Hint",
-                    "content": "<strong>Key Points:</strong> Combination (order does not matter), with duplicate elements, but each element can be <strong>used only once</strong>.<br><strong>Core Logic:</strong> Use <code>startIndex</code> to mark the starting point and recursively call <code>backtrack(i + 1)</code> because elements cannot be reused.<br><strong>Pruning:</strong> First, <strong>sort</strong> the array. Within the same level of recursion (the same for-loop), if the current element is the same as the previous one (<code>i > startIndex && nums[i] == nums[i-1]</code>), skip it to avoid generating duplicate combinations."
+                    "content": `
+
+Template Codes:
+[pre]def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+    candidates.sort()
+
+    path = []
+    result = []
+
+    def backtrack(start_i, cur_sum):
+        if cur_sum > target:
+            return
+        if cur_sum == target:
+            result.append(list(path))
+            return
+        
+        for i in range(start_i, len(candidates)):  
+            if i > start_i and candidates[i] == candidates[i-1]:
+                continue
+            
+            path.append(candidates[i])
+            backtrack(i+1, cur_sum + candidates[i])
+            path.pop()
+    
+    backtrack(0, 0)
+    return result
+[/pre]
+
+                    `
                     }
-                }
+                },
+                {
+                    "title": "LeetCode 17: Letter Combinations of a Phone Number", "url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/",
+                    "key_point": { "label": "Hint",
+                    "content": `
+                        Use a choices loop for selection, similar to graph's direction.
+                    `
+                    }
+                },
+                
                 ]
             }
         },
@@ -681,6 +1029,25 @@ This question is very classic, and the key point is on constructing the state tr
                                     `
                         },
                     },
+                ]
+            }
+        },
+        
+        // navi: lps navi: longest palindromic subsequence
+        { id: 'LPS', label: 'LPS (Mark)', type: 'intermediate', details: { 
+                description: `
+                Longest Palindromic Subsequence (LPS) is another very important 2D DP application.
+                `,                 
+                exercises: [
+                    { title: 'LeetCode 516: Longest Palindromic Subsequence (Mark)', 
+                        url: 'https://leetcode.com/problems/longest-common-subsequence/description/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+                                            .....
+                                    `
+                        },
+                    },
 
                     
                     
@@ -720,6 +1087,7 @@ This question is very classic, and the key point is on constructing the state tr
         // searching
         { from: 'searching', to: 'binary_search' },
         { from: 'binary_search', to: 'binary_search_on_the_answer'},
+        { from: 'binary_search_on_the_answer', to: 'partition_binary_search'},
 
         // recursion
         { from: 'recursion', to: 'backtracking' },
@@ -733,6 +1101,7 @@ This question is very classic, and the key point is on constructing the state tr
 
         // 2D-DP
         {from:'2d_dp',to:'LCS'},
+        {from:'2d_dp',to:'LPS'},
 
 
 

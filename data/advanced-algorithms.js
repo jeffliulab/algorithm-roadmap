@@ -17,6 +17,13 @@ ROADMAP_DATA.advanced_algorithms = {
 
 // Min-Cut 最小割
 
+        // navi: kmp
+        { id: 'advanced_search', label: 'Advanced Search', type: 'foundation', details: { 
+            description: `
+            waiting for update...
+            `}
+        },
+
 
         // navi: kmp
         { id: 'kmp', label: 'KMP Algorithm', type: 'intermediate', details: { 
@@ -41,7 +48,7 @@ ROADMAP_DATA.advanced_algorithms = {
 
     ],
     edges: [
-        // { from: 'string_matching', to: 'kmp' },
+        { from: 'advanced_search', to: 'kmp' },
 
     ]
 };

@@ -18,19 +18,29 @@ ROADMAP_DATA.linear_structures = {
         { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: { description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.', exercises: [{ title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' }]}},
         { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'advanced', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
         // Matrix     | navi: matrix   | navi:matrix
-        { id: 'matrix', label: '2D Array (Matrix)', type: 'sub_foundation', details: { description: "Matrix problems involve traversing or modifying a 2D grid.", exercises: [{ title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" }, { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" }, { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" }]}
+        { id: 'matrix', label: '2D Array (Matrix)', type: 'sub_foundation', details: { description: `
+            Matrix problems involve traversing or modifying a 2D grid.
+            `, exercises: [
+                { title: "LeetCode 54: Spiral Matrix", url: "https://leetcode.com/problems/spiral-matrix/" 
+                }, 
+                { title: "LeetCode 48: Rotate Image", url: "https://leetcode.com/problems/rotate-image/" 
+                }, 
+                { title: "LeetCode 73: Set Matrix Zeroes", url: "https://leetcode.com/problems/set-matrix-zeroes/" 
+                },
+                { title: 'LeetCode 36: Valid Sudoku', url: 'https://leetcode.com/problems/valid-sudoku/' 
+                },
+            ]}
         },
-        // Array, Hashing, List   | navi: list | navi:list
+        // Array, Hashing, List navi: array   | navi: list | navi:list
         {id: 'list', label: 'Arrays & Hashing', type: 'foundation',
             details: {
                 description: 'A collection of fundamental problems focusing on array manipulations and the use of hash maps for efficient lookups and storage.',
                 exercises: [
-                { title: 'LeetCode 217: Contains Duplicate', url: 'https://leetcode.com/problems/contains-duplicate/' },
                 { title: 'LeetCode 1: Two Sum', url: 'https://leetcode.com/problems/two-sum/' },
-                { title: 'LeetCode 347: Top K Frequent Elements', url: 'https://leetcode.com/problems/top-k-frequent-elements/' },
+                { title: 'LeetCode 128: Longest Consecutive Sequence', url: 'https://leetcode.com/problems/longest-consecutive-sequence/' },
+                { title: 'LeetCode 217: Contains Duplicate', url: 'https://leetcode.com/problems/contains-duplicate/' },
                 { title: 'LeetCode 238: Product of Array Except Self', url: 'https://leetcode.com/problems/product-of-array-except-self/' },
-                { title: 'LeetCode 36: Valid Sudoku', url: 'https://leetcode.com/problems/valid-sudoku/' },
-                { title: 'LeetCode 128: Longest Consecutive Sequence', url: 'https://leetcode.com/problems/longest-consecutive-sequence/' }
+                { title: 'LeetCode 347: Top K Frequent Elements', url: 'https://leetcode.com/problems/top-k-frequent-elements/' },
                 ]
             }
         },
@@ -117,7 +127,34 @@ then a % k == b % k
                 exercises: [
                 { title: 'LeetCode 242: Valid Anagram', url: 'https://leetcode.com/problems/valid-anagram/' },
                 { title: 'LeetCode 49: Group Anagrams', url: 'https://leetcode.com/problems/group-anagrams/' },
-                { title: 'LeetCode 271: Encode and Decode Strings', url: 'https://leetcode.com/problems/encode-and-decode-strings/' }
+                { title: 'LeetCode 271: Encode and Decode Strings', url: 'https://leetcode.com/problems/encode-and-decode-strings/' },
+                { title: '<strong>Palindromic Substring & Manacher\'s Algorithm >></strong>',
+                },
+                { title: 'LeetCode 5: Longest Palindromic Substring', url: 'https://leetcode.com/problems/longest-palindromic-substring/description/' ,
+                    key_point: {label: 'Hint', content: `
+                            Solution: Expand Around Center, O(N^2) time.
+                            <br><strong>Consider 'ccc', you have to discuss the even and odd cases separately.</strong>
+                            <br><br>
+                            <strong>Advanced Solution: Manacher's Algorithm</strong>
+[pre]The expand around center method has two problem:
+1. Must seprately check odd and even situations.
+2. You must repeat checking at every single index.
+
+Manacher's Algorithm's Optimization:
+1. Preprocessing string:
+    
+    s = "aba"  ->  t = "#a#b#a#"
+    s = "abba" ->  t = "#a#b#b#a#"
+
+    So we don't need separately check in even and odd conditions.
+
+2. Accelerate with the property of symmetric
+
+
+
+[/pre]
+                        `},
+                },
                 ]
             }
         },
