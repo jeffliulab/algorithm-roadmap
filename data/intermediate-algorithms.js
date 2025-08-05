@@ -241,29 +241,91 @@ def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
                             `
                         }, 
                     },
-                    { title: 'LeetCode 378: Kth Smallest Element in a Sorted Matrix', url: 'https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/',
-                        key_point: {
-                            label: 'Hint', // 这是自定义的按钮名称
-                            content: `We need to find the Kth smallest number, that is, the smallest number among the numbers that are less than or equal to it and that meet the condition. That is, the first T in the sequence [F,F, F, ..., F, T, T,...]                            
-                            `
-                        }, 
-                    },
-                    { title: 'LeetCode 1011: Capacity To Ship Packages Within D Days', url: 'https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/',
-                        key_point: {
-                            label: 'Hint', // 这是自定义的按钮名称
-                            content: `If the capacity is too small, it cannot be transported; if the capacity is larger, it can be transported. What we are looking for is the lowest carrying capacity, that is, the first T in the result sequence of check(x) [F, F, F, .... F, T, T, ... T].
-                            `
-                        }, 
-                    },
+                    // { title: 'LeetCode aaaa', url: 'aaaa',
+                    //     key_point: {
+                    //         label: 'Hint',
+                    //         content: `
+                    //         aaaa
+                    //         `
+                    //     }, 
+                    // },
+
                 ]
             }
         },
 
         // Intervals | navi: intervals
-        { id: 'intervals', label: 'Intervals Problems', type: 'basic', details: { description: "Interval problems involve dealing with ranges or segments of data. Sorting is often the first step.", exercises: [{ title: "LeetCode 56: Merge Intervals", url: "https://leetcode.com/problems/merge-intervals/description/" }, { title: "LeetCode 57: Insert Interval", url: "https://leetcode.com/problems/insert-interval/description/" }, { title: "LeetCode 253: Meeting Rooms II", url: "https://leetcode.com/problems/meeting-rooms-ii/description/" }]}},
+        { id: 'intervals', label: 'Intervals Problems', type: 'basic', details: { description: "Interval problems involve dealing with ranges or segments of data. <strong>Sorting is always the first step.</strong>", exercises: [{ title: "LeetCode 56: Merge Intervals", url: "https://leetcode.com/problems/merge-intervals/description/" }, { title: "LeetCode 57: Insert Interval", url: "https://leetcode.com/problems/insert-interval/description/" }, { title: "LeetCode 253: Meeting Rooms II", url: "https://leetcode.com/problems/meeting-rooms-ii/description/" }]}},
   
+        // navi: sweep line counter 
+        { id: 'sweep_line_counter', label: 'Sweep Line Counter', type: 'intermediate', 
+            details: { description: `
+                    Sweep Line Algorithm is a quite wide range of question's solution method.
+                `, 
+                // exercises: [
+                //     { title: 'LeetCode 22: Generate Parentheses', url: 'https://leetcode.com/problems/generate-parentheses/description/', 
+                //         key_point: {
+                //             label: 'Hint',
+                //             content: `
+                //                 ....
+                //             `
+                //         }, 
+                //     },
+                // ]
+            }
+        },
+
+        // navi: sweep line hard 
+        { id: 'sweep_line_hard', label: 'Sweep Line Hard', type: 'advanced', 
+            details: { description: `
+                    Sweep Line Algorithm is a quite wide range of question's solution method.
+                `, 
+                // exercises: [
+                //     { title: 'LeetCode 22: Generate Parentheses', url: 'https://leetcode.com/problems/generate-parentheses/description/', 
+                //         key_point: {
+                //             label: 'Hint',
+                //             content: `
+                //                 ....
+                //             `
+                //         }, 
+                //     },
+                // ]
+            }
+        },
+
+
+
+
         // Backtracking  | navi: backtracking
-        { id: 'backtracking', label: 'Backtracking', type: 'basic', details: { description: 'Backtracking is an algorithmic paradigm for solving problems recursively by trying to build a solution incrementally.', exercises: [{ title: 'LeetCode 78: Subsets', url: 'https://leetcode.com/problems/subsets/description/' }, { title: 'LeetCode 46: Permutations', url: 'https://leetcode.com/problems/permutations/description/' }]}},
+        { id: 'backtracking', label: 'Backtracking', type: 'basic', 
+            details: { description: 'Backtracking is an algorithmic paradigm for solving problems recursively by trying to build a solution incrementally.', 
+                exercises: [
+                    { title: 'LeetCode 22: Generate Parentheses', url: 'https://leetcode.com/problems/generate-parentheses/description/', 
+                        key_point: {
+                            label: 'Hint',
+                            content: `
+                            This question doesn't need "pop" manipulation to backtrack, it uses a special condition in this certain question: the amount of right parentheses cannot overpass the amount of left parentheses, when adding parentheses. So we can use this rule to backtrack all possible results.
+[pre]def generateParenthesis(self, n: int) -> List[str]:
+    result = []
+    def backtrack(path, l, r):
+        if l + r == 2 * n:
+            result.append(path)
+            return
+        
+        if l < n:
+            # KEY POINT: HERE IS TRYING TO ADD, SO YOU MUST ADD '(' WHEN PASSING PARAMETERS
+            backtrack(path+'(', l+1, r)
+        
+        if r < l:
+            backtrack(path+')', l, r+1)
+    
+    backtrack('', 0, 0)
+    return result
+[/pre]
+                            `
+                        }, 
+                    },
+                ]}},
 
         // Backtracking 2D | navi: backtracking 2d
         { id: 'backtracking_2d', label: '2D Backtracking', type: 'intermediate', details: { 
@@ -1054,11 +1116,42 @@ This question is very classic, and the key point is on constructing the state tr
                 ]
             }
         },
+        // navi: greedy
+        { id: 'greedy', label: 'Greedy', type: 'foundation', details: { 
+                description: `
+                Greedy is a kind of problems that don't have a template, but all follow a special idea that the action only focus on current step.
+                `,                 
+                exercises: [
+                    { title: '<strong>Sort and Construct</strong>',},
+                    // 这类greedy题目一般先对「要放的东西」排序，确定放入的优先级，
+                    //                      然后依次按最佳位置/时机「构造」出最终解。
+                    // 和它相近的题型还有：
+                    //          最小会议室数（sort intervals + sweep）
+                    //          插入区间合并（sort by start + 插入/合并）
+                    //          按照权重排序后填充背包（先排比值高的，再装）
+                    // 共同点都是：
+                    // 1. 先排序，把“最重要”/“最紧迫”/“最挑剔”的那部分先拿出来；
+                    // 2. 逐个插入/安排，用简单操作完成构造，之后不会回头修改。
+                    { title: 'LeetCode 406. Queue Reconstruction by Height', 
+                        url: 'https://leetcode.com/problems/queue-reconstruction-by-height/',
+                        key_point: {
+                            label: 'Key Points', 
+                            content: `
+                                      x[0] is descending, and x[1] is ascending:
+                                        [pre]people.sort(key=lambda x:(-x[0], x[1]))[/pre]
+                                    `
+                        },
+                    },
+
+                    
+                    
+                ]
+            }
+        },
 
 
 
 
-        { id: 'greedy', label: 'Greedy', type: 'foundation', details: { description: '.....', }},
         { id: 'quick_sort', label: 'Quick Sort', type: 'basic', details: { description: '.....', }},
 
 
@@ -1072,10 +1165,10 @@ This question is very classic, and the key point is on constructing the state tr
         {from:'dp',to:'1d_dp'},
         {from:'1d_dp',to:'2d_dp'},
 
-
-
-        // sorting
+        // intervals
         {from:'sorting',to:'intervals'},
+        {from:'intervals',to:'sweep_line_counter'},
+        {from:'sweep_line_counter',to:'sweep_line_hard'},
 
         // Divide and Conquer
         {from:'divide_conquer', to: 'quick_sort'},

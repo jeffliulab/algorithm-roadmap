@@ -543,14 +543,156 @@ In such case, we can modify the data structure of TreeNode:
                                 `
                             },
                 },
-                
-                
-                
-                
-                
+              
                 ]
             }
         },
+        // navi: bst application
+        { id: 'bst_application', label: 'BST Application', type: 'basic', details: { 
+                description: `
+                This series focus on the questions that are not shown clearly as BST, but the solution is based on BST.
+                `,                 
+                exercises: [
+                    { title: '<strong>classification1 >></strong>',
+                    },
+                    { title: 'LeetCode 729: My Calendar I', 
+                        url: 'https://leetcode.com/problems/my-calendar-i/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                This question's best solution is to use BST.
+                            `
+                        },
+                    },
+                    
+
+                ]
+            }
+        },
+        // navi: full binary tree
+        { id: 'full_binary_tree', label: 'Full Binary Tree', type: 'sub_foundation', details: { 
+                description: `
+                aaaaaaaaaaaaaaaaaaaaaa
+                `,                 
+                exercises: [
+                    { title: '<strong>classification1 >></strong>',
+                    },
+                    { title: 'LeetCode aaaaa ★', 
+                        url: 'aaaaa',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+aaaaaa
+                            `
+                        },
+                    },
+                    
+
+                ]
+            }
+        },
+        // navi: segment tree
+        { id: 'segment_tree', label: 'Segment Tree', type: 'foundation', details: { 
+                description: `
+                For an array, we can update in O(1) but O(N) for range sum query. Segment Tree can achieve O(logN) for range sum query, while update will use O(logN).
+                `,                 
+                exercises: [
+                    { title: 'Implementation of Segment Tree', 
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+[pre]class SegmentTree:
+    # build: O(N)
+    # update: O(logN)
+    # rangeQuery: O(logN)
+
+
+    def __init__(self, total, L, R):
+        self.sum = total
+
+        self.left = None
+        self.right = None
+        
+        self.L = L
+        self.R = R
+    
+    @staticmethod
+    def build(nums, L, R):
+        if L == R:
+            return SegmentTree(nums[L], L, R)
+
+        M = (L+R)//2
+
+        root = SegmentTree(0, L, R)
+        root.left = SegmentTree.build(nums, L, M)
+        root.right = SegmentTree.build(nums, M+1, R)
+
+        root.sum = root.left.sum + root.right.sum
+        return root
+    
+    def update(self, index, val):
+        if self.L == self.R:
+            self.sum = val
+            return 
+        
+        M = (self.L + self.R) // 2
+
+        if index > M:
+            self.right.update(index, val)
+        else:
+            self.left.update(index, val)
+        
+        self.sum = self.left.sum + self.right.sum
+    
+    def rangeQuery(self, L, R):
+        if L == self.L and R == self.R:
+            return self.sum
+
+        M = (self.L + self.R) // 2
+
+        if L > M:
+            return self.right.rangeQuery(L, R)
+        elif R <= M:
+            return self.left.rangeQuery(L, R)
+        else:
+            return ( self.left.rangeQuery(L, M) +
+                       self.right.rangeQuery(M+1, R) )
+[/pre]
+                            `
+                        },
+                    },
+                    { title: 'LeetCode 307: Range Sum Query - Mutable', 
+                        url: 'https://leetcode.com/problems/range-sum-query-mutable/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+                                Create a segment tree, then use segment tree to store array.
+                            `
+                        },
+                    },             
+
+
+//                     { title: 'LeetCode aaaaa ★', 
+//                         url: 'aaaaa',
+//                         key_point: {
+//                             label: 'Hint', 
+//                             content: `
+// aaaaaa
+//                             `
+//                         },
+//                     },
+
+                ]
+            }
+        },
+
+
+
+
+
+
+
+
         // Heap  | navi: heap  | navi:heap
         { id: 'heap', label: 'Heap / Priority Queue', type: 'foundation', details: { 
                 description: `
@@ -1219,7 +1361,6 @@ return curr
         { from: 'tree', to: 'graph'},
         { from: 'tree', to: 'trie' }, 
         { from: 'tree', to: 'binary_tree' }, 
-        //{ from: 'tree', to: 'union_find' }, 
 
         // trie
         { from: 'trie', to: 'lcp' }, 
@@ -1242,18 +1383,22 @@ return curr
         // Graph: DAG (Directed Acyclic Graph)
         { from: 'dag', to: 'topological_sort'},
         
-
-
-
         // binary tree
-        { from: 'binary_tree', to: 'bst' }, 
         { from: 'binary_tree', to: 'balanced_binary_tree' }, 
+        { from: 'binary_tree', to: 'full_binary_tree' }, 
         { from: 'balanced_binary_tree', to: 'complete_binary_tree' }, 
-        { from: 'complete_binary_tree', to: 'heap' }, 
+
+        // BST
+        { from: 'binary_tree', to: 'bst' }, 
+        { from: 'bst', to: 'bst_application' }, 
 
         // heap
+        { from: 'complete_binary_tree', to: 'heap' }, 
         { from: 'heap', to: 'merge_k_ways'},
         { from: 'merge_k_ways', to: 'task_scheduler'},
+
+        // segment tree
+        { from: 'full_binary_tree', to: 'segment_tree' }, 
 
     ]
 };

@@ -14,9 +14,6 @@ if (typeof ROADMAP_DATA === 'undefined') { var ROADMAP_DATA = {}; }
 
 ROADMAP_DATA.linear_structures = {
     nodes: [
-        // 所有单独是一行的节点之后有时间都要重新捋一下，这些是INIT的时候设置的
-        { id: 'stack_enhanced_stack', label: 'Enhanced Stack', type: 'basic', details: { description: 'Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.', exercises: [{ title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/' }]}},
-        { id: 'stack_problem_largest_rectangle', label: 'Largest Rectangle Problem', type: 'advanced', details: { description: 'A classic application of the monotonic stack.', exercises: [{ title: 'LeetCode 84: Largest Rectangle in Histogram', url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/' }]}},
         // Matrix     | navi: matrix   | navi:matrix
         { id: 'matrix', label: '2D Array (Matrix)', type: 'sub_foundation', details: { description: `
             Matrix problems involve traversing or modifying a 2D grid.
@@ -36,11 +33,20 @@ ROADMAP_DATA.linear_structures = {
             details: {
                 description: 'A collection of fundamental problems focusing on array manipulations and the use of hash maps for efficient lookups and storage.',
                 exercises: [
-                { title: 'LeetCode 1: Two Sum', url: 'https://leetcode.com/problems/two-sum/' },
                 { title: 'LeetCode 128: Longest Consecutive Sequence', url: 'https://leetcode.com/problems/longest-consecutive-sequence/' },
                 { title: 'LeetCode 217: Contains Duplicate', url: 'https://leetcode.com/problems/contains-duplicate/' },
                 { title: 'LeetCode 238: Product of Array Except Self', url: 'https://leetcode.com/problems/product-of-array-except-self/' },
                 { title: 'LeetCode 347: Top K Frequent Elements', url: 'https://leetcode.com/problems/top-k-frequent-elements/' },
+                { title: '<strong>K Sum Problems >></strong>', },
+                { title: 'LeetCode 1: Two Sum', 
+                    url: 'https://leetcode.com/problems/two-sum/' ,
+                    key_point: {label: 'Hint', content: `
+                        Remember to sort the array firstly.
+                        `},
+                },
+                { title: 'LeetCode 16: 3 Sum Closest', 
+                    url: 'https://leetcode.com/problems/3sum-closest/description/' 
+                },
                 ]
             }
         },
@@ -549,15 +555,35 @@ while True:
         { id: 'stack', label: 'Stack', type: 'foundation', 
             details: { description: 'A stack is a Last-In-First-Out (LIFO) data structure.', 
                 exercises: [
+                    { title: '<strong>Basic Stack >></strong>',  
+                    },
                     { title: 'LeetCode 20: Valid Parentheses', url: 'https://leetcode.com/problems/valid-parentheses/description/' 
                     }, 
-                    { title: 'LeetCode 22: Generate Parentheses', url: 'https://leetcode.com/problems/generate-parentheses/description/' 
+                    { title: 'LeetCode 224: Basic Calculator', url: 'https://leetcode.com/problems/basic-calculator/description/', 
+                    }, 
+                    { title: 'LeetCode 227: Basic Calculator II', url: 'https://leetcode.com/problems/basic-calculator-ii/description/', 
+                    },
+                    { title: '<strong>Enhanced Stack >></strong>',  
+                    },
+                    { title: 'LeetCode 155: Min Stack', url: 'https://leetcode.com/problems/min-stack/description/',
+                        key_point: {label: 'Hint', content: `
+                                Discover how auxiliary stacks and augmented nodes turn simple stacks into problem-solving machines.
+                            `},
+                    },
+                    { title: '<strong>Postfix / RPN & Shunting Yard Algorithm>></strong>',  
                     },
                     { title: 'LeetCode 150: Evaluate Reverse Polish Notation', url: 'https://leetcode.com/problems/evaluate-reverse-polish-notation/description/' 
                     },
+                    { title: 'LeetCode 772: Basic Calculator III (Mark)', url: 'https://leetcode.com/problems/basic-calculator-iii/description/', 
+                        key_point: {label: 'Hint', content: `
+                                Note: Basic Calculator IV is a totally different question. See "Symbolic Computation"
+                            `},
+                    },
                 ]}
         },
-        // Stack  | navi: stack | navi:stack
+        //
+        //
+        // Monotonic Stack  | navi: monotonic stack | navi:stack
         { id: 'stack_monotonic_stack', label: 'Monotonic Stack', type: 'intermediate', 
             details: { description: `
                             <br>A <strong>monotonic stack</strong> is a stack where its elements are maintained in either a monotonically increasing or monotonically decreasing order from the bottom to the top.
@@ -588,6 +614,14 @@ while True:
                         key_point: {label: 'Hint', content: `
                             HINT: The simplest way is to double nums and then record the index. A better solution is to use modulo operation and loop through nums twice, which does not require additional space.
                             `},
+                    },
+                    { title: '<strong>A very classic problem: Largest Rectangle >></strong>'}, 
+                    { title: 'LeetCode 84: Largest Rectangle in Histogram (Mark, do it again)', 
+                        url: 'https://leetcode.com/problems/largest-rectangle-in-histogram/',
+                        key_point: { label: 'Hint', content: `
+                            A classic application of the monotonic stack.
+                            `
+                        }
                     },
 
                 ]}
@@ -657,22 +691,7 @@ while True:
                 ]
             }
         },
-                // Basic Calculator Problem
-        { id: 'basic_calculator', label: 'Basic Calculator Problem', type: 'intermediate', details: { 
-            description: 'Use stacks to parse and evaluate mathematical expressions.', 
-            exercises: [{ title: 'LeetCode 224: Basic Calculator', url: 'https://leetcode.com/problems/basic-calculator/description/', }, 
-                { title: 'LeetCode 227: Basic Calculator II', url: 'https://leetcode.com/problems/basic-calculator-ii/description/', },
-            ]}
-        },
-        // Shunting Yard Algorithm
-        { id: 'shunting_yard', label: 'Shunting Yard Algorithm', type: 'advanced', details: { 
-            description: `Note: Basic Calculator IV is a totally different question. 
-            See "Symbolic Computation"`, 
-            exercises: [{ title: 'LeetCode 772: Basic Calculator III', url: 'https://leetcode.com/problems/basic-calculator-iii/description/', }, 
-            ]}
-        },
-        //
-        //
+
         
 
 
@@ -681,9 +700,9 @@ while True:
         // Branch
         { from: 'list', to: 'string' }, 
         { from: 'list', to: 'matrix' },
-        {from:'string', to:'stack'},
-        { from: 'string', to: 'queue' },
-        {from:'queue',to:'linked_list'},
+        { from:'string', to:'stack'},
+        { from: 'stack', to: 'queue' },
+        { from:'queue', to:'linked_list'},
 
         // List
         {from:'list',to:'boyer_moore_majority_vote'},
@@ -695,30 +714,29 @@ while True:
         { from: 'two_pointers_array_string', to: 'sliding_window' },
         { from: 'two_pointers_array_string', to: 'group_reverse_string' }, 
 
+        { from: 'sliding_window', to: 'monotonic_queue' },
+
+
+
+        // stack
+        { from: 'stack', to: 'stack_monotonic_stack' },        
+
+
+
+
+
         // Linked List
         { from: 'linked_list', to: 'two_pointers_linked_list' },
         { from: 'linked_list', to: 'doubly_linked_list' },
         { from: 'two_pointers_linked_list', to: 'group_reverse_linked_list' },
 
-
-
         { from: 'two_pointers_linked_list', to: 'fast_slow_pointers' },
         { from: 'fast_slow_pointers', to: 'in_place_hashing' },
 
         
-        { from: 'sliding_window', to: 'monotonic_queue' },
 
         
     
-
-
-
-        { from: 'stack', to: 'stack_enhanced_stack' },
-        { from: 'stack_enhanced_stack', to: 'stack_monotonic_stack' },
-        { from: 'stack_monotonic_stack', to: 'stack_problem_largest_rectangle' },
-        
-        { from: 'stack', to: 'basic_calculator' },
-        { from: 'basic_calculator', to: 'shunting_yard' },
 
 
 

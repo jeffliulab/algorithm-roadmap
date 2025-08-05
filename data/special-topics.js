@@ -16,17 +16,7 @@ ROADMAP_DATA.special_topics = {
 
 
 
-
-
-
-
-
-
-
-
-
-        { id: 'math', label: 'Math & Geometry', type: 'foundation', details: { description: '.....', }},
-// bit manipulation | navi: bit
+        // bit manipulation | navi: bit
         { id: 'bit', label: 'Bit Manipulation', type: 'foundation', details: { 
             description: `Introduction of Bit Manipulation:
                 <br>AND: Only 1 & 1 is 1; coding: n = 1 & 1
@@ -36,9 +26,10 @@ ROADMAP_DATA.special_topics = {
                 <br>Bit shifting: n = 1; n = n << 1; n = n >> 1
                 `,                 
                 exercises: [
+                    
                     { title: 'LeetCode 136: Single Number (XOR)', url: 'https://leetcode.com/problems/single-number/description/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
                             content: `XOR:
                                     <br>a^0=a Any number XOR with 0 will result in itself
                                     <br>a^a=0  Any number XOR with itself results in 0       
@@ -52,7 +43,7 @@ ROADMAP_DATA.special_topics = {
                     },
                     { title: 'LeetCode 191: Number of 1 Bits (Shift)', url: 'https://leetcode.com/problems/number-of-1-bits/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
                             content: `
                             <br><strong>Solution1:</strong>
                             <br><code>count = 0
@@ -77,7 +68,7 @@ ROADMAP_DATA.special_topics = {
                     },
                     { title: 'LeetCode 338: Counting Bits', url: 'https://leetcode.com/problems/counting-bits/description/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
                             content: `This question is to calculate the number of 1s in each number from 0 to N.
                                         Call Q191's function, can achieve O(NlogN) time.
                                     <br>This Question actually has an O(N) time solution: Use the recursive formula to achieve a better algorithm for new numbers. Interested students can check the relevant information by themselves.
@@ -91,7 +82,7 @@ ROADMAP_DATA.special_topics = {
                     },
                     { title: 'LeetCode 190: Reverse Bits (OR)', url: 'https://leetcode.com/problems/reverse-bits/description/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
                             content: `This solution introduces a method for reversing the bits of a 32-bit integer. The core idea is to extract each bit from the original number, one by one, and build a new number with these bits in the reverse order.
                                         <br>This process utilizes the bitwise OR operator. We use OR to set the last bit of our result variable x. To append a bit d to x, we first make space by left-shifting x (x = x << 1), and then we set the last bit using the OR operation (x = x | d).
                                         <br>The algorithm iterates 32 times and performs the following steps in each loop:
@@ -114,14 +105,16 @@ ROADMAP_DATA.special_topics = {
                     },
                     { title: 'LeetCode 268: Missing Number', url: 'https://leetcode.com/problems/missing-number/description/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
                             content: `This question is 136, but it requires some manipulation: convert the known range into a complete range, and then it can be converted to 136.
                                     `
                         },
                     },
-                    { title: 'LeetCode 371: Sum of Two Integers★★', url: 'https://leetcode.com/problems/sum-of-two-integers/description/',
+                    { title: '<strong>Integer Calculation by Bit Manipulation',
+                    },
+                    { title: 'LeetCode 371: Sum of Two Integers ★★ (Mark)', url: 'https://leetcode.com/problems/sum-of-two-integers/description/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
                             content: `
                                 This is a very classic bit manipulating question.
                                 <br>
@@ -140,19 +133,29 @@ else:
                             `
                         },
                     },
+                    { title: 'LeetCode 29: Divide Two Integers (Mark)', url: 'https://leetcode.com/problems/divide-two-integers/description/',
+                        key_point: {
+                            label: 'Hint', 
+                            content: `
+[pre]10 // 3 is actually 10 - 3 - 3 - 3
+...
+[/pre]
+                            `
+                        },
+                    },
                 ]
             },
         },
 
-        // math and geometry | navi: math
-        { id: 'math', label: 'Math & Geometry', type: 'foundation', details: { 
+        // math | navi: math
+        { id: 'math', label: 'Math & Calculation', type: 'foundation', details: { 
             description: `
                 To make a complicated question into an easy one.
                 `,                 
                 exercises: [
-                    { title: 'LeetCode 7. Reverse Integer', url: 'https://leetcode.com/problems/reverse-integer/description/',
+                    { title: 'LeetCode 7: Reverse Integer', url: 'https://leetcode.com/problems/reverse-integer/description/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
                             content: `
                             <br>Key points to consider:
                             <br>(1) %10: To get the last digit
@@ -168,9 +171,20 @@ else:
                             <br>&nbsp;&nbsp;&nbsp;&nbsp;return 0</code>                                `
                         },
                     },
-                    { title: 'LeetCode 66. Plus One', url: 'https://leetcode.com/problems/plus-one/description/',
+                    { title: 'LeetCode 43: Multiply Strings (Mark)', url: 'https://leetcode.com/problems/multiply-strings/description/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
+                            content: `
+                            `
+                        },
+                    },
+
+                    
+                    
+
+                    { title: 'LeetCode 66: Plus One', url: 'https://leetcode.com/problems/plus-one/description/',
+                        key_point: {
+                            label: 'Hint', 
                             content: `
                                 <br>Assuming we are adding a single-digit number K:
                                 <br><code>if k == 0:
@@ -191,9 +205,9 @@ else:
                                 <br>return digits</code>                                `
                         },
                     },
-                    { title: 'LeetCode 50. Pow(x,n)', url: 'https://leetcode.com/problems/powx-n/description/',
+                    { title: 'LeetCode 50: Pow(x,n)', url: 'https://leetcode.com/problems/powx-n/description/',
                         key_point: {
-                            label: 'Key Points', 
+                            label: 'Hint', 
                             content: `
                                 <br>This problem is about binary exponentiation (Fast Exponentiation).
                                 <br>
